@@ -118,24 +118,43 @@ async function initializeDomains(db: IDBPDatabase<MethodologyDB>) {
 }
 
 async function initializeSeedData(db: IDBPDatabase<MethodologyDB>) {
-  const count = await db.count('methods')
-  if (count === 0) {
-    const tx = db.transaction(['methods', 'relations', 'domains'], 'readwrite')
-    for (const m of SEED_METHODS) {
-      await tx.objectStore('methods').put(m)
+  const tx = db.transaction(['methods', 'relations', 'domains'], 'readwrite')
+  const methodsStore = tx.objectStore('methods')
+  const domainsStore = tx.objectStore('domains')
+
+  for (const m of SEED_METHODS) {
+    const existing = await methodsStore.get(m.id)
+    if (!existing) {
+      await methodsStore.put(m)
       for (const dId of m.domains) {
-        const dom = await tx.objectStore('domains').get(dId)
+        const dom = await domainsStore.get(dId)
         if (dom) {
           dom.methodCount = (dom.methodCount || 0) + 1
-          await tx.objectStore('domains').put(dom)
+          await domainsStore.put(dom)
         }
       }
+    } else {
+      // 保持种子方法论别名与关键元数据同步更新
+      let updated = false
+      if (!existing.aliases || JSON.stringify(existing.aliases) !== JSON.stringify(m.aliases)) {
+        existing.aliases = m.aliases
+        updated = true
+      }
+      if (updated) {
+        await methodsStore.put(existing)
+      }
     }
-    for (const rel of SEED_RELATIONS) {
-      await tx.objectStore('relations').put(rel)
-    }
-    await tx.done
   }
+
+  const relsStore = tx.objectStore('relations')
+  for (const rel of SEED_RELATIONS) {
+    const existingRel = await relsStore.get(rel.id)
+    if (!existingRel) {
+      await relsStore.put(rel)
+    }
+  }
+
+  await tx.done
 }
 
 // ============================================================

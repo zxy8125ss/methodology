@@ -4,7 +4,7 @@ export const SEED_METHODS: Method[] = [
   {
     id: 'method_pdca',
     name: 'PDCA循环',
-    aliases: ['戴明环', '质量环', 'Plan-Do-Check-Act'],
+    aliases: ['戴明环', '质量环', 'Plan-Do-Check-Act', 'PDCA', 'PDCA循环'],
     domains: ['management', 'work_efficiency'],
     subDomains: ['process', 'perf_mgmt'],
     type: 'process',
@@ -148,7 +148,7 @@ PDCA 的本质是科学实验方法在管理实践中的工程化实现：
   {
     id: 'method_first_principles',
     name: '第一性原理',
-    aliases: ['First Principles Thinking', '第一原理思考'],
+    aliases: ['First Principles Thinking', '第一性原理', '第一原理思考', '第一性原理思维', '第一性'],
     domains: ['thinking', 'business'],
     subDomains: ['critical', 'decision', 'strategy'],
     type: 'principle',
@@ -272,7 +272,7 @@ PDCA 的本质是科学实验方法在管理实践中的工程化实现：
   {
     id: 'method_okr',
     name: 'OKR目标与关键结果',
-    aliases: ['Objectives and Key Results', '目标与关键结果法'],
+    aliases: ['Objectives and Key Results', 'OKR', '目标与关键结果法', '目标管理'],
     domains: ['management', 'personal_growth', 'work_efficiency'],
     subDomains: ['goal_mgmt', 'perf_mgmt', 'team_mgmt'],
     type: 'framework',
@@ -406,7 +406,7 @@ OKR 不是单纯的任务清单，而是组织心智与注意力的放大器。
   {
     id: 'method_feynman',
     name: '费曼学习法',
-    aliases: ['Feynman Technique', '以教促学'],
+    aliases: ['Feynman Technique', '费曼技巧', '费曼', '以教促学'],
     domains: ['learning', 'thinking'],
     subDomains: ['active_learning', 'knowledge_org'],
     type: 'process',
@@ -539,7 +539,7 @@ OKR 不是单纯的任务清单，而是组织心智与注意力的放大器。
   {
     id: 'method_eisenhower',
     name: '艾森豪威尔矩阵',
-    aliases: ['时间管理四象限', 'Eisenhower Matrix', '紧急与重要矩阵'],
+    aliases: ['时间管理四象限', 'Eisenhower Matrix', '紧急与重要矩阵', '四象限法则', '四象限'],
     domains: ['work_efficiency', 'personal_growth'],
     subDomains: ['time_mgmt', 'prioritization'],
     type: 'tool',

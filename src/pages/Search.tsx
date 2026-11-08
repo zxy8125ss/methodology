@@ -59,12 +59,14 @@ export default function SearchPage() {
     [queryText, searchType, setSearchResults, setSearchQuery, addNotification]
   )
 
-  // 自动响应 URL 参数（从首页一键推演跳入）
+  // 自动响应 URL 参数变化（从首页或其他入口一键推演跳入）
   useEffect(() => {
-    if (initialQuery && !result && !loading) {
-      handleSearch(initialQuery)
+    const q = searchParams.get('q')
+    if (q && q.trim()) {
+      setQueryText(q.trim())
+      handleSearch(q.trim())
     }
-  }, [initialQuery, handleSearch])
+  }, [searchParams, handleSearch])
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') handleSearch()

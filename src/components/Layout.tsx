@@ -147,7 +147,7 @@ export default function Layout() {
 
         {/* 内容容器 */}
         <main className="flex-1 overflow-y-auto overscroll-y-contain">
-          <div className="max-w-4xl mx-auto px-4 md:px-8 pt-4 md:pt-8 pb-[calc(56px+env(safe-area-inset-bottom,16px))] md:pb-12">
+          <div className="max-w-4xl mx-auto px-4 md:px-8 pt-4 md:pt-8 pb-[calc(72px+env(safe-area-inset-bottom,20px))] md:pb-12">
             <Outlet />
           </div>
         </main>
