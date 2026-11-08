@@ -106,6 +106,15 @@ async function run() {
   await send('Runtime.enable')
   await send('DOM.enable')
 
+  // 精准设置 iPhone 17 设备视口与触控仿真 (393 x 852, DPR 3, Mobile)
+  await send('Emulation.setDeviceMetricsOverride', {
+    width: 393,
+    height: 852,
+    deviceScaleFactor: 3,
+    mobile: true,
+    hasTouch: true
+  })
+
   console.log('⏳ 正在通过 CDP 导航到目标 URL:', URL)
   await send('Page.navigate', { url: URL })
   await wait(4000)
