@@ -109,7 +109,7 @@ export default function ReviewItemCard({
               优先级：{item.priority === 'high' ? '高' : item.priority === 'medium' ? '中' : '低'}
             </span>
           </div>
-          <h3 className="text-stone-900 font-semibold text-base leading-snug">
+          <h3 className="font-serif text-[#1F1E1B] font-medium text-base leading-snug">
             {draft?.name ?? item.updatedMethod?.methodName ?? '未知方法论'}
           </h3>
           {draft?.content?.summary && (

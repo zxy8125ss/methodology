@@ -12,8 +12,8 @@ export default defineConfig({
         name: 'Cogito · 个人方法论与认知系统',
         short_name: 'Cogito',
         description: '个人 AI 驱动的方法论知识管理与实践系统',
-        theme_color: '#FAF9F6',
-        background_color: '#FAF9F6',
+        theme_color: '#FAF9F5',
+        background_color: '#FAF9F5',
         display: 'standalone',
         orientation: 'portrait-primary',
         icons: [

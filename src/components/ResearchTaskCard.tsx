@@ -35,7 +35,7 @@ export default function ResearchTaskCard({ task, onClick }: ResearchTaskCardProp
     >
       <div className="flex items-start justify-between gap-3 mb-2.5">
         {/* 标题 */}
-        <h3 className="text-stone-900 font-semibold text-sm leading-snug flex-1 line-clamp-2">
+        <h3 className="font-serif text-[#1F1E1B] font-medium text-sm leading-snug flex-1 line-clamp-2">
           {task.title}
         </h3>
 

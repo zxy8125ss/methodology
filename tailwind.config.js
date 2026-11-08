@@ -5,57 +5,61 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        serif: [
+          'Newsreader',
+          'Charter',
+          'Georgia',
+          '"Source Serif Pro"',
+          '"Songti SC"',
+          'serif'
+        ],
         sans: [
           '-apple-system',
           'BlinkMacSystemFont',
-          '"SF Pro Display"',
           '"SF Pro Text"',
+          '"SF Pro Display"',
           'Inter',
           '"PingFang SC"',
           '"Hiragino Sans GB"',
-          '"Microsoft YaHei"',
           'system-ui',
           'sans-serif'
-        ],
-        serif: [
-          'Newsreader',
-          'Merriweather',
-          'Georgia',
-          '"Songti SC"',
-          'serif'
         ]
       },
       colors: {
-        canvas: {
-          base: '#FAF9F6',     // Warm paper ivory base
-          subtle: '#F4F3EF',   // Subtle sidebar / section background
-          card: '#FFFFFF',     // Pure white card
-          overlay: '#FFFFFF',  // Elevated popover / hover
-          border: '#E7E5E4',   // Stone 200 hairline subtle border
-          muted: '#D6D3D1'     // Stone 300 divider
+        claude: {
+          50: '#FBF8F5',
+          100: '#F7EFE9',
+          200: '#F0DED3',
+          300: '#E4C2B0',
+          400: '#D79E84',
+          500: '#CC785C', // Anthropic Signature Terracotta
+          600: '#B8684D',
+          700: '#9E543C',
+          800: '#824430',
+          900: '#6B3827'
+        },
+        paper: {
+          base: '#FAF9F5',     // Claude warm ivory page canvas
+          subtle: '#F4F2EC',   // Claude warm container background
+          card: '#FFFFFF',     // Pure card white
+          border: '#EAE6DF',   // Claude hairline warm border
+          borderStrong: '#DCD7CE',
+          muted: '#8C877D',    // Subtle text
+          charcoal: '#1F1E1B', // Deep warm ink black
+          ink: '#3D3A34'       // Warm body text
         }
       },
       boxShadow: {
-        'soft': '0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03)',
-        'card': '0 2px 8px -2px rgba(28, 25, 23, 0.04), 0 1px 3px -1px rgba(28, 25, 23, 0.02)',
-        'float': '0 12px 28px -6px rgba(28, 25, 23, 0.08), 0 4px 10px -2px rgba(28, 25, 23, 0.04)',
-        'dock': '0 -2px 12px 0 rgba(28, 25, 23, 0.04)'
+        'soft': '0 1px 2px 0 rgba(31, 30, 27, 0.03)',
+        'card': '0 1px 3px 0 rgba(31, 30, 27, 0.04), 0 1px 2px -1px rgba(31, 30, 27, 0.02)',
+        'float': '0 10px 25px -4px rgba(31, 30, 27, 0.06), 0 4px 10px -2px rgba(31, 30, 27, 0.03)',
+        'dock': '0 -1px 4px 0 rgba(31, 30, 27, 0.04)'
       },
       borderRadius: {
         'xl': '0.875rem',
         '2xl': '1.125rem',
         '3xl': '1.5rem',
         '4xl': '2rem'
-      },
-      animation: {
-        'fade-in': 'fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-        'slide-up': 'slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-        'scale-in': 'scaleIn 0.15s cubic-bezier(0.16, 1, 0.3, 1)'
-      },
-      keyframes: {
-        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-        slideUp: { '0%': { transform: 'translateY(6px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
-        scaleIn: { '0%': { transform: 'scale(0.97)', opacity: '0' }, '100%': { transform: 'scale(1)', opacity: '1' } }
       }
     }
   },

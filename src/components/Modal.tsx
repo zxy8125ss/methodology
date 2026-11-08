@@ -56,13 +56,13 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
         className={`relative w-full ${sizeClasses[size]} bg-white border border-stone-200/90 rounded-2xl shadow-float flex flex-col max-h-[90vh] overflow-hidden`}
       >
         {/* 头部 */}
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-stone-200/80 shrink-0 bg-stone-50/60">
-          <h2 id="modal-title" className="text-sm font-bold text-stone-900">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#EAE6DF] shrink-0 bg-[#FAF9F5]">
+          <h2 id="modal-title" className="font-serif text-base font-medium text-[#1F1E1B]">
             {title}
           </h2>
           <button
             onClick={onClose}
-            className="text-stone-400 hover:text-stone-700 transition-colors p-1 rounded-lg hover:bg-stone-200/60"
+            className="text-[#8C877D] hover:text-[#1F1E1B] transition-colors p-1 rounded-lg hover:bg-[#F4F2EC]"
             aria-label="关闭"
           >
             <X className="w-4 h-4" />

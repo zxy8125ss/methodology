@@ -1,26 +1,28 @@
-import React, { useState, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Search as SearchIcon, Sparkles, CornerDownLeft } from 'lucide-react'
+import React, { useState, useEffect, useCallback } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Search as SearchIcon, Sparkles, CornerDownLeft, ArrowRight, Lightbulb } from 'lucide-react'
 import { search } from '../services/search'
 import { useAppStore } from '../stores'
 import type { SearchQuery, SearchResult } from '../types'
 import EvidenceBadge from '../components/EvidenceBadge'
 
 const EXAMPLES = [
-  '如何提升跨团队协作与执行力？',
-  '面对复杂未知系统时，如何自下而上第一性思考？',
-  '时间碎片化严重，怎样守住高价值深度工作？',
-  '如何制定具有野心且可量化的团队季度目标？',
-  '怎样用费曼学习法快速攻坚新专业领域？',
+  '如何结合第一性原理与费曼技巧穿透业务本质？',
+  '面对复杂多变的目标，如何用 OKR 与双周 PDCA 建立坚固执行闭环？',
+  '注意力碎片化严重，怎样打造高沉浸的心流深度工作系统？',
+  '重大决策前夕，如何运用逆向思维与事前验尸法防范黑天鹅？',
+  '跨部门协作阻力重重，如何运用非暴力沟通与利害关系人矩阵破局？'
 ]
 
-type SearchType = 'keyword' | 'natural_language' | 'scenario'
+type SearchType = 'natural_language' | 'scenario' | 'keyword'
 
 export default function SearchPage() {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const { setSearchResults, setSearchQuery, addNotification } = useAppStore()
 
-  const [queryText, setQueryText] = useState('')
+  const initialQuery = searchParams.get('q') || ''
+  const [queryText, setQueryText] = useState(initialQuery)
   const [searchType, setSearchType] = useState<SearchType>('natural_language')
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<SearchResult | null>(null)
@@ -49,7 +51,7 @@ export default function SearchPage() {
       } catch (err) {
         const msg = (err as Error).message
         setError(msg)
-        addNotification({ type: 'error', title: '搜索失败', message: msg })
+        addNotification({ type: 'error', title: '推演检索失败', message: msg })
       } finally {
         setLoading(false)
       }
@@ -57,29 +59,38 @@ export default function SearchPage() {
     [queryText, searchType, setSearchResults, setSearchQuery, addNotification]
   )
 
+  // 自动响应 URL 参数（从首页一键推演跳入）
+  useEffect(() => {
+    if (initialQuery && !result && !loading) {
+      handleSearch(initialQuery)
+    }
+  }, [initialQuery, handleSearch])
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') handleSearch()
   }
 
   return (
-    <div className="space-y-7 max-w-4xl mx-auto">
-      {/* 头部 */}
-      <div className="text-center space-y-2 pt-2">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-stone-200 text-[11px] text-stone-600 font-mono shadow-soft">
-          <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-          <span>Cogito · Multi-Method Reasoning</span>
+    <div className="space-y-7 max-w-3xl mx-auto">
+      {/* 头部：Claude Editorial 雅致标题 */}
+      <div className="text-center space-y-2.5 pt-2">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF0EB] border border-[#F0DED3] text-[11px] text-[#B8684D] font-medium font-sans">
+          <Sparkles className="w-3.5 h-3.5 text-[#CC785C]" />
+          <span>Cognitive Synthesis · 跨模型推演</span>
         </div>
-        <h1 className="text-3xl font-bold tracking-tight text-stone-900">智能搜索与场景推演</h1>
-        <p className="text-xs text-stone-500 max-w-lg mx-auto">
-          输入你遇到的实际困境或目标，AI 从方法论底层逻辑进行推演，组合出可落地的系统解法
+        <h1 className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-[#1F1E1B]">
+          智能推演与场景解构
+        </h1>
+        <p className="text-xs sm:text-sm text-[#57534D] max-w-lg mx-auto font-sans leading-relaxed">
+          描述你面临的具体现实阻碍、决策困惑或业务目标，AI 将从方法论底层逻辑进行解构与组合，生成可落地的系统解法。
         </p>
       </div>
 
       {/* 搜索控制台 */}
       <div className="space-y-3">
-        <div className="relative card p-1.5 border-stone-200/90 focus-within:border-stone-400 focus-within:shadow-float transition-all">
-          <div className="flex items-center gap-3 px-3">
-            <SearchIcon className="w-5 h-5 text-stone-400 shrink-0" />
+        <div className="bg-white border border-[#EAE6DF] focus-within:border-[#CC785C] focus-within:ring-2 focus-within:ring-[#CC785C]/20 rounded-2xl p-2 sm:p-2.5 transition-all shadow-card">
+          <div className="flex items-center gap-3 px-2">
+            <SearchIcon className="w-5 h-5 text-[#8C877D] shrink-0" />
             <input
               type="text"
               value={queryText}
@@ -89,18 +100,18 @@ export default function SearchPage() {
                 searchType === 'keyword'
                   ? '输入方法论名称、提出者或关键词...'
                   : searchType === 'natural_language'
-                  ? '输入你面临的实际问题（如：团队执行力不足、专注力差）...'
-                  : '描述你的业务场景，由 AI 推荐最佳实践组合...'
+                  ? '描述你面临的现实困境（如：跨团队协作阻力、战略执行滞后）...'
+                  : '描述业务场景，由 AI 推荐最佳方法论组合...'
               }
-              className="w-full bg-transparent border-none py-3 text-sm text-stone-900 placeholder-stone-400 focus:outline-none"
+              className="w-full bg-transparent border-none py-2 text-xs sm:text-sm text-[#1F1E1B] placeholder-[#9E9A90] focus:outline-none min-w-0"
             />
             <button
               onClick={() => handleSearch()}
               disabled={loading || !queryText.trim()}
-              className="btn-primary text-xs shrink-0 py-2 px-4 rounded-xl flex items-center gap-1.5"
+              className="px-4 py-2 bg-[#CC785C] hover:bg-[#B8684D] active:bg-[#A2583F] disabled:opacity-40 text-white rounded-xl text-xs font-medium transition-all shadow-soft shrink-0 flex items-center gap-1.5"
             >
-              <span>{loading ? '推演中...' : '推演解法'}</span>
-              <CornerDownLeft className="w-3.5 h-3.5 opacity-60" />
+              <span>{loading ? '推演中...' : '推演'}</span>
+              <CornerDownLeft className="w-3.5 h-3.5 opacity-70" />
             </button>
           </div>
         </div>
@@ -115,10 +126,10 @@ export default function SearchPage() {
             <button
               key={key}
               onClick={() => setSearchType(key as SearchType)}
-              className={`px-3 py-1 rounded-lg transition-colors font-medium ${
+              className={`px-3 py-1 rounded-xl transition-all font-medium text-[11px] ${
                 searchType === key
-                  ? 'bg-stone-900 text-white shadow-soft'
-                  : 'text-stone-500 hover:text-stone-800'
+                  ? 'bg-[#CC785C] text-white shadow-soft font-semibold'
+                  : 'text-[#68645C] hover:text-[#1F1E1B] bg-white border border-[#EAE6DF]'
               }`}
             >
               {label}
@@ -127,13 +138,13 @@ export default function SearchPage() {
         </div>
       </div>
 
-      {/* 示例问题 */}
+      {/* 示例启发 */}
       {!result && !loading && (
-        <div className="space-y-3 pt-2">
-          <div className="text-[11px] font-mono text-stone-500 uppercase tracking-widest text-center">
-            点击快速探索真实案例
+        <div className="space-y-3 pt-3">
+          <div className="text-[11px] font-sans text-[#8C877D] uppercase tracking-wider text-center">
+            点击快速探索经典困局解法
           </div>
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="flex flex-col gap-2">
             {EXAMPLES.map((ex, i) => (
               <button
                 key={i}
@@ -141,9 +152,13 @@ export default function SearchPage() {
                   setQueryText(ex)
                   handleSearch(ex)
                 }}
-                className="text-xs bg-white hover:bg-stone-50 border border-stone-200 text-stone-700 px-3.5 py-2 rounded-xl transition-all duration-150 text-left hover:border-stone-300 hover:text-stone-900 shadow-soft"
+                className="text-xs bg-white hover:bg-[#FAF9F5] border border-[#EAE6DF] hover:border-[#CC785C]/60 text-[#4A4741] hover:text-[#1F1E1B] px-4 py-2.5 rounded-xl transition-all duration-150 text-left shadow-soft flex items-center justify-between group"
               >
-                {ex}
+                <span className="flex items-center gap-2">
+                  <Lightbulb className="w-3.5 h-3.5 text-[#CC785C] shrink-0" />
+                  <span>{ex}</span>
+                </span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#A39E93] group-hover:text-[#CC785C] group-hover:translate-x-0.5 transition-all shrink-0" />
               </button>
             ))}
           </div>
@@ -151,33 +166,38 @@ export default function SearchPage() {
       )}
 
       {error && (
-        <div className="card p-4 border-rose-200 bg-rose-50 text-xs text-rose-700">
+        <div className="card p-4 border-rose-200 bg-rose-50 text-xs text-rose-800">
           {error}
         </div>
       )}
 
-      {/* 搜索推演结果 */}
+      {/* 搜索推演结果 (Claude Artifacts 级精细排版) */}
       {result && (
-        <div className="space-y-6 pt-3">
-          {/* AI 组合方案面板 */}
+        <div className="space-y-6 pt-2">
+          {/* AI 组合方案报告 */}
           {result.aiAnalysis && (
-            <div className="card p-5 border-stone-300 bg-white shadow-float space-y-4">
-              <div className="flex items-center gap-2 text-stone-900 text-xs font-semibold uppercase tracking-wider border-b border-stone-200 pb-3">
-                <Sparkles className="w-4 h-4 text-amber-500" />
-                <span>AI 方法论组合推演报告</span>
+            <div className="bg-white border border-[#EAE6DF] rounded-2xl p-5 shadow-card space-y-4">
+              <div className="flex items-center justify-between border-b border-[#EAE6DF] pb-3">
+                <div className="flex items-center gap-2 text-xs font-serif font-medium text-[#1F1E1B]">
+                  <Sparkles className="w-4 h-4 text-[#CC785C]" />
+                  <span>AI 方法论跨界推演报告</span>
+                </div>
+                <span className="text-[10px] font-sans px-2 py-0.5 rounded-md bg-[#FAF0EB] text-[#B8684D] border border-[#F0DED3]">
+                  多模型协同
+                </span>
               </div>
 
               {/* 理解 */}
-              <div className="text-xs text-stone-700 bg-stone-50 p-3.5 rounded-xl border border-stone-200">
-                <strong className="text-stone-900 block mb-1">问题本质理解：</strong>
+              <div className="text-xs text-[#4A4741] bg-[#FAF9F5] p-3.5 rounded-xl border border-[#EAE6DF] leading-relaxed">
+                <strong className="text-[#1F1E1B] block mb-1 font-serif text-sm">问题本质解构：</strong>
                 {result.aiAnalysis.problemUnderstanding}
               </div>
 
               {/* 组合方案 */}
               {result.aiAnalysis.recommendedCombination && (
                 <div className="space-y-1.5">
-                  <h3 className="text-xs font-semibold text-stone-900">推荐组合解法</h3>
-                  <p className="text-xs text-stone-700 leading-relaxed bg-stone-50 p-3.5 rounded-xl border border-stone-200">
+                  <h3 className="font-serif text-sm font-medium text-[#1F1E1B]">推荐组合解法</h3>
+                  <p className="text-xs text-[#4A4741] leading-relaxed bg-[#FAF9F5] p-3.5 rounded-xl border border-[#EAE6DF]">
                     {result.aiAnalysis.recommendedCombination}
                   </p>
                 </div>
@@ -186,11 +206,11 @@ export default function SearchPage() {
               {/* 步骤 */}
               {result.aiAnalysis.executionSteps && result.aiAnalysis.executionSteps.length > 0 && (
                 <div className="space-y-2">
-                  <h3 className="text-xs font-semibold text-stone-900">实施路径建议</h3>
+                  <h3 className="font-serif text-sm font-medium text-[#1F1E1B]">行动落地路径</h3>
                   <div className="space-y-1.5">
                     {result.aiAnalysis.executionSteps.map((st, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs text-stone-700 p-2.5 rounded-lg bg-stone-50 border border-stone-200">
-                        <span className="w-4 h-4 rounded-full bg-stone-200 text-stone-700 text-[10px] flex items-center justify-center shrink-0 font-mono mt-0.5 font-bold">
+                      <div key={i} className="flex items-start gap-2.5 text-xs text-[#4A4741] p-2.5 rounded-xl bg-[#FAF9F5] border border-[#EAE6DF] leading-relaxed">
+                        <span className="w-4 h-4 rounded-full bg-[#FAF0EB] text-[#B8684D] text-[10px] flex items-center justify-center shrink-0 font-serif mt-0.5 font-medium border border-[#F0DED3]">
                           {i + 1}
                         </span>
                         <span>{st}</span>
@@ -204,8 +224,8 @@ export default function SearchPage() {
 
           {/* 匹配的方法论卡片 */}
           <div className="space-y-3">
-            <div className="flex items-center justify-between text-xs text-stone-500 font-mono px-1">
-              <span>匹配方法论 ({result.methods.length})</span>
+            <div className="flex items-center justify-between text-xs text-[#8C877D] font-serif italic px-1">
+              <span>关联方法论档案 ({result.methods.length})</span>
               <span>相关度排序</span>
             </div>
 
@@ -216,30 +236,31 @@ export default function SearchPage() {
                   <div
                     key={m.id}
                     onClick={() => navigate(`/library/${m.id}`)}
-                    className="card p-4 cursor-pointer hover:border-stone-400 hover:shadow-card transition-all group flex flex-col sm:flex-row sm:items-start justify-between gap-3 overflow-hidden"
+                    className="bg-white border border-[#EAE6DF] rounded-2xl p-4 cursor-pointer hover:border-[#CC785C]/60 hover:shadow-card transition-all group flex flex-col sm:flex-row sm:items-start justify-between gap-3 overflow-hidden"
                   >
                     <div className="space-y-1.5 flex-1 min-w-0">
                       <div className="flex items-center gap-2 min-w-0 flex-wrap sm:flex-nowrap">
-                        <h4 className="text-sm font-semibold text-stone-900 group-hover:text-stone-950 truncate min-w-0">
+                        <h4 className="font-serif text-base font-medium text-[#1F1E1B] group-hover:text-[#9E543C] transition-colors truncate min-w-0">
                           {m.name}
                         </h4>
                         <div className="shrink-0">
                           <EvidenceBadge level={m.evidence?.level ?? 'unverified'} />
                         </div>
                       </div>
-                      <p className="text-xs text-stone-600 line-clamp-2 break-words">
+                      <p className="text-xs text-[#57534D] line-clamp-2 break-words leading-relaxed">
                         {m.content?.summary}
                       </p>
                       {hit.relevanceReason && (
-                        <div className="text-[11px] text-stone-500 font-mono truncate">
-                          匹配依据：{hit.relevanceReason}
+                        <div className="text-[11px] text-[#8C877D] truncate">
+                          推演契合点：{hit.relevanceReason}
                         </div>
                       )}
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0 self-end sm:self-start pt-0 sm:pt-1">
-                      <span className="btn-secondary text-xs py-1 px-2.5 rounded-lg whitespace-nowrap">
-                        查阅档案 →
+                      <span className="text-xs text-[#CC785C] font-medium flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                        <span>研读</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
                       </span>
                     </div>
                   </div>

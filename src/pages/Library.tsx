@@ -151,14 +151,14 @@ export default function Library() {
   return (
     <div className="space-y-6">
       {/* 顶部标题栏 */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-200/80 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EAE6DF] pb-4">
         <div className="min-w-0">
           <div className="flex items-center gap-2 mb-1 flex-wrap">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-stone-500">Cogito · Library</span>
-            <span className="badge-zinc text-[10px]">{filteredMethods.length} 条收录</span>
+            <span className="text-[10px] font-sans uppercase tracking-widest text-[#8C877D]">Cogito · Archive</span>
+            <span className="badge-terracotta text-[10px]">{filteredMethods.length} 条收录</span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-stone-900 truncate">方法论知识库</h1>
-          <p className="text-xs text-stone-500 mt-0.5 truncate">
+          <h1 className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-[#1F1E1B] truncate">方法论档案库</h1>
+          <p className="text-xs text-[#57534D] mt-0.5 truncate font-sans">
             标准化结构档案、多维检验证据与跨领域关联体系
           </p>
         </div>
@@ -320,8 +320,8 @@ export default function Library() {
             onClick={() => handleDomainSelect(null)}
             className={`px-3 py-1.5 rounded-xl whitespace-nowrap transition-all duration-150 ${
               selectedDomain === null
-                ? 'bg-stone-900 text-white font-semibold shadow-soft'
-                : 'bg-stone-100 text-stone-600 hover:text-stone-900 hover:bg-stone-200/70 border border-stone-200'
+                ? 'bg-[#CC785C] text-white font-medium shadow-soft'
+                : 'bg-white text-[#68645C] hover:text-[#1F1E1B] hover:bg-[#FAF9F5] border border-[#EAE6DF]'
             }`}
           >
             全部 ({methods.length})
@@ -335,13 +335,13 @@ export default function Library() {
                 onClick={() => handleDomainSelect(isSelected ? null : dom.id)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl whitespace-nowrap transition-all duration-150 ${
                   isSelected
-                    ? 'bg-stone-900 text-white font-semibold shadow-soft'
-                    : 'bg-stone-100 text-stone-600 hover:text-stone-900 hover:bg-stone-200/70 border border-stone-200'
+                    ? 'bg-[#CC785C] text-white font-medium shadow-soft'
+                    : 'bg-white text-[#68645C] hover:text-[#1F1E1B] hover:bg-[#FAF9F5] border border-[#EAE6DF]'
                 }`}
               >
                 <span>{dom.name}</span>
-                <span className={`text-[10px] font-mono px-1 rounded ${
-                  isSelected ? 'bg-stone-800 text-stone-200' : 'bg-white text-stone-500 border border-stone-200'
+                <span className={`text-[10px] font-sans px-1 rounded ${
+                  isSelected ? 'bg-white/20 text-white' : 'bg-[#F4F2EC] text-[#8C877D] border border-[#EAE6DF]'
                 }`}>
                   {count}
                 </span>

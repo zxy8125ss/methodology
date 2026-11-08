@@ -7,14 +7,14 @@ interface DomainBadgeProps {
 }
 
 const domainStyleMap: Record<string, { bg: string; text: string; border: string }> = {
-  management: { bg: 'bg-stone-100', text: 'text-stone-700', border: 'border-stone-200' },
-  personal_growth: { bg: 'bg-emerald-50', text: 'text-emerald-800', border: 'border-emerald-200' },
-  thinking: { bg: 'bg-indigo-50', text: 'text-indigo-800', border: 'border-indigo-200' },
-  work_efficiency: { bg: 'bg-amber-50', text: 'text-amber-800', border: 'border-amber-200' },
-  communication: { bg: 'bg-sky-50', text: 'text-sky-800', border: 'border-sky-200' },
-  learning: { bg: 'bg-cyan-50', text: 'text-cyan-800', border: 'border-cyan-200' },
-  business: { bg: 'bg-violet-50', text: 'text-violet-800', border: 'border-violet-200' },
-  life: { bg: 'bg-rose-50', text: 'text-rose-800', border: 'border-rose-200' },
+  thinking: { bg: 'bg-[#FAF0EB]', text: 'text-[#B8684D]', border: 'border-[#F0DED3]' },
+  management: { bg: 'bg-[#F4F2EC]', text: 'text-[#57534D]', border: 'border-[#EAE6DF]' },
+  personal_growth: { bg: 'bg-[#F0F5F1]', text: 'text-[#2F6B42]', border: 'border-[#D9E8DC]' },
+  work_efficiency: { bg: 'bg-[#FAF4E8]', text: 'text-[#8C6415]', border: 'border-[#F3E5C6]' },
+  communication: { bg: 'bg-[#F0F4F8]', text: 'text-[#2D5A80]', border: 'border-[#D8E4EE]' },
+  learning: { bg: 'bg-[#EFF6F6]', text: 'text-[#2D6C6F]', border: 'border-[#D6EAEA]' },
+  business: { bg: 'bg-[#F5F2F8]', text: 'text-[#634582]', border: 'border-[#E5DEEE]' },
+  life: { bg: 'bg-[#FBF1F0]', text: 'text-[#8A3F3A]', border: 'border-[#F3D7D5]' },
 }
 
 const domainNameMap: Record<string, string> = {
@@ -29,12 +29,12 @@ const domainNameMap: Record<string, string> = {
 }
 
 const DomainBadge: React.FC<DomainBadgeProps> = ({ domainId, label, size = 'sm' }) => {
-  const style = domainStyleMap[domainId] ?? { bg: 'bg-stone-100', text: 'text-stone-700', border: 'border-stone-200' }
+  const style = domainStyleMap[domainId] ?? { bg: 'bg-[#F4F2EC]', text: 'text-[#57534D]', border: 'border-[#EAE6DF]' }
   const displayLabel = label ?? domainNameMap[domainId] ?? domainId
 
   return (
     <span
-      className={`inline-flex items-center rounded-lg border font-medium ${style.bg} ${style.text} ${style.border} ${
+      className={`inline-flex items-center rounded-md border font-medium ${style.bg} ${style.text} ${style.border} ${
         size === 'md' ? 'px-2.5 py-1 text-xs' : 'px-2 py-0.5 text-[11px]'
       }`}
     >

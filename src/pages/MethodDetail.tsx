@@ -447,17 +447,17 @@ export default function MethodDetail() {
       </div>
 
       {/* Header */}
-      <div className="border-b border-stone-200/80 pb-5">
-        <h1 className="text-2xl font-bold text-stone-900 mb-2 tracking-tight">{method.name}</h1>
+      <div className="border-b border-[#EAE6DF] pb-5">
+        <h1 className="font-serif text-2xl sm:text-3xl font-normal text-[#1F1E1B] mb-2 tracking-tight">{method.name}</h1>
         <div className="flex flex-wrap items-center gap-2 mb-4">
           {statusBadge && <Badge {...statusBadge} />}
           {evidenceBadge && <Badge {...evidenceBadge} />}
           <Badge
             label={TYPE_LABELS[method.type] ?? method.type}
-            cls="bg-stone-100 text-stone-700 border-stone-200"
+            cls="bg-[#F4F2EC] text-[#57534D] border-[#EAE6DF]"
           />
           {method.tags.map((tag) => (
-            <span key={tag} className="text-[11px] text-stone-500 bg-stone-100 border border-stone-200 px-2 py-0.5 rounded-full">
+            <span key={tag} className="text-[11px] text-[#736F66] bg-[#FAF9F5] border border-[#EAE6DF] px-2 py-0.5 rounded-full font-serif">
               #{tag}
             </span>
           ))}
@@ -493,15 +493,15 @@ export default function MethodDetail() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 border-b border-stone-200 overflow-x-auto no-scrollbar">
+      <div className="flex gap-1 border-b border-[#EAE6DF] overflow-x-auto no-scrollbar">
         {TABS.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={`flex-shrink-0 px-3.5 py-2 text-xs font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === tab.key
-                ? 'border-stone-900 text-stone-950 font-semibold'
-                : 'border-transparent text-stone-500 hover:text-stone-800'
+                ? 'border-[#CC785C] text-[#9E543C] font-semibold'
+                : 'border-transparent text-[#736F66] hover:text-[#1F1E1B]'
             }`}
           >
             {tab.label}

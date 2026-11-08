@@ -268,13 +268,13 @@ export default function Research() {
   return (
     <div className="space-y-6">
       {/* 页头 */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-200/80 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EAE6DF] pb-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-stone-500">Cogito · AI Research</span>
+            <span className="text-[10px] font-sans uppercase tracking-widest text-[#8C877D]">Cogito · AI Research</span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-stone-900">AI 深度研究中心</h1>
-          <p className="text-xs text-stone-500 mt-0.5">自动化挖掘经典与前沿方法论，建立标准化档案与证据链</p>
+          <h1 className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-[#1F1E1B]">AI 深度研究中心</h1>
+          <p className="text-xs text-[#57534D] mt-0.5 font-sans">自动化挖掘经典与前沿方法论，建立标准化档案与证据链</p>
         </div>
         <button
           onClick={() => setShowNewModal(true)}
@@ -286,7 +286,7 @@ export default function Research() {
       </div>
 
       {/* 标签页 */}
-      <div className="flex gap-1 p-1 bg-stone-100 rounded-xl w-fit border border-stone-200">
+      <div className="flex gap-1 p-1 bg-white rounded-xl w-fit border border-[#EAE6DF] shadow-soft">
         {[
           { key: 'tasks', label: '研究任务', count: tasks.length },
           { key: 'review', label: '审核队列', count: pendingReviews.length },
@@ -296,15 +296,15 @@ export default function Research() {
             onClick={() => setTab(key as 'tasks' | 'review')}
             className={`flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-medium transition-all ${
               tab === key
-                ? 'bg-stone-900 text-white shadow-soft font-semibold'
-                : 'text-stone-600 hover:text-stone-900'
+                ? 'bg-[#CC785C] text-white shadow-soft font-semibold'
+                : 'text-[#68645C] hover:text-[#1F1E1B]'
             }`}
           >
             <span>{label}</span>
             {count > 0 && (
               <span
-                className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
-                  tab === key ? 'bg-stone-800 text-stone-200' : 'bg-stone-200 text-stone-600'
+                className={`text-[10px] px-1.5 py-0.2 rounded-full font-sans ${
+                  tab === key ? 'bg-white/25 text-white' : 'bg-[#F4F2EC] text-[#8C877D]'
                 }`}
               >
                 {count}

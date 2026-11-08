@@ -400,8 +400,8 @@ export default function MethodEdit() {
                   onClick={() => toggleDomain(dom.id)}
                   className={`flex items-center gap-2 p-2.5 rounded-lg border text-xs text-left transition-all ${
                     checked
-                      ? 'bg-blue-600/20 border-blue-500 text-blue-300 font-medium'
-                      : 'bg-white border-stone-200 text-stone-700 hover:border-stone-300'
+                      ? 'bg-[#FAF0EB] border-[#CC785C] text-[#9E543C] font-medium shadow-soft'
+                      : 'bg-white border-[#EAE6DF] text-[#57534D] hover:border-[#D4CEBF]'
                   }`}
                 >
                   <span className="text-base">{dom.icon}</span>
@@ -532,7 +532,7 @@ export default function MethodEdit() {
               {steps.map((st, idx) => (
                 <div key={idx} className="p-3.5 rounded-lg bg-white border border-stone-200 space-y-2">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="w-5 h-5 rounded-full bg-blue-600/30 text-blue-300 text-xs flex items-center justify-center font-bold">
+                    <span className="w-5 h-5 rounded-full bg-[#FAF0EB] text-[#B8684D] border border-[#F0DED3] text-xs flex items-center justify-center font-serif font-medium">
                       {st.order || idx + 1}
                     </span>
                     <input

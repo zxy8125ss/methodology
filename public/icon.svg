@@ -1,16 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <!-- Warm Paper Canvas -->
-  <rect width="100" height="100" rx="24" fill="#FAF9F6" />
-  <rect x="0.5" y="0.5" width="99" height="99" rx="23.5" stroke="#E7E5E4" stroke-width="1" />
+  <!-- Warm Paper Canvas #FAF9F5 -->
+  <rect width="100" height="100" rx="22" fill="#FAF9F5" />
+  <rect x="0.5" y="0.5" width="99" height="99" rx="21.5" stroke="#EAE6DF" stroke-width="1" />
   
-  <!-- Balanced Mathematical Lemniscate (25% Safe Breathing Margin) -->
-  <path d="M 50.00,50.00 C 43.50,42.50 37.00,38.00 29.50,38.00 C 21.00,38.00 16.00,44.00 16.00,50.00 C 16.00,56.00 21.00,62.00 29.50,62.00 C 37.00,62.00 43.50,57.50 50.00,50.00 C 56.50,42.50 63.00,38.00 70.50,38.00 C 79.00,38.00 84.00,44.00 84.00,50.00 C 84.00,56.00 79.00,62.00 70.50,62.00 C 63.00,62.00 56.50,57.50 50.00,50.00 Z" 
-        stroke="#18181B" 
-        stroke-width="5" 
-        stroke-linecap="round" 
-        stroke-linejoin="round" />
-        
-  <!-- Subtle Amber Focus Spark -->
-  <circle cx="50" cy="50" r="2.2" fill="#D97706" />
-  <circle cx="50" cy="50" r="1.1" fill="#FFFFFF" />
+  <!-- Claude-inspired Cogito Cognition Compass (Anthropic Terracotta #CC785C) -->
+  <g transform="translate(50, 50)">
+    <!-- Cardinal Petals -->
+    <path d="M 0,-28 C 3,-18 5,-8 0,0 C -5,-8 -3,-18 0,-28 Z" fill="#CC785C" />
+    <path d="M 0,28 C 3,18 5,8 0,0 C -5,8 -3,18 0,28 Z" fill="#CC785C" />
+    <path d="M -28,0 C -18,3 -8,5 0,0 C -8,-5 -18,-3 -28,0 Z" fill="#CC785C" />
+    <path d="M 28,0 C 18,3 8,5 0,0 C 8,-5 18,-3 28,0 Z" fill="#CC785C" />
+    
+    <!-- Diagonal Petals -->
+    <g transform="rotate(45)">
+      <path d="M 0,-23 C 2.5,-15 4,-6 0,0 C -4,-6 -2.5,-15 0,-23 Z" fill="#CC785C" />
+      <path d="M 0,23 C 2.5,15 4,6 0,0 C -4,6 -2.5,15 0,23 Z" fill="#CC785C" />
+      <path d="M -23,0 C -15,2.5 -6,4 0,0 C -6,-4 -15,-2.5 -23,0 Z" fill="#CC785C" />
+      <path d="M 23,0 C 15,2.5 6,4 0,0 C 6,-4 15,-2.5 23,0 Z" fill="#CC785C" />
+    </g>
+    
+    <!-- Central Hub & Aperture -->
+    <circle cx="0" cy="0" r="10" fill="#CC785C" />
+    <circle cx="0" cy="0" r="5" fill="#FAF9F5" />
+    <circle cx="0" cy="0" r="2.2" fill="#E07A5F" />
+  </g>
 </svg>

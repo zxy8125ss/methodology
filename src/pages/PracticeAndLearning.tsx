@@ -36,22 +36,22 @@ export default function PracticeAndLearning() {
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-12">
       {/* 顶部标签切换 */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-200/80 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#EAE6DF] pb-4">
         <div>
-          <h1 className="text-2xl font-bold text-stone-900">实践与学习中心</h1>
-          <p className="text-xs text-stone-500 mt-0.5">
-            将方法论转化为真实行动与长效复利认知资产
+          <h1 className="font-serif text-2xl sm:text-3xl font-normal text-[#1F1E1B]">实践与复盘中心</h1>
+          <p className="text-xs text-[#57534D] mt-0.5 font-sans">
+            将方法论转化为真实行动，建立长效复利认知资产
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="bg-stone-100 p-1 rounded-xl border border-stone-200 flex items-center">
+          <div className="bg-white p-1 rounded-xl border border-[#EAE6DF] shadow-soft flex items-center">
             <button
               onClick={() => setActiveTab('practice')}
               className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === 'practice'
-                  ? 'bg-stone-900 text-white font-semibold shadow-soft'
-                  : 'text-stone-600 hover:text-stone-900'
+                  ? 'bg-[#CC785C] text-white font-medium shadow-soft'
+                  : 'text-[#68645C] hover:text-[#1F1E1B]'
               }`}
             >
               <Target className="w-3.5 h-3.5" />
@@ -61,8 +61,8 @@ export default function PracticeAndLearning() {
               onClick={() => setActiveTab('learning')}
               className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === 'learning'
-                  ? 'bg-stone-900 text-white font-semibold shadow-soft'
-                  : 'text-stone-600 hover:text-stone-900'
+                  ? 'bg-[#CC785C] text-white font-medium shadow-soft'
+                  : 'text-[#68645C] hover:text-[#1F1E1B]'
               }`}
             >
               <BookOpen className="w-3.5 h-3.5" />

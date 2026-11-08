@@ -24,14 +24,14 @@ export default function Graph() {
   INITIAL_DOMAINS.forEach(d => { domainColors[d.id] = d.color })
 
   const getNodeColor = (node: GraphNode) => {
-    if (node.type === 'domain') return '#78716c'
+    if (node.type === 'domain') return '#CC785C'
     if (node.type === 'method') {
       const method = node.data as Method | undefined
-      if (method?.layer === 1) return '#1c1917'
-      if (method?.layer === 2) return '#44403c'
-      return '#78716c'
+      if (method?.layer === 1) return '#CC785C'
+      if (method?.layer === 2) return '#1F1E1B'
+      return '#736F66'
     }
-    return '#a8a29e'
+    return '#A39E93'
   }
 
   const buildGraph = useCallback(async () => {
@@ -256,8 +256,8 @@ export default function Graph() {
     <div className="flex flex-col h-full" style={{ height: 'calc(100vh - 120px)' }}>
       {/* 工具栏 */}
       <div className="flex flex-wrap items-center gap-3 mb-4">
-        <h1 className="section-title">知识图谱</h1>
-        <div className="flex items-center gap-2 text-sm text-muted ml-auto">
+        <h1 className="font-serif text-2xl font-normal text-[#1F1E1B]">认知图谱</h1>
+        <div className="flex items-center gap-2 text-xs text-[#8C877D] ml-auto">
           <span>{nodeCount} 节点</span>
           <span>·</span>
           <span>{edgeCount} 关系</span>
@@ -295,9 +295,9 @@ export default function Graph() {
         {/* 图谱 */}
         <div className="flex-1 relative card overflow-hidden">
           {loading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-slate-800/50 z-10">
+            <div className="absolute inset-0 flex items-center justify-center bg-white/70 z-10 backdrop-blur-xs">
               <div className="text-center">
-                <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-2" />
+                <div className="w-8 h-8 border-2 border-[#EAE6DF] border-t-[#CC785C] rounded-full animate-spin mx-auto mb-2" />
                 <div className="text-sm text-muted">构建图谱中...</div>
               </div>
             </div>

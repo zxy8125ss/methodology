@@ -23,18 +23,23 @@ export default function Settings() {
   ]
 
   return (
-    <div className="max-w-4xl">
-      <h1 className="section-title mb-6">系统设置</h1>
+    <div className="max-w-4xl space-y-6">
+      <h1 className="font-serif text-2xl sm:text-3xl font-normal text-[#1F1E1B]">系统设置</h1>
 
       {/* 标签页 */}
-      <div className="flex gap-2 mb-6 flex-wrap">
+      <div className="flex gap-2 flex-wrap">
         {tabs.map(t => (
           <button
             key={t.id}
             onClick={() => setActiveTab(t.id)}
-            className={activeTab === t.id ? 'tab-active' : 'tab-inactive'}
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
+              activeTab === t.id
+                ? 'bg-[#CC785C] text-white shadow-soft font-semibold'
+                : 'bg-white text-[#68645C] hover:text-[#1F1E1B] border border-[#EAE6DF]'
+            }`}
           >
-            {t.icon} {t.label}
+            <span>{t.icon}</span>
+            <span>{t.label}</span>
           </button>
         ))}
       </div>
@@ -43,14 +48,14 @@ export default function Settings() {
       {activeTab === 'ai' && (
         <div className="space-y-6">
           {/* 警告提示 */}
-          <div className="card border-yellow-700/50 bg-yellow-900/10 border p-4">
+          <div className="bg-[#FAF4E8] border border-[#F3E5C6] rounded-2xl p-4">
             <div className="flex gap-3">
-              <span className="text-xl">⚠️</span>
+              <span className="text-xl">🛡️</span>
               <div>
-                <div className="font-semibold text-yellow-300 text-sm mb-1">安全提示</div>
-                <div className="text-sm text-yellow-200/80">
+                <div className="font-medium text-[#8C6415] text-xs mb-1">端侧安全隐私声明</div>
+                <div className="text-xs text-[#57534D] leading-relaxed">
                   API Key 仅存储在本设备的本地存储中，不会上传到 GitHub 或任何服务器。
-                  建议使用 Cloudflare Workers 代理模式以获得更高安全性。
+                  建议配置 Claude 官方 API 或 Cloudflare Workers 代理模式以获得最佳体验。
                 </div>
               </div>
             </div>
