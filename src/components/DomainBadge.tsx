@@ -7,14 +7,14 @@ interface DomainBadgeProps {
 }
 
 const domainStyleMap: Record<string, { bg: string; text: string; border: string }> = {
-  management: { bg: 'bg-zinc-800/80', text: 'text-zinc-200', border: 'border-zinc-700/60' },
-  personal_growth: { bg: 'bg-emerald-950/30', text: 'text-emerald-300', border: 'border-emerald-800/40' },
-  thinking: { bg: 'bg-zinc-800/80', text: 'text-zinc-200', border: 'border-zinc-700/60' },
-  work_efficiency: { bg: 'bg-amber-950/30', text: 'text-amber-300', border: 'border-amber-800/40' },
-  communication: { bg: 'bg-zinc-800/80', text: 'text-zinc-200', border: 'border-zinc-700/60' },
-  learning: { bg: 'bg-sky-950/30', text: 'text-sky-300', border: 'border-sky-800/40' },
-  business: { bg: 'bg-zinc-800/80', text: 'text-zinc-200', border: 'border-zinc-700/60' },
-  life: { bg: 'bg-zinc-800/80', text: 'text-zinc-200', border: 'border-zinc-700/60' },
+  management: { bg: 'bg-stone-100', text: 'text-stone-700', border: 'border-stone-200' },
+  personal_growth: { bg: 'bg-emerald-50', text: 'text-emerald-800', border: 'border-emerald-200' },
+  thinking: { bg: 'bg-indigo-50', text: 'text-indigo-800', border: 'border-indigo-200' },
+  work_efficiency: { bg: 'bg-amber-50', text: 'text-amber-800', border: 'border-amber-200' },
+  communication: { bg: 'bg-sky-50', text: 'text-sky-800', border: 'border-sky-200' },
+  learning: { bg: 'bg-cyan-50', text: 'text-cyan-800', border: 'border-cyan-200' },
+  business: { bg: 'bg-violet-50', text: 'text-violet-800', border: 'border-violet-200' },
+  life: { bg: 'bg-rose-50', text: 'text-rose-800', border: 'border-rose-200' },
 }
 
 const domainNameMap: Record<string, string> = {
@@ -25,11 +25,11 @@ const domainNameMap: Record<string, string> = {
   communication: '沟通谈判',
   learning: '学习管理',
   business: '商业模式',
-  life: '生活哲学',
+  life: '生活实用',
 }
 
 const DomainBadge: React.FC<DomainBadgeProps> = ({ domainId, label, size = 'sm' }) => {
-  const style = domainStyleMap[domainId] ?? { bg: 'bg-zinc-800/70', text: 'text-zinc-300', border: 'border-zinc-700/60' }
+  const style = domainStyleMap[domainId] ?? { bg: 'bg-stone-100', text: 'text-stone-700', border: 'border-stone-200' }
   const displayLabel = label ?? domainNameMap[domainId] ?? domainId
 
   return (

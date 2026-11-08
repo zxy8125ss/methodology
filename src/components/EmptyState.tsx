@@ -12,16 +12,16 @@ interface EmptyStateProps {
 
 const EmptyState: React.FC<EmptyStateProps> = ({ icon, title, description, action }) => {
   return (
-    <div className="flex flex-col items-center justify-center py-16 px-6 text-center">
-      <div className="text-5xl mb-4 select-none">{icon}</div>
-      <h3 className="text-lg font-semibold text-zinc-200 mb-2">{title}</h3>
+    <div className="flex flex-col items-center justify-center py-16 px-6 text-center card bg-white">
+      <div className="text-4xl mb-3 select-none">{icon}</div>
+      <h3 className="text-base font-bold text-stone-900 mb-1.5">{title}</h3>
       {description && (
-        <p className="text-sm text-zinc-400 max-w-sm mb-6">{description}</p>
+        <p className="text-xs text-stone-500 max-w-sm mb-5 leading-relaxed">{description}</p>
       )}
       {action && (
         <button
           onClick={action.onClick}
-          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium rounded-lg transition-colors"
+          className="btn-primary text-xs"
         >
           {action.label}
         </button>

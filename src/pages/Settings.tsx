@@ -58,7 +58,7 @@ export default function Settings() {
 
           {/* Worker 代理配置 */}
           <div className="card p-5">
-            <h3 className="font-semibold text-zinc-100 mb-4">🛡️ Cloudflare Workers 代理（推荐）</h3>
+            <h3 className="font-semibold text-stone-900 mb-4">🛡️ Cloudflare Workers 代理（推荐）</h3>
             <div className="space-y-3">
               <div>
                 <label className="label">Worker URL</label>
@@ -83,7 +83,7 @@ export default function Settings() {
 
           {/* 本地直连配置 */}
           <div className="card p-5">
-            <h3 className="font-semibold text-zinc-100 mb-1">🔑 本地直连（开发/私有部署）</h3>
+            <h3 className="font-semibold text-stone-900 mb-1">🔑 本地直连（开发/私有部署）</h3>
             <p className="text-xs text-muted mb-4">仅适合本地使用，API Key 存储在浏览器本地</p>
 
             <LocalAIConfig />
@@ -92,7 +92,7 @@ export default function Settings() {
           {/* 模型配置列表 */}
           <div className="card p-5">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-semibold text-zinc-100">模型配置</h3>
+              <h3 className="font-semibold text-stone-900">模型配置</h3>
               <button onClick={() => setShowAddModel(true)} className="btn-secondary text-sm">+ 添加模型</button>
             </div>
 
@@ -229,7 +229,7 @@ function GitHubSettings({ config, onSave, onTest, testing }: {
       </div>
 
       <div className="card p-5 space-y-4">
-        <h3 className="font-semibold text-zinc-100">仓库配置</h3>
+        <h3 className="font-semibold text-stone-900">仓库配置</h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="label">GitHub 用户名 / 组织名</label>
@@ -281,7 +281,7 @@ function ResearchSettings({ config, onSave }: {
 
   return (
     <div className="card p-5 space-y-4">
-      <h3 className="font-semibold text-zinc-100">AI 研究参数</h3>
+      <h3 className="font-semibold text-stone-900">AI 研究参数</h3>
 
       <div>
         <label className="label">每周最多研究方法论数量</label>
@@ -291,7 +291,7 @@ function ResearchSettings({ config, onSave }: {
 
       <div className="flex items-center gap-3">
         <input type="checkbox" id="requireReview" checked={requireReview} onChange={e => setRequireReview(e.target.checked)} className="rounded" />
-        <label htmlFor="requireReview" className="text-sm text-zinc-300">入库前必须经过人工审核</label>
+        <label htmlFor="requireReview" className="text-sm text-stone-700">入库前必须经过人工审核</label>
       </div>
 
       <div>
@@ -302,7 +302,7 @@ function ResearchSettings({ config, onSave }: {
 
       <div className="flex items-center gap-3">
         <input type="checkbox" id="prioritizeGeneral" checked={prioritizeGeneral} onChange={e => setPrioritizeGeneral(e.target.checked)} className="rounded" />
-        <label htmlFor="prioritizeGeneral" className="text-sm text-zinc-300">优先研究通用方法论（第一层），再深化专业领域</label>
+        <label htmlFor="prioritizeGeneral" className="text-sm text-stone-700">优先研究通用方法论（第一层），再深化专业领域</label>
       </div>
 
       <button onClick={handleSave} className="btn-primary">保存研究配置</button>
@@ -317,14 +317,14 @@ function ModelConfigCard({ model, onDelete }: { model: ModelConfig; onDelete: ()
     claude: '🟣 Claude', openai: '🟢 OpenAI', gemini: '🔵 Gemini', deepseek: '🔷 DeepSeek'
   }
   return (
-    <div className="bg-zinc-800/50 rounded-lg p-3 flex items-center gap-3">
+    <div className="bg-stone-50 rounded-lg p-3 flex items-center gap-3">
       <div className="flex-1">
-        <div className="text-sm font-medium text-zinc-200">{model.displayName}</div>
+        <div className="text-sm font-medium text-stone-800">{model.displayName}</div>
         <div className="text-xs text-muted">{providerLabels[model.provider] ?? model.provider} · {model.model}</div>
       </div>
       <div className="flex gap-2">
         {model.isDefault && <span className="badge-blue text-xs">默认</span>}
-        <button onClick={onDelete} className="text-zinc-500 hover:text-red-400 text-sm">删除</button>
+        <button onClick={onDelete} className="text-stone-400 hover:text-red-400 text-sm">删除</button>
       </div>
     </div>
   )
@@ -368,8 +368,8 @@ function AddModelForm({ onSave, onCancel }: {
   }
 
   return (
-    <div className="mt-4 border-t border-zinc-800 pt-4 space-y-3">
-      <h4 className="font-medium text-zinc-200">添加新模型</h4>
+    <div className="mt-4 border-t border-stone-200 pt-4 space-y-3">
+      <h4 className="font-medium text-stone-800">添加新模型</h4>
       <div className="grid grid-cols-2 gap-3">
         <div>
           <label className="label">提供商</label>
@@ -394,7 +394,7 @@ function AddModelForm({ onSave, onCancel }: {
       </div>
       <div className="flex items-center gap-3">
         <input type="checkbox" id="isDefault" checked={isDefault} onChange={e => setIsDefault(e.target.checked)} />
-        <label htmlFor="isDefault" className="text-sm text-zinc-300">设为默认模型</label>
+        <label htmlFor="isDefault" className="text-sm text-stone-700">设为默认模型</label>
       </div>
       <div className="flex gap-3">
         <button onClick={handleSubmit} className="btn-primary">添加</button>
@@ -412,16 +412,16 @@ function AboutSection() {
       <div className="flex items-center gap-4">
         <div className="w-16 h-16 rounded-2xl bg-blue-600 flex items-center justify-center text-white font-bold text-2xl">方</div>
         <div>
-          <h2 className="text-xl font-bold text-zinc-100">方法论</h2>
+          <h2 className="text-xl font-bold text-stone-900">方法论</h2>
           <p className="text-sm text-muted">个人 AI 驱动的方法论知识管理与实践系统</p>
           <p className="text-xs text-muted mt-0.5">版本 1.0.0 · PWA</p>
         </div>
       </div>
       <div className="divider" />
-      <div className="space-y-2 text-sm text-zinc-300">
-        <p><strong className="text-zinc-100">核心工作流：</strong>发现 → 研究 → 整理 → 审核 → 入库 → 关联 → 学习 → 应用 → 验证 → 更新</p>
-        <p><strong className="text-zinc-100">部署方案：</strong>PWA 前端 + GitHub 数据仓库 + GitHub Actions 自动任务 + Cloudflare Workers AI 代理</p>
-        <p><strong className="text-zinc-100">支持模型：</strong>Claude · OpenAI GPT · Google Gemini · DeepSeek</p>
+      <div className="space-y-2 text-sm text-stone-700">
+        <p><strong className="text-stone-900">核心工作流：</strong>发现 → 研究 → 整理 → 审核 → 入库 → 关联 → 学习 → 应用 → 验证 → 更新</p>
+        <p><strong className="text-stone-900">部署方案：</strong>PWA 前端 + GitHub 数据仓库 + GitHub Actions 自动任务 + Cloudflare Workers AI 代理</p>
+        <p><strong className="text-stone-900">支持模型：</strong>Claude · OpenAI GPT · Google Gemini · DeepSeek</p>
       </div>
       <div className="divider" />
       <div className="text-xs text-muted">

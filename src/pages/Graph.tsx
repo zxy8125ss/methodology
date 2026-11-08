@@ -24,14 +24,14 @@ export default function Graph() {
   INITIAL_DOMAINS.forEach(d => { domainColors[d.id] = d.color })
 
   const getNodeColor = (node: GraphNode) => {
-    if (node.type === 'domain') return '#71717a'
+    if (node.type === 'domain') return '#78716c'
     if (node.type === 'method') {
       const method = node.data as Method | undefined
-      if (method?.layer === 1) return '#ffffff'
-      if (method?.layer === 2) return '#d4d4d8'
-      return '#a1a1aa'
+      if (method?.layer === 1) return '#1c1917'
+      if (method?.layer === 2) return '#44403c'
+      return '#78716c'
     }
-    return '#71717a'
+    return '#a8a29e'
   }
 
   const buildGraph = useCallback(async () => {
@@ -216,8 +216,8 @@ export default function Graph() {
     node.append('circle')
       .attr('r', d => d.radius ?? 12)
       .attr('fill', d => getNodeColor(d))
-      .attr('fill-opacity', 0.85)
-      .attr('stroke', '#1e293b')
+      .attr('fill-opacity', 0.9)
+      .attr('stroke', '#ffffff')
       .attr('stroke-width', 2)
 
     // 节点文字
@@ -225,7 +225,8 @@ export default function Graph() {
       .attr('dy', d => (d.radius ?? 12) + 12)
       .attr('text-anchor', 'middle')
       .attr('font-size', '10px')
-      .attr('fill', '#cbd5e1')
+      .attr('fill', '#44403c')
+      .attr('font-weight', '500')
       .text(d => d.label.length > 8 ? d.label.slice(0, 8) + '…' : d.label)
 
     simulation.on('tick', () => {
@@ -321,7 +322,7 @@ export default function Graph() {
           </div>
 
           {/* 操作提示 */}
-          <div className="absolute top-3 right-3 text-xs text-muted bg-slate-900/70 px-2 py-1 rounded">
+          <div className="absolute top-3 right-3 text-xs text-stone-500 bg-white/90 border border-stone-200 px-2 py-1 rounded-lg shadow-soft">
             滚轮缩放 · 拖拽平移 · 点击节点查看详情
           </div>
         </div>
@@ -333,10 +334,10 @@ export default function Graph() {
               <span className="text-xs text-muted uppercase">
                 {selectedNode.type === 'method' ? '方法论' : selectedNode.type === 'domain' ? '领域' : '节点'}
               </span>
-              <button onClick={() => setSelectedNode(null)} className="text-slate-500 hover:text-slate-300">×</button>
+              <button onClick={() => setSelectedNode(null)} className="text-stone-400 hover:text-stone-700">×</button>
             </div>
             
-            <h3 className="font-bold text-slate-100 text-base mb-2">{selectedNode.label}</h3>
+            <h3 className="font-bold text-stone-900 text-base mb-2">{selectedNode.label}</h3>
             {selectedNode.description && (
               <p className="text-sm text-muted mb-4">{selectedNode.description}</p>
             )}

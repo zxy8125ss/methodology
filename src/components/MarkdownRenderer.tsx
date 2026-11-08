@@ -34,7 +34,7 @@ export default function MarkdownRenderer({ content, className = '' }: MarkdownRe
 
   return (
     <div
-      className={`prose-dark ${className}`}
+      className={`prose ${className}`}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )

@@ -36,36 +36,36 @@ export default function PracticeAndLearning() {
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-12">
       {/* 顶部标签切换 */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-900 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-200/80 pb-4">
         <div>
-          <h1 className="text-2xl font-bold text-zinc-100">实践与学习中心</h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <h1 className="text-2xl font-bold text-stone-900">实践与学习中心</h1>
+          <p className="text-xs text-stone-500 mt-0.5">
             将方法论转化为真实行动与长效复利认知资产
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="bg-zinc-900/80 p-1 rounded-xl border border-zinc-800/80 flex items-center">
+          <div className="bg-stone-100 p-1 rounded-xl border border-stone-200 flex items-center">
             <button
               onClick={() => setActiveTab('practice')}
-              className={`flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === 'practice'
-                  ? 'bg-white text-zinc-950 font-semibold shadow-md'
-                  : 'text-zinc-400 hover:text-zinc-200'
+                  ? 'bg-stone-900 text-white font-semibold shadow-soft'
+                  : 'text-stone-600 hover:text-stone-900'
               }`}
             >
-              <Target className="w-4 h-4" />
+              <Target className="w-3.5 h-3.5" />
               <span>实践闭环 ({practices.length})</span>
             </button>
             <button
               onClick={() => setActiveTab('learning')}
-              className={`flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
                 activeTab === 'learning'
-                  ? 'bg-white text-zinc-950 font-semibold shadow-md'
-                  : 'text-zinc-400 hover:text-zinc-200'
+                  ? 'bg-stone-900 text-white font-semibold shadow-soft'
+                  : 'text-stone-600 hover:text-stone-900'
               }`}
             >
-              <BookOpen className="w-4 h-4" />
+              <BookOpen className="w-3.5 h-3.5" />
               <span>学习计划 ({plans.length})</span>
             </button>
           </div>
@@ -75,7 +75,7 @@ export default function PracticeAndLearning() {
               onClick={() => setShowNewPracticeModal(true)}
               className="btn-primary text-xs flex items-center gap-1.5"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-3.5 h-3.5" />
               <span>发起实践</span>
             </button>
           ) : (
@@ -298,12 +298,12 @@ function PracticeSection({
                   onClick={() => onSelectPractice(p)}
                   className={`card p-4 cursor-pointer transition-all ${
                     isSelected
-                      ? 'border-blue-500 bg-zinc-900/90 shadow-md shadow-blue-500/10'
-                      : 'hover:border-zinc-700 hover:bg-zinc-900/60'
+                      ? 'border-stone-900 bg-stone-50 shadow-soft ring-1 ring-stone-900'
+                      : 'hover:border-stone-400 hover:shadow-card bg-white'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className="font-semibold text-zinc-100 text-sm line-clamp-1">{p.title}</h3>
+                    <h3 className="font-semibold text-stone-900 text-sm line-clamp-1">{p.title}</h3>
                     <span className={`badge text-[10px] ${
                       p.status === 'completed' ? 'badge-green' :
                       p.status === 'in_progress' ? 'badge-blue' : 'badge-slate'
@@ -312,13 +312,13 @@ function PracticeSection({
                     </span>
                   </div>
 
-                  <p className="text-xs text-zinc-400 mt-1 line-clamp-2">{p.problem}</p>
+                  <p className="text-xs text-stone-600 mt-1 line-clamp-2">{p.problem}</p>
 
                   <div className="flex items-center gap-1.5 mt-2 flex-wrap">
                     {p.methodIds.map(id => {
                       const m = methodMap.get(id)
                       return (
-                        <span key={id} className="badge bg-zinc-800/80 text-zinc-300 text-[10px]">
+                        <span key={id} className="badge bg-stone-100 text-stone-700 border-stone-200 text-[10px]">
                           {m?.name || id}
                         </span>
                       )
@@ -327,13 +327,13 @@ function PracticeSection({
 
                   {totalSteps > 0 && (
                     <div className="mt-3">
-                      <div className="flex justify-between text-[10px] text-zinc-400 mb-1">
+                      <div className="flex justify-between text-[10px] text-stone-500 mb-1">
                         <span>执行进度</span>
                         <span>{doneSteps}/{totalSteps} 步骤 ({p.evaluation?.goalCompletion || 0}%)</span>
                       </div>
-                      <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
+                      <div className="w-full bg-stone-100 rounded-full overflow-hidden border border-stone-200">
                         <div
-                          className="bg-blue-500 h-full rounded-full transition-all"
+                          className="bg-stone-900 h-1.5 rounded-full transition-all"
                           style={{ width: `${p.evaluation?.goalCompletion || 0}%` }}
                         />
                       </div>
@@ -381,31 +381,31 @@ function PracticeSection({
             </div>
 
             {/* 关联方法论与方案 */}
-            <div className="p-4 rounded-xl bg-zinc-950/60 border border-zinc-800/60 space-y-3">
-              <div className="text-xs font-semibold text-blue-300 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
+            <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 space-y-3">
+              <div className="text-xs font-semibold text-stone-900 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
                 <span>关联方法论与预期目标</span>
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {currentPractice.methodIds.map(id => {
                   const m = methodMap.get(id)
                   return (
-                    <span key={id} className="badge badge-blue text-xs">
+                    <span key={id} className="badge bg-stone-200/80 text-stone-800 border-stone-300 text-xs">
                       {m?.name || id}
                     </span>
                   )
                 })}
               </div>
-              <div className="text-xs text-zinc-300">
+              <div className="text-xs text-stone-700">
                 <strong>预期目标：</strong> {currentPractice.planning?.goal || currentPractice.planning?.expectedOutcome}
               </div>
             </div>
 
             {/* 执行步骤清单 */}
             <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-zinc-200 flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-stone-900 flex items-center justify-between">
                 <span>执行步骤 ({currentPractice.planning?.steps?.filter(s => s.status === 'done').length || 0}/{currentPractice.planning?.steps?.length || 0})</span>
-                <span className="text-xs font-normal text-zinc-400">点击勾选完成</span>
+                <span className="text-xs font-normal text-stone-500">点击勾选完成</span>
               </h3>
 
               <div className="space-y-2">
@@ -415,21 +415,21 @@ function PracticeSection({
                     <div
                       key={idx}
                       onClick={() => toggleStep(idx)}
-                      className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
+                      className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-all ${
                         isDone
-                          ? 'bg-emerald-950/20 border-emerald-800/40 text-zinc-400 line-through'
-                          : 'bg-zinc-900/50 border-zinc-800 text-zinc-200 hover:border-zinc-700'
+                          ? 'bg-emerald-50/50 border-emerald-200 text-stone-400 line-through'
+                          : 'bg-white border-stone-200 text-stone-800 hover:border-stone-400 shadow-soft'
                       }`}
                     >
                       <input
                         type="checkbox"
                         checked={isDone}
                         onChange={() => {}}
-                        className="mt-0.5 rounded text-blue-600"
+                        className="mt-0.5 rounded text-stone-900 accent-stone-900"
                       />
                       <div className="flex-1 text-xs">
-                        <div className="font-medium text-zinc-200">{step.title}</div>
-                        {step.description && <div className="text-zinc-400 mt-0.5">{step.description}</div>}
+                        <div className="font-semibold text-stone-900">{step.title}</div>
+                        {step.description && <div className="text-stone-500 mt-0.5">{step.description}</div>}
                       </div>
                     </div>
                   )
@@ -438,8 +438,8 @@ function PracticeSection({
             </div>
 
             {/* 过程日志记录 */}
-            <div className="space-y-3 pt-2 border-t border-zinc-800/60">
-              <h3 className="text-sm font-semibold text-zinc-200">执行过程日志</h3>
+            <div className="space-y-3 pt-2 border-t border-stone-200">
+              <h3 className="text-sm font-semibold text-stone-900">执行过程日志</h3>
 
               <div className="flex gap-2">
                 <input
@@ -458,9 +458,9 @@ function PracticeSection({
               {currentPractice.execution?.logs && currentPractice.execution.logs.length > 0 && (
                 <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
                   {currentPractice.execution.logs.map(log => (
-                    <div key={log.id} className="text-xs p-2.5 rounded bg-zinc-950/50 border border-zinc-900 flex justify-between gap-3">
-                      <span className="text-zinc-300">{log.content}</span>
-                      <span className="text-[10px] text-zinc-500 whitespace-nowrap">{log.date}</span>
+                    <div key={log.id} className="text-xs p-2.5 rounded-xl bg-stone-50 border border-stone-200 flex justify-between gap-3">
+                      <span className="text-stone-700">{log.content}</span>
+                      <span className="text-[10px] text-stone-400 whitespace-nowrap font-mono">{log.date}</span>
                     </div>
                   ))}
                 </div>
@@ -468,8 +468,8 @@ function PracticeSection({
             </div>
 
             {/* 效果评价与总结 */}
-            <div className="space-y-3 pt-2 border-t border-zinc-800/60">
-              <h3 className="text-sm font-semibold text-zinc-200">效果评价与反思</h3>
+            <div className="space-y-3 pt-2 border-t border-stone-200">
+              <h3 className="text-sm font-semibold text-stone-900">效果评价与反思</h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                 <div>
@@ -614,20 +614,20 @@ function LearningSection({ plans, dueTasks, onSavePlan, allMethods }: LearningSe
 
                 <div className="flex flex-wrap gap-1">
                   {plan.methodIds.map(id => (
-                    <span key={id} className="badge bg-zinc-800/80 text-zinc-300 text-[10px]">
+                    <span key={id} className="badge bg-stone-100 text-stone-700 border-stone-200 text-[10px]">
                       {methodMap.get(id)?.name || id}
                     </span>
                   ))}
                 </div>
 
-                <div className="pt-2 border-t border-zinc-800/60">
-                  <div className="flex justify-between text-xs text-zinc-400 mb-1">
+                <div className="pt-2 border-t border-stone-100">
+                  <div className="flex justify-between text-xs text-stone-500 mb-1">
                     <span>学习进度</span>
                     <span>{plan.progress.completedTasks}/{plan.progress.totalTasks || plan.tasks?.length || 1} 课时</span>
                   </div>
-                  <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
+                  <div className="w-full bg-stone-100 h-2 rounded-full overflow-hidden border border-stone-200">
                     <div
-                      className="bg-emerald-500 h-full rounded-full"
+                      className="bg-stone-900 h-full rounded-full"
                       style={{
                         width: `${Math.round(((plan.progress.completedTasks || 0) / Math.max(1, plan.progress.totalTasks || 1)) * 100)}%`
                       }}
@@ -782,7 +782,7 @@ function NewPracticeModal({ isOpen, onClose, allMethods, onCreated }: NewPractic
 
         <div>
           <label className="label">选择适用的方法论（可多选组合）</label>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-40 overflow-y-auto p-2 bg-zinc-950/60 rounded-lg border border-zinc-800">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-40 overflow-y-auto p-2 bg-stone-50 rounded-xl border border-stone-200">
             {allMethods.map(m => {
               const checked = selectedMethods.includes(m.id)
               return (
@@ -792,14 +792,14 @@ function NewPracticeModal({ isOpen, onClose, allMethods, onCreated }: NewPractic
                   onClick={() => {
                     setSelectedMethods(checked ? selectedMethods.filter(id => id !== m.id) : [...selectedMethods, m.id])
                   }}
-                  className={`p-2 rounded text-left border transition-all text-xs ${
+                  className={`p-2 rounded-lg text-left border transition-all text-xs ${
                     checked
-                      ? 'bg-blue-600/20 border-blue-500 text-blue-300 font-medium'
-                      : 'bg-zinc-900 border-zinc-800 text-zinc-300 hover:border-zinc-700'
+                      ? 'bg-stone-900 border-stone-900 text-white font-medium shadow-soft'
+                      : 'bg-white border-stone-200 text-stone-700 hover:border-stone-400'
                   }`}
                 >
                   <div className="font-medium truncate">{m.name}</div>
-                  <div className="text-[10px] text-zinc-500 truncate">{m.content.summary}</div>
+                  <div className={`text-[10px] truncate ${checked ? 'text-stone-300' : 'text-stone-400'}`}>{m.content.summary}</div>
                 </button>
               )
             })}
@@ -916,7 +916,7 @@ function NewPlanModal({ isOpen, onClose, allMethods, onCreated }: NewPlanModalPr
 
         <div>
           <label className="label">选入方法论</label>
-          <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto p-2 bg-zinc-950/60 rounded-lg border border-zinc-800">
+          <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto p-2 bg-stone-50 rounded-xl border border-stone-200">
             {allMethods.map(m => {
               const checked = selectedMethods.includes(m.id)
               return (
@@ -926,10 +926,10 @@ function NewPlanModal({ isOpen, onClose, allMethods, onCreated }: NewPlanModalPr
                   onClick={() => {
                     setSelectedMethods(checked ? selectedMethods.filter(id => id !== m.id) : [...selectedMethods, m.id])
                   }}
-                  className={`p-2 rounded text-left border transition-all text-xs truncate ${
+                  className={`p-2 rounded-lg text-left border transition-all text-xs truncate ${
                     checked
-                      ? 'bg-blue-600/20 border-blue-500 text-blue-300 font-medium'
-                      : 'bg-zinc-900 border-zinc-800 text-zinc-300 hover:border-zinc-700'
+                      ? 'bg-stone-900 border-stone-900 text-white font-medium shadow-soft'
+                      : 'bg-white border-stone-200 text-stone-700 hover:border-stone-400'
                   }`}
                 >
                   {m.name}

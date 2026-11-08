@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { X } from 'lucide-react'
 
 interface ModalProps {
   isOpen: boolean
@@ -46,32 +47,30 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' }:
     >
       {/* 遮罩 */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-stone-900/30 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
 
       {/* 内容 */}
       <div
-        className={`relative w-full ${sizeClasses[size]} bg-gray-900 border border-gray-700 rounded-xl shadow-2xl flex flex-col max-h-[90vh]`}
+        className={`relative w-full ${sizeClasses[size]} bg-white border border-stone-200/90 rounded-2xl shadow-float flex flex-col max-h-[90vh] overflow-hidden`}
       >
         {/* 头部 */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-700 shrink-0">
-          <h2 id="modal-title" className="text-lg font-semibold text-white">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-stone-200/80 shrink-0 bg-stone-50/60">
+          <h2 id="modal-title" className="text-sm font-bold text-stone-900">
             {title}
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-gray-700"
+            className="text-stone-400 hover:text-stone-700 transition-colors p-1 rounded-lg hover:bg-stone-200/60"
             aria-label="关闭"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* 主体（可滚动） */}
-        <div className="overflow-y-auto flex-1 px-6 py-4">
+        {/* 内容主体 */}
+        <div className="p-5 overflow-y-auto text-stone-800 text-xs">
           {children}
         </div>
       </div>

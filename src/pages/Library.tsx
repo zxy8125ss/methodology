@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { Plus, Search, Download, Upload, RefreshCw, X, SlidersHorizontal, BookMarked } from 'lucide-react'
+import { Plus, Search, Download, Upload, RefreshCw, X, SlidersHorizontal } from 'lucide-react'
 import { useMethodsStore, useAppStore } from '../stores'
 import { methodsDB } from '../services/db'
 import MethodCard from '../components/MethodCard'
@@ -151,14 +151,14 @@ export default function Library() {
   return (
     <div className="space-y-6">
       {/* 顶部标题栏 */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-900/80 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-200/80 pb-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Cogito · Library</span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-stone-500">Cogito · Library</span>
             <span className="badge-zinc text-[10px]">{filteredMethods.length} 条收录</span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">方法论知识库</h1>
-          <p className="text-xs text-zinc-400 mt-1">
+          <h1 className="text-2xl font-bold tracking-tight text-stone-900">方法论知识库</h1>
+          <p className="text-xs text-stone-500 mt-0.5">
             标准化结构档案、多维检验证据与跨领域关联体系
           </p>
         </div>
@@ -199,10 +199,10 @@ export default function Library() {
 
       {/* 搜索与主筛选卡片 */}
       <div className="card p-4 space-y-3.5">
-        <div className="flex flex-col md:flex-row gap-3">
+        <div className="flex flex-col md:flex-row gap-2.5">
           {/* 搜索框 */}
           <div className="relative flex-1">
-            <Search className="absolute left-3.5 top-3 w-4 h-4 text-zinc-500" />
+            <Search className="absolute left-3.5 top-3 w-4 h-4 text-stone-400" />
             <input
               type="text"
               value={searchTerm}
@@ -213,7 +213,7 @@ export default function Library() {
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="absolute right-3 top-3 text-zinc-500 hover:text-zinc-200"
+                className="absolute right-3 top-3 text-stone-400 hover:text-stone-700"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -225,7 +225,7 @@ export default function Library() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="select text-xs py-2"
+              className="select text-xs py-2 w-auto"
             >
               <option value="updatedAt">最近更新</option>
               <option value="name">名称字母序</option>
@@ -237,7 +237,7 @@ export default function Library() {
               onClick={() => setIsFilterOpen(!isFilterOpen)}
               className={`btn text-xs px-3.5 py-2 ${
                 isFilterOpen
-                  ? 'bg-zinc-100 text-zinc-950 font-semibold'
+                  ? 'bg-stone-900 text-white font-semibold'
                   : 'btn-secondary'
               }`}
             >
@@ -249,7 +249,7 @@ export default function Library() {
 
         {/* 展开式高级过滤器 */}
         {isFilterOpen && (
-          <div className="pt-3 border-t border-zinc-800/60 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div className="pt-3 border-t border-stone-200/70 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
             <div>
               <label className="label">知识架构层级</label>
               <select
@@ -315,13 +315,13 @@ export default function Library() {
         )}
 
         {/* 八大领域水平切换按钮 */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 pt-1 no-scrollbar text-xs">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 pt-0.5 no-scrollbar text-xs">
           <button
             onClick={() => handleDomainSelect(null)}
             className={`px-3 py-1.5 rounded-xl whitespace-nowrap transition-all duration-150 ${
               selectedDomain === null
-                ? 'bg-white text-zinc-950 font-semibold shadow-sm'
-                : 'bg-zinc-800/80 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
+                ? 'bg-stone-900 text-white font-semibold shadow-soft'
+                : 'bg-stone-100 text-stone-600 hover:text-stone-900 hover:bg-stone-200/70 border border-stone-200'
             }`}
           >
             全部 ({methods.length})
@@ -335,13 +335,13 @@ export default function Library() {
                 onClick={() => handleDomainSelect(isSelected ? null : dom.id)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl whitespace-nowrap transition-all duration-150 ${
                   isSelected
-                    ? 'bg-white text-zinc-950 font-semibold shadow-sm'
-                    : 'bg-zinc-800/80 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
+                    ? 'bg-stone-900 text-white font-semibold shadow-soft'
+                    : 'bg-stone-100 text-stone-600 hover:text-stone-900 hover:bg-stone-200/70 border border-stone-200'
                 }`}
               >
                 <span>{dom.name}</span>
                 <span className={`text-[10px] font-mono px-1 rounded ${
-                  isSelected ? 'bg-zinc-200 text-zinc-950' : 'bg-zinc-900 text-zinc-500'
+                  isSelected ? 'bg-stone-800 text-stone-200' : 'bg-white text-stone-500 border border-stone-200'
                 }`}>
                   {count}
                 </span>
@@ -351,11 +351,11 @@ export default function Library() {
         </div>
 
         {hasActiveFilters && (
-          <div className="flex items-center justify-between text-xs pt-1 text-zinc-500 border-t border-zinc-800/40">
+          <div className="flex items-center justify-between text-xs pt-1 text-stone-500 border-t border-stone-200/70">
             <span>筛选结果：{filteredMethods.length} 项</span>
             <button
               onClick={handleResetFilters}
-              className="text-zinc-300 hover:text-white flex items-center gap-1 font-medium transition-colors"
+              className="text-stone-700 hover:text-stone-950 flex items-center gap-1 font-medium transition-colors"
             >
               <RefreshCw className="w-3 h-3" />
               <span>清空筛选</span>
@@ -380,7 +380,7 @@ export default function Library() {
           }}
         />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
           {filteredMethods.map((method) => (
             <MethodCard
               key={method.id}

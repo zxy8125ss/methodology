@@ -8,33 +8,33 @@ interface EvidenceBadgeProps {
 const evidenceConfig: Record<EvidenceLevel, { label: string; dot: string; text: string; bg: string }> = {
   high: {
     label: '高可信度',
-    dot: 'bg-emerald-400',
-    text: 'text-zinc-300',
-    bg: 'bg-zinc-800/80 border-zinc-700/60'
+    dot: 'bg-emerald-600',
+    text: 'text-stone-700',
+    bg: 'bg-emerald-50/80 border-emerald-200'
   },
   medium: {
     label: '中等可信',
-    dot: 'bg-sky-400',
-    text: 'text-zinc-300',
-    bg: 'bg-zinc-800/80 border-zinc-700/60'
+    dot: 'bg-sky-600',
+    text: 'text-stone-700',
+    bg: 'bg-sky-50/80 border-sky-200'
   },
   low: {
     label: '经验性',
-    dot: 'bg-amber-400',
-    text: 'text-zinc-400',
-    bg: 'bg-zinc-800/80 border-zinc-700/60'
+    dot: 'bg-amber-600',
+    text: 'text-stone-700',
+    bg: 'bg-amber-50/80 border-amber-200'
   },
   unverified: {
     label: '待验证',
-    dot: 'bg-zinc-500',
-    text: 'text-zinc-500',
-    bg: 'bg-zinc-900 border-zinc-800'
+    dot: 'bg-stone-400',
+    text: 'text-stone-500',
+    bg: 'bg-stone-100 border-stone-200'
   },
   disputed: {
     label: '存疑',
-    dot: 'bg-rose-400',
-    text: 'text-rose-300',
-    bg: 'bg-rose-950/20 border-rose-900/40'
+    dot: 'bg-rose-600',
+    text: 'text-rose-700',
+    bg: 'bg-rose-50 border-rose-200'
   },
 }
 

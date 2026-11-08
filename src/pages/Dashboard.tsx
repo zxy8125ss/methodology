@@ -5,10 +5,8 @@ import {
   ArrowRight,
   TrendingUp,
   BookOpen,
-  CheckCircle2,
   RefreshCw,
   Compass,
-  Layers,
   ChevronRight
 } from 'lucide-react'
 import { useAppStore } from '../stores'
@@ -29,18 +27,18 @@ const domainNameMap: Record<string, string> = {
   communication: '沟通谈判',
   learning: '学习管理',
   business: '商业经营',
-  life: '生活哲学',
+  life: '生活实用',
 }
 
 const domainBarColorMap: Record<string, string> = {
-  management: '#71717a',
-  personal_growth: '#10b981',
-  thinking: '#f4f4f5',
-  work_efficiency: '#f59e0b',
-  communication: '#a1a1aa',
-  learning: '#0ea5e9',
-  business: '#d4d4d8',
-  life: '#84cc16',
+  management: '#78716c',
+  personal_growth: '#059669',
+  thinking: '#4f46e5',
+  work_efficiency: '#d97706',
+  communication: '#0284c7',
+  learning: '#0891b2',
+  business: '#7c3aed',
+  life: '#e11d48',
 }
 
 interface StatCardProps {
@@ -54,19 +52,19 @@ interface StatCardProps {
 const StatCard: React.FC<StatCardProps> = ({ label, value, sub, icon, onClick }) => (
   <div
     onClick={onClick}
-    className={`bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/80 rounded-2xl p-4.5 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-900/90 hover:shadow-float ${
+    className={`bg-white border border-stone-200/85 rounded-2xl p-4 flex flex-col justify-between shadow-card transition-all duration-200 hover:border-stone-400 hover:shadow-float ${
       onClick ? 'cursor-pointer' : ''
     }`}
   >
-    <div className="flex items-center justify-between text-zinc-400">
+    <div className="flex items-center justify-between text-stone-500">
       <span className="text-xs font-medium tracking-tight">{label}</span>
-      <span className="w-6 h-6 rounded-lg bg-zinc-800/60 flex items-center justify-center text-zinc-300">
+      <span className="w-6 h-6 rounded-lg bg-stone-100 flex items-center justify-center text-stone-700">
         {icon}
       </span>
     </div>
-    <div className="mt-3">
-      <div className="text-2xl font-bold font-mono tracking-tight text-white">{value}</div>
-      {sub && <div className="text-[11px] text-zinc-400 mt-0.5">{sub}</div>}
+    <div className="mt-2.5">
+      <div className="text-2xl font-bold font-mono tracking-tight text-stone-900">{value}</div>
+      {sub && <div className="text-[11px] text-stone-500 mt-0.5">{sub}</div>}
     </div>
   </div>
 )
@@ -112,15 +110,15 @@ const Dashboard: React.FC = () => {
   const maxDomainCount = Math.max(1, ...Object.values(domainDistribution))
 
   return (
-    <div className="space-y-7">
+    <div className="space-y-6">
       {/* Editorial Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-900/80 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-200/80 pb-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Cogito · Overview</span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-stone-500">Cogito · Overview</span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">综合概览与认知工作台</h1>
-          <p className="text-xs text-zinc-400 mt-1">
+          <h1 className="text-2xl font-bold tracking-tight text-stone-900">综合概览与认知工作台</h1>
+          <p className="text-xs text-stone-500 mt-0.5">
             标准化沉淀、关联推演与实践验证的个人方法论总览
           </p>
         </div>
@@ -130,7 +128,7 @@ const Dashboard: React.FC = () => {
             onClick={handleRefresh}
             className="btn-secondary text-xs flex items-center gap-1.5"
           >
-            <RefreshCw className="w-3.5 h-3.5" />
+            <RefreshCw className="w-3.5 h-3.5 text-stone-500" />
             <span>刷新数据</span>
           </button>
           <button
@@ -149,7 +147,7 @@ const Dashboard: React.FC = () => {
       ) : (
         <>
           {/* 4 核心指标卡片 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <StatCard
               label="收录方法论"
               value={totalMethods}
@@ -158,7 +156,7 @@ const Dashboard: React.FC = () => {
               onClick={() => navigate('/library')}
             />
             <StatCard
-              label="AI 待审核成果"
+              label="待审核成果"
               value={stats?.pendingReviews ?? 0}
               sub={stats?.pendingReviews ? '待人工检视入库' : '暂无积压'}
               icon={<Sparkles className="w-3.5 h-3.5" />}
@@ -181,15 +179,15 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* 主工作区二分网格 */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
             {/* 左侧：八大领域知识分布图 */}
-            <div className="card p-5 space-y-4 lg:col-span-1">
-              <div className="flex items-center justify-between border-b border-zinc-800/60 pb-3">
-                <h2 className="text-xs font-semibold uppercase tracking-wider text-zinc-300">八大领域分布</h2>
-                <span className="text-[11px] font-mono text-zinc-500">{totalMethods} 档案</span>
+            <div className="card p-4.5 space-y-4 lg:col-span-1">
+              <div className="flex items-center justify-between border-b border-stone-200/70 pb-2.5">
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-stone-800">八大领域分布</h2>
+                <span className="text-[11px] font-mono text-stone-500">{totalMethods} 档案</span>
               </div>
 
-              {/* 极简环形概览 */}
+              {/* 环形概览 */}
               <div className="relative flex items-center justify-center py-2">
                 <svg viewBox="0 0 120 120" className="w-28 h-28 -rotate-90">
                   {(() => {
@@ -215,8 +213,8 @@ const Dashboard: React.FC = () => {
                           cy="60"
                           r={radius}
                           fill="none"
-                          stroke={domainBarColorMap[id] ?? '#52525b'}
-                          strokeWidth="10"
+                          stroke={domainBarColorMap[id] ?? '#78716c'}
+                          strokeWidth="9"
                           strokeDasharray={strokeDasharray}
                           strokeDashoffset={strokeDashoffset}
                           className="transition-all duration-500"
@@ -226,13 +224,13 @@ const Dashboard: React.FC = () => {
                   })()}
                 </svg>
                 <div className="absolute text-center">
-                  <div className="text-xl font-bold font-mono text-white">{totalMethods}</div>
-                  <div className="text-[10px] text-zinc-500">Methodology</div>
+                  <div className="text-xl font-bold font-mono text-stone-900">{totalMethods}</div>
+                  <div className="text-[10px] text-stone-400">Methodology</div>
                 </div>
               </div>
 
               {/* 领域进度条列表 */}
-              <div className="space-y-2 pt-1">
+              <div className="space-y-1.5 pt-1">
                 {DOMAIN_IDS.map((id) => {
                   const count = domainDistribution[id] ?? 0
                   const pct = maxDomainCount > 0 ? Math.round((count / maxDomainCount) * 100) : 0
@@ -240,18 +238,18 @@ const Dashboard: React.FC = () => {
                     <div
                       key={id}
                       onClick={() => navigate(`/library?domain=${id}`)}
-                      className="group cursor-pointer p-1.5 rounded-lg hover:bg-zinc-800/40 transition-colors"
+                      className="group cursor-pointer p-1.5 rounded-lg hover:bg-stone-50 transition-colors"
                     >
                       <div className="flex items-center justify-between text-xs mb-1">
-                        <span className="text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                        <span className="text-stone-700 group-hover:text-stone-900 transition-colors">
                           {domainNameMap[id]}
                         </span>
-                        <span className="font-mono text-zinc-500 text-[11px]">{count}</span>
+                        <span className="font-mono text-stone-500 text-[11px]">{count}</span>
                       </div>
-                      <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
+                      <div className="h-1 bg-stone-100 rounded-full overflow-hidden">
                         <div
                           className="h-full rounded-full transition-all duration-500"
-                          style={{ width: `${pct}%`, backgroundColor: domainBarColorMap[id] ?? '#71717a' }}
+                          style={{ width: `${pct}%`, backgroundColor: domainBarColorMap[id] ?? '#78716c' }}
                         />
                       </div>
                     </div>
@@ -261,14 +259,14 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* 右侧：最近收录 + 待审核队列 */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-5">
               {/* 最近收录 */}
-              <div className="card p-5 space-y-4">
-                <div className="flex items-center justify-between border-b border-zinc-800/60 pb-3">
-                  <h2 className="text-xs font-semibold uppercase tracking-wider text-zinc-300">最近更新档案</h2>
+              <div className="card p-4.5 space-y-3.5">
+                <div className="flex items-center justify-between border-b border-stone-200/70 pb-2.5">
+                  <h2 className="text-xs font-semibold uppercase tracking-wider text-stone-800">最近更新档案</h2>
                   <button
                     onClick={() => navigate('/library')}
-                    className="text-xs text-zinc-400 hover:text-white transition-colors flex items-center gap-1"
+                    className="text-xs text-stone-600 hover:text-stone-900 transition-colors flex items-center gap-1 font-medium"
                   >
                     <span>浏览全部</span>
                     <ArrowRight className="w-3 h-3" />
@@ -283,7 +281,7 @@ const Dashboard: React.FC = () => {
                     action={{ label: '新建方法论', onClick: () => navigate('/library/new') }}
                   />
                 ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {recentMethods.slice(0, 4).map((method) => (
                       <MethodCard
                         key={method.id}
@@ -297,17 +295,17 @@ const Dashboard: React.FC = () => {
 
               {/* 待审核队列（若有） */}
               {pendingReviews.length > 0 && (
-                <div className="card p-5 border-amber-900/40 bg-amber-950/10 space-y-3">
+                <div className="card p-4 border-amber-300 bg-amber-50/50 space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-amber-400" />
-                      <h2 className="text-xs font-semibold uppercase tracking-wider text-amber-300">
+                      <Sparkles className="w-4 h-4 text-amber-600" />
+                      <h2 className="text-xs font-semibold uppercase tracking-wider text-amber-900">
                         AI 研究成果待审核 ({pendingReviews.length})
                       </h2>
                     </div>
                     <button
                       onClick={() => navigate('/research')}
-                      className="text-xs text-amber-400 hover:text-amber-300 flex items-center gap-1 font-medium"
+                      className="text-xs text-amber-800 hover:text-amber-950 flex items-center gap-1 font-medium"
                     >
                       <span>前往审核队列</span>
                       <ChevronRight className="w-3 h-3" />
@@ -318,26 +316,26 @@ const Dashboard: React.FC = () => {
                     {pendingReviews.slice(0, 2).map((review) => (
                       <div
                         key={review.id}
-                        className="flex items-start justify-between gap-3 p-3 rounded-xl bg-zinc-900/80 border border-zinc-800"
+                        className="flex items-start justify-between gap-3 p-3 rounded-xl bg-white border border-amber-200 shadow-soft"
                       >
                         <div className="flex-1 min-w-0">
-                          <p className="text-xs font-medium text-zinc-200 truncate">
+                          <p className="text-xs font-semibold text-stone-900 truncate">
                             {review.discoveredMethod?.draftMethod?.name ?? '待收录方法论'}
                           </p>
-                          <p className="text-[11px] text-zinc-400 mt-0.5 line-clamp-1">
+                          <p className="text-[11px] text-stone-600 mt-0.5 line-clamp-1">
                             {review.aiSummary}
                           </p>
                         </div>
                         <div className="flex gap-1.5 shrink-0">
                           <button
                             onClick={() => approveReview(review.id)}
-                            className="px-2.5 py-1 text-[11px] bg-white text-zinc-950 font-semibold rounded-lg hover:bg-zinc-200 transition-colors"
+                            className="px-2.5 py-1 text-[11px] bg-stone-900 text-white font-semibold rounded-lg hover:bg-stone-800 transition-colors shadow-soft"
                           >
                             批准
                           </button>
                           <button
                             onClick={() => rejectReview(review.id, '退回')}
-                            className="px-2.5 py-1 text-[11px] bg-zinc-800 text-zinc-400 hover:text-zinc-200 rounded-lg transition-colors"
+                            className="px-2.5 py-1 text-[11px] bg-stone-100 text-stone-600 hover:text-stone-900 rounded-lg transition-colors border border-stone-200"
                           >
                             忽略
                           </button>
@@ -349,15 +347,15 @@ const Dashboard: React.FC = () => {
               )}
 
               {/* AI 推荐洞察 */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {AI_INSIGHTS.map((item, idx) => (
-                  <div key={idx} className="card p-4 space-y-2 border-zinc-800/60 bg-zinc-900/40">
-                    <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+                  <div key={idx} className="card p-3.5 space-y-1.5 border-stone-200/80 bg-stone-50/50">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-stone-500">
                       <span>{item.tag}</span>
-                      <Sparkles className="w-3 h-3 text-zinc-400" />
+                      <Sparkles className="w-3 h-3 text-stone-400" />
                     </div>
-                    <h3 className="text-xs font-semibold text-zinc-200">{item.title}</h3>
-                    <p className="text-[11px] text-zinc-400 leading-relaxed">{item.desc}</p>
+                    <h3 className="text-xs font-semibold text-stone-900">{item.title}</h3>
+                    <p className="text-[11px] text-stone-600 leading-relaxed">{item.desc}</p>
                   </div>
                 ))}
               </div>

@@ -16,11 +16,11 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ size = 'md', className 
   return (
     <div className="flex flex-col items-center justify-center gap-2 p-4">
       <div
-        className={`inline-block rounded-full border-slate-600 border-t-indigo-400 animate-spin ${sizeMap[size]} ${className}`}
+        className={`inline-block rounded-full border-stone-200 border-t-stone-900 animate-spin ${sizeMap[size]} ${className}`}
         role="status"
         aria-label="加载中"
       />
-      {text && <span className="text-xs text-slate-400">{text}</span>}
+      {text && <span className="text-xs text-stone-500">{text}</span>}
     </div>
   )
 }

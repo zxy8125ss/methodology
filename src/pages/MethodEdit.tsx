@@ -278,7 +278,7 @@ export default function MethodEdit() {
       <div className="flex items-center justify-between gap-4">
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-1.5 text-zinc-400 hover:text-zinc-200 text-sm font-medium"
+          className="flex items-center gap-1.5 text-stone-500 hover:text-stone-800 text-sm font-medium"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>返回</span>
@@ -315,7 +315,7 @@ export default function MethodEdit() {
       </div>
 
       <div className="card p-6 space-y-6">
-        <h2 className="text-xl font-bold text-zinc-100 border-b border-zinc-800/60 pb-3">
+        <h2 className="text-xl font-bold text-stone-900 border-b border-stone-200 pb-3">
           {isNew ? '创建新方法论档案' : `编辑方法论：${name}`}
         </h2>
 
@@ -401,7 +401,7 @@ export default function MethodEdit() {
                   className={`flex items-center gap-2 p-2.5 rounded-lg border text-xs text-left transition-all ${
                     checked
                       ? 'bg-blue-600/20 border-blue-500 text-blue-300 font-medium'
-                      : 'bg-zinc-900/80 border-zinc-800 text-zinc-300 hover:border-zinc-700'
+                      : 'bg-white border-stone-200 text-stone-700 hover:border-stone-300'
                   }`}
                 >
                   <span className="text-base">{dom.icon}</span>
@@ -413,8 +413,8 @@ export default function MethodEdit() {
         </div>
 
         {/* 渊源出处 */}
-        <div className="pt-4 border-t border-zinc-800/60 space-y-4">
-          <h3 className="text-sm font-semibold text-zinc-200">理论渊源与提出者</h3>
+        <div className="pt-4 border-t border-stone-200 space-y-4">
+          <h3 className="text-sm font-semibold text-stone-800">理论渊源与提出者</h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div>
               <label className="label">提出者 / 创始人</label>
@@ -450,8 +450,8 @@ export default function MethodEdit() {
         </div>
 
         {/* 核心内容 */}
-        <div className="pt-4 border-t border-zinc-800/60 space-y-4">
-          <h3 className="text-sm font-semibold text-zinc-200">核心内容与运行机制</h3>
+        <div className="pt-4 border-t border-stone-200 space-y-4">
+          <h3 className="text-sm font-semibold text-stone-800">核心内容与运行机制</h3>
 
           <div>
             <label className="label">一句话概述（卡片展示用，30-50字） *</label>
@@ -507,11 +507,11 @@ export default function MethodEdit() {
         </div>
 
         {/* 可操作步骤 */}
-        <div className="pt-4 border-t border-zinc-800/60 space-y-3">
+        <div className="pt-4 border-t border-stone-200 space-y-3">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-sm font-semibold text-zinc-200">标准操作步骤 (Steps)</h3>
-              <p className="text-xs text-zinc-400">指导用户在真实场景中一步步落地的 SOP</p>
+              <h3 className="text-sm font-semibold text-stone-800">标准操作步骤 (Steps)</h3>
+              <p className="text-xs text-stone-500">指导用户在真实场景中一步步落地的 SOP</p>
             </div>
             <button
               type="button"
@@ -524,13 +524,13 @@ export default function MethodEdit() {
           </div>
 
           {steps.length === 0 ? (
-            <div className="p-4 rounded-lg bg-zinc-900/40 border border-dashed border-zinc-800 text-center text-xs text-zinc-500">
+            <div className="p-4 rounded-lg bg-stone-50 border border-dashed border-stone-200 text-center text-xs text-stone-400">
               暂无具体步骤，点击右上角“添加步骤”或使用 AI 辅助扩写生成
             </div>
           ) : (
             <div className="space-y-3">
               {steps.map((st, idx) => (
-                <div key={idx} className="p-3.5 rounded-lg bg-zinc-900/60 border border-zinc-800 space-y-2">
+                <div key={idx} className="p-3.5 rounded-lg bg-white border border-stone-200 space-y-2">
                   <div className="flex items-center justify-between gap-2">
                     <span className="w-5 h-5 rounded-full bg-blue-600/30 text-blue-300 text-xs flex items-center justify-center font-bold">
                       {st.order || idx + 1}
@@ -545,7 +545,7 @@ export default function MethodEdit() {
                     <button
                       type="button"
                       onClick={() => removeStep(idx)}
-                      className="text-zinc-500 hover:text-red-400 p-1"
+                      className="text-stone-400 hover:text-red-400 p-1"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -564,7 +564,7 @@ export default function MethodEdit() {
         </div>
 
         {/* 优缺点、局限与误区 */}
-        <div className="pt-4 border-t border-zinc-800/60 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="pt-4 border-t border-stone-200 grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label className="label text-emerald-300">核心优点 (Advantages)</label>
             <TagInput
@@ -592,7 +592,7 @@ export default function MethodEdit() {
         </div>
 
         {/* 标签 */}
-        <div className="pt-4 border-t border-zinc-800/60">
+        <div className="pt-4 border-t border-stone-200">
           <label className="label">标签 (Tags)</label>
           <TagInput
             value={tags}
@@ -602,10 +602,10 @@ export default function MethodEdit() {
         </div>
 
         {/* 完整深度研究文章 (Markdown) */}
-        <div className="pt-4 border-t border-zinc-800/60 space-y-2">
+        <div className="pt-4 border-t border-stone-200 space-y-2">
           <div className="flex items-center justify-between">
             <label className="label mb-0">完整研究报告 (Markdown 文章)</label>
-            <span className="text-xs text-zinc-500">支持标准 GitHub Flavored Markdown 语法</span>
+            <span className="text-xs text-stone-400">支持标准 GitHub Flavored Markdown 语法</span>
           </div>
           <textarea
             rows={10}
