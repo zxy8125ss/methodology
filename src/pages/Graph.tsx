@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import * as d3 from 'd3'
 import { methodsDB, relationsDB, domainsDB } from '../services/db'
 import type { Method, Domain, GraphNode, GraphEdge } from '../types'
@@ -355,12 +356,12 @@ export default function Graph() {
                       )}
                       <div className="text-xs text-muted">类型：{m.type}</div>
                       <div className="text-xs text-muted">证据：{m.evidence?.level}</div>
-                      <a
-                        href={`/library/${m.id}`}
+                      <Link
+                        to={`/library/${m.id}`}
                         className="btn-primary text-xs mt-3 w-full justify-center"
                       >
                         查看详情 →
-                      </a>
+                      </Link>
                     </>
                   )
                 })()}

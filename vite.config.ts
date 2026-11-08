@@ -46,7 +46,7 @@ export default defineConfig({
       }
     })
   ],
-  base: process.env.GITHUB_PAGES ? '/methodology/' : '/',
+  base: (process.env.GITHUB_PAGES || process.env.NODE_ENV === 'production') ? '/methodology/' : '/',
   build: {
     outDir: 'dist',
     sourcemap: false,

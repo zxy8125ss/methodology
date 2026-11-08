@@ -1,6 +1,5 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from './components/Layout'
 import Dashboard from './pages/Dashboard'
 import Library from './pages/Library'
@@ -15,14 +14,14 @@ import NotificationCenter from './components/NotificationCenter'
 import { useAppStore } from './stores'
 
 export default function App() {
-  const { initialize, initialized } = useAppStore()
+  const { initialize } = useAppStore()
 
   useEffect(() => {
     initialize()
   }, [initialize])
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="min-h-screen bg-slate-900 text-slate-100 font-sans">
         <NotificationCenter />
         <Routes>
@@ -38,9 +37,10 @@ export default function App() {
             <Route path="graph" element={<Graph />} />
             <Route path="practice" element={<PracticeAndLearning />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Route>
         </Routes>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
