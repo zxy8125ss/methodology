@@ -1,0 +1,99 @@
+{
+  "id": "method_eisenhower",
+  "name": "艾森豪威尔矩阵",
+  "aliases": [
+    "时间管理四象限",
+    "Eisenhower Matrix"
+  ],
+  "domains": [
+    "work_efficiency",
+    "personal_growth"
+  ],
+  "subDomains": [
+    "time_mgmt",
+    "prioritization"
+  ],
+  "type": "tool",
+  "layer": 1,
+  "origin": {
+    "proposer": "德怀特·艾森豪威尔 (Dwight D. Eisenhower)",
+    "year": 1954,
+    "sources": [
+      {
+        "id": "src_eis_1",
+        "title": "The 7 Habits of Highly Effective People",
+        "type": "book",
+        "credibility": "high"
+      }
+    ]
+  },
+  "content": {
+    "summary": "依据“重要性”与“紧急性”两个维度将任务划分为四个象限，引导注意力投向长期价值创造的决策工具",
+    "coreIdea": "紧急的事情很少是重要的，重要的事情很少是极度紧急的。必须摆脱虚假紧急性的绑架。",
+    "principles": [
+      "Q1重要且紧急马上做",
+      "Q2重要不紧急专注做",
+      "Q3紧急不重要授权做",
+      "Q4不紧急不重要坚决不做"
+    ],
+    "mechanism": "打碎大脑基于时间临近度的应激反应，建立理性长期价值筛选器。",
+    "scenarios": [
+      "日程梳理",
+      "管理者精力聚焦",
+      "个人长期护城河建设"
+    ],
+    "conditions": [
+      "对核心价值有清晰定义"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "title": "列出所有待办清单",
+        "description": "清空大脑中的所有未竟事项"
+      },
+      {
+        "order": 2,
+        "title": "按重要与紧急分配象限",
+        "description": "审视一年后的长期真实价值"
+      },
+      {
+        "order": 3,
+        "title": "执行四象限策略",
+        "description": "重点捍卫第二象限深度工作时间"
+      }
+    ],
+    "advantages": [
+      "直观易行",
+      "极大降低无谓忙碌消耗"
+    ],
+    "limitations": [
+      "需结合价值观判断重要性"
+    ],
+    "misconceptions": [
+      "整日扑在第一象限救火以为很充实"
+    ],
+    "fullArticle": "# 艾森豪威尔四象限时间管理法\n\n从疲于奔命的救火员转变为长远布局的规划师。"
+  },
+  "evidence": {
+    "level": "high",
+    "confidence": 96,
+    "notes": "半个世纪全球数千万人践行"
+  },
+  "cases": [],
+  "relations": [],
+  "tags": [
+    "工作效率",
+    "时间管理",
+    "优先级"
+  ],
+  "status": "active",
+  "stats": {
+    "viewCount": 220,
+    "practiceCount": 26,
+    "learningCount": 38,
+    "avgRating": 4.9
+  },
+  "version": 1,
+  "createdAt": "2026-11-08T10:00:08.284Z",
+  "updatedAt": "2026-11-08T10:00:08.284Z"
+}

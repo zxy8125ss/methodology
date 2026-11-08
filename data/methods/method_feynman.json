@@ -1,0 +1,102 @@
+{
+  "id": "method_feynman",
+  "name": "费曼学习法",
+  "aliases": [
+    "Feynman Technique",
+    "以教促学"
+  ],
+  "domains": [
+    "learning",
+    "thinking"
+  ],
+  "subDomains": [
+    "active_learning"
+  ],
+  "type": "process",
+  "layer": 2,
+  "origin": {
+    "proposer": "理查德·费曼 (Richard Feynman)",
+    "year": 1965,
+    "sources": [
+      {
+        "id": "src_feynman_1",
+        "title": "Surely You're Joking, Mr. Feynman!",
+        "type": "book",
+        "credibility": "high"
+      }
+    ]
+  },
+  "content": {
+    "summary": "通过用通俗易懂的极简语言向初学者讲授概念，精准定位理解漏洞并针对性补强的学习方法",
+    "coreIdea": "教是最好的学。真正的掌握源于直觉化还原与类比构建，而非生搬硬套专业术语。",
+    "principles": [
+      "禁用一切晦涩行业黑话",
+      "卡壳处即是认知盲区",
+      "运用生活化类比"
+    ],
+    "mechanism": "强迫大脑从被动输入切换为高阶输出，激活概念解构回路。",
+    "scenarios": [
+      "学习抽象复杂理论",
+      "技术内训赋能",
+      "个人知识梳理"
+    ],
+    "conditions": [
+      "坦诚面对知识漏洞的心态"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "title": "选择目标概念",
+        "description": "聚焦单一清晰的知识点"
+      },
+      {
+        "order": 2,
+        "title": "假装向外行/儿童传授",
+        "description": "用极简日常语言写出解释"
+      },
+      {
+        "order": 3,
+        "title": "定位卡点并回归原始资料",
+        "description": "精准补齐认知断层"
+      },
+      {
+        "order": 4,
+        "title": "简化语言并建立生动类比",
+        "description": "串联为生活化案例"
+      }
+    ],
+    "advantages": [
+      "彻底击穿知识伪装",
+      "形成的直觉理解长期稳固"
+    ],
+    "limitations": [
+      "脑力消耗较大"
+    ],
+    "misconceptions": [
+      "能背出定义就等于真正懂了"
+    ],
+    "fullArticle": "# 费曼学习法深度解析\n\n认知科学推崇的高阶学习心法。"
+  },
+  "evidence": {
+    "level": "high",
+    "confidence": 98,
+    "notes": "认知心理学实验验证有效"
+  },
+  "cases": [],
+  "relations": [],
+  "tags": [
+    "学习方法",
+    "知识管理",
+    "输入输出"
+  ],
+  "status": "active",
+  "stats": {
+    "viewCount": 310,
+    "practiceCount": 29,
+    "learningCount": 56,
+    "avgRating": 5
+  },
+  "version": 1,
+  "createdAt": "2026-11-08T10:00:08.284Z",
+  "updatedAt": "2026-11-08T10:00:08.284Z"
+}

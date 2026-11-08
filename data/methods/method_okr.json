@@ -1,0 +1,104 @@
+{
+  "id": "method_okr",
+  "name": "OKR目标与关键结果",
+  "aliases": [
+    "Objectives and Key Results",
+    "目标与关键结果法"
+  ],
+  "domains": [
+    "management",
+    "personal_growth"
+  ],
+  "subDomains": [
+    "goal_mgmt"
+  ],
+  "type": "framework",
+  "layer": 2,
+  "origin": {
+    "proposer": "安迪·格鲁夫 (Andy Grove) / 约翰·杜尔 (John Doerr)",
+    "year": 1975,
+    "sources": [
+      {
+        "id": "src_okr_1",
+        "title": "Measure What Matters",
+        "type": "book",
+        "credibility": "high"
+      }
+    ]
+  },
+  "content": {
+    "summary": "通过设定野心目标(O)与可量化关键结果(KR)，驱动组织协同与个人聚焦的敏捷目标管理系统",
+    "coreIdea": "OKR 是激发自主协同的敏捷罗盘，而不是事后惩罚的绩效考核棍棒。",
+    "principles": [
+      "目标定性富有鼓舞性，KR必须量化",
+      "全员透明公开",
+      "与薪酬考核解耦"
+    ],
+    "mechanism": "极限精简约束注意力，公开透明带来同侪激励。",
+    "scenarios": [
+      "创新转型企业",
+      "跨团队复杂协同",
+      "个人重大目标攻坚"
+    ],
+    "conditions": [
+      "鼓励创新的安全文化",
+      "管理层透明公开"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "title": "设定鼓舞人心的目标 (O)",
+        "description": "明确周期最想达成的突破"
+      },
+      {
+        "order": 2,
+        "title": "制定量化关键结果 (KR)",
+        "description": "设定 2-4 个数值化衡量标准"
+      },
+      {
+        "order": 3,
+        "title": "横向纵向协同对齐",
+        "description": "消除依赖阻塞"
+      },
+      {
+        "order": 4,
+        "title": "定期复盘与评分",
+        "description": "周同步进度，季度末反思打分"
+      }
+    ],
+    "advantages": [
+      "战略高度聚焦",
+      "打破跨部门壁垒"
+    ],
+    "limitations": [
+      "需包容适度失败的组织文化土壤"
+    ],
+    "misconceptions": [
+      "直接把 OKR 等同于奖金绩效考核"
+    ],
+    "fullArticle": "# OKR 目标管理全景指南\n\n驱动 Google 等顶尖科技巨头高速成长的协同框架。"
+  },
+  "evidence": {
+    "level": "high",
+    "confidence": 95,
+    "notes": "硅谷与全球科技行业主流标配"
+  },
+  "cases": [],
+  "relations": [],
+  "tags": [
+    "管理",
+    "目标管理",
+    "OKR",
+    "团队协同"
+  ],
+  "status": "active",
+  "stats": {
+    "viewCount": 189,
+    "practiceCount": 19,
+    "learningCount": 42,
+    "avgRating": 4.8
+  },
+  "version": 1,
+  "createdAt": "2026-11-08T10:00:08.284Z",
+  "updatedAt": "2026-11-08T10:00:08.284Z"
+}

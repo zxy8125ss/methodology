@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Methodology",
+  "type": "object",
+  "required": ["id", "name", "domains", "type", "layer", "content", "status", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^method_[a-zA-Z0-9_]+$" },
+    "name": { "type": "string", "minLength": 1 },
+    "aliases": { "type": "array", "items": { "type": "string" } },
+    "domains": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "subDomains": { "type": "array", "items": { "type": "string" } },
+    "type": { "type": "string", "enum": ["theory", "model", "tool", "process", "principle", "framework", "other"] },
+    "layer": { "type": "integer", "enum": [1, 2, 3] },
+    "origin": {
+      "type": "object",
+      "properties": {
+        "proposer": { "type": "string" },
+        "proposerBio": { "type": "string" },
+        "year": { "type": "integer" },
+        "sources": { "type": "array" }
+      }
+    },
+    "content": {
+      "type": "object",
+      "required": ["summary", "coreIdea"],
+      "properties": {
+        "summary": { "type": "string" },
+        "coreIdea": { "type": "string" },
+        "principles": { "type": "array", "items": { "type": "string" } },
+        "mechanism": { "type": "string" },
+        "scenarios": { "type": "array", "items": { "type": "string" } },
+        "conditions": { "type": "array", "items": { "type": "string" } },
+        "steps": { "type": "array" },
+        "advantages": { "type": "array", "items": { "type": "string" } },
+        "limitations": { "type": "array", "items": { "type": "string" } },
+        "misconceptions": { "type": "array", "items": { "type": "string" } },
+        "fullArticle": { "type": "string" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "level": { "type": "string", "enum": ["high", "medium", "low", "unverified", "disputed"] },
+        "confidence": { "type": ["number", "null"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "status": { "type": "string", "enum": ["active", "pending_review", "draft", "deprecated", "disputed"] },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "version": { "type": "integer", "minimum": 1 }
+  }
+}

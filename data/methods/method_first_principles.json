@@ -1,0 +1,99 @@
+{
+  "id": "method_first_principles",
+  "name": "第一性原理",
+  "aliases": [
+    "First Principles Thinking",
+    "第一原理思考"
+  ],
+  "domains": [
+    "thinking",
+    "business"
+  ],
+  "subDomains": [
+    "critical",
+    "decision"
+  ],
+  "type": "principle",
+  "layer": 1,
+  "origin": {
+    "proposer": "亚里士多德 (Aristotle)",
+    "year": -330,
+    "sources": [
+      {
+        "id": "src_fp_1",
+        "title": "形而上学 (Metaphysics)",
+        "type": "book",
+        "credibility": "high"
+      }
+    ]
+  },
+  "content": {
+    "summary": "回归事物最底层本质，从最基本的事实出发进行逻辑推导，而非基于类比与既有经验的思维方法",
+    "coreIdea": "打破思维定式，将问题分解为不可再分的基本真理，重新推演最优解。",
+    "principles": [
+      "质疑一切既有假设",
+      "拆解至物理底层事实",
+      "从零逻辑重构方案"
+    ],
+    "mechanism": "剥离行业惯性溢价与沉没冗余，直接逼近价值/成本极限。",
+    "scenarios": [
+      "重大颠覆式创新",
+      "极限降本设计",
+      "复杂系统突破"
+    ],
+    "conditions": [
+      "掌握底层学科规律",
+      "充足心智算力"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "title": "识别并写下当前的核心假设",
+        "description": "审视人们习以为常的行规"
+      },
+      {
+        "order": 2,
+        "title": "下潜拆解至基本物理事实",
+        "description": "分解为不可再分的基本真理"
+      },
+      {
+        "order": 3,
+        "title": "从底层重新设计解决方案",
+        "description": "寻找全新的技术与工艺组合路径"
+      }
+    ],
+    "advantages": [
+      "催生颠覆性创新",
+      "发现被严重高估的成本结构"
+    ],
+    "limitations": [
+      "日常琐碎决策计算成本过高"
+    ],
+    "misconceptions": [
+      "误以为是全盘否定既往常识"
+    ],
+    "fullArticle": "# 第一性原理思维报告\n\n亚里士多德与马斯克的底层创新推演心法。"
+  },
+  "evidence": {
+    "level": "high",
+    "confidence": 95,
+    "notes": "物理学与高科技产业实践强力支撑"
+  },
+  "cases": [],
+  "relations": [],
+  "tags": [
+    "思维模型",
+    "创新",
+    "底层逻辑"
+  ],
+  "status": "active",
+  "stats": {
+    "viewCount": 245,
+    "practiceCount": 22,
+    "learningCount": 48,
+    "avgRating": 5
+  },
+  "version": 1,
+  "createdAt": "2026-11-08T10:00:08.284Z",
+  "updatedAt": "2026-11-08T10:00:08.284Z"
+}

@@ -1,0 +1,88 @@
+[
+  {
+    "id": "method_pdca",
+    "name": "PDCA循环",
+    "aliases": [
+      "戴明环",
+      "质量环",
+      "Plan-Do-Check-Act"
+    ],
+    "domains": [
+      "management",
+      "work_efficiency"
+    ],
+    "type": "process",
+    "layer": 1,
+    "summary": "通过计划、执行、检查、行动四个阶段持续改进工作质量与流程的管理工具",
+    "status": "active",
+    "updatedAt": "2026-11-08T10:00:08.284Z"
+  },
+  {
+    "id": "method_first_principles",
+    "name": "第一性原理",
+    "aliases": [
+      "First Principles Thinking",
+      "第一原理思考"
+    ],
+    "domains": [
+      "thinking",
+      "business"
+    ],
+    "type": "principle",
+    "layer": 1,
+    "summary": "回归事物最底层本质，从最基本的事实出发进行逻辑推导，而非基于类比与既有经验的思维方法",
+    "status": "active",
+    "updatedAt": "2026-11-08T10:00:08.284Z"
+  },
+  {
+    "id": "method_okr",
+    "name": "OKR目标与关键结果",
+    "aliases": [
+      "Objectives and Key Results",
+      "目标与关键结果法"
+    ],
+    "domains": [
+      "management",
+      "personal_growth"
+    ],
+    "type": "framework",
+    "layer": 2,
+    "summary": "通过设定野心目标(O)与可量化关键结果(KR)，驱动组织协同与个人聚焦的敏捷目标管理系统",
+    "status": "active",
+    "updatedAt": "2026-11-08T10:00:08.284Z"
+  },
+  {
+    "id": "method_feynman",
+    "name": "费曼学习法",
+    "aliases": [
+      "Feynman Technique",
+      "以教促学"
+    ],
+    "domains": [
+      "learning",
+      "thinking"
+    ],
+    "type": "process",
+    "layer": 2,
+    "summary": "通过用通俗易懂的极简语言向初学者讲授概念，精准定位理解漏洞并针对性补强的学习方法",
+    "status": "active",
+    "updatedAt": "2026-11-08T10:00:08.284Z"
+  },
+  {
+    "id": "method_eisenhower",
+    "name": "艾森豪威尔矩阵",
+    "aliases": [
+      "时间管理四象限",
+      "Eisenhower Matrix"
+    ],
+    "domains": [
+      "work_efficiency",
+      "personal_growth"
+    ],
+    "type": "tool",
+    "layer": 1,
+    "summary": "依据“重要性”与“紧急性”两个维度将任务划分为四个象限，引导注意力投向长期价值创造的决策工具",
+    "status": "active",
+    "updatedAt": "2026-11-08T10:00:08.284Z"
+  }
+]

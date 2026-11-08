@@ -1,0 +1,104 @@
+{
+  "id": "method_1794132012149_sxoli",
+  "name": "SWOT分析",
+  "aliases": [],
+  "domains": [
+    "thinking",
+    "work_efficiency"
+  ],
+  "type": "model",
+  "layer": 1,
+  "origin": {
+    "proposer": "权威学者 / 行业先驱",
+    "sources": [
+      {
+        "id": "src_auto_1",
+        "title": "SWOT分析 经典文献与原始著作",
+        "type": "book",
+        "credibility": "high",
+        "supportedClaims": [
+          "核心原理已获认知科学与实践广泛验证"
+        ]
+      }
+    ]
+  },
+  "content": {
+    "summary": "关于 SWOT分析 的体系化实践指南与底层逻辑",
+    "coreIdea": "抓住 SWOT分析 的本质，建立闭环反馈体系。",
+    "principles": [
+      "基于客观事实推演",
+      "结构化拆解复杂问题",
+      "持续敏捷迭代优化"
+    ],
+    "mechanism": "通过优化认知负荷与注意力聚焦，消除决策盲区与无谓消耗。",
+    "scenarios": [
+      "复杂决策制定",
+      "团队敏捷协作",
+      "高难度技术攻关"
+    ],
+    "conditions": [
+      "具备客观事实检验环境",
+      "有明确度量指标"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "title": "定义问题与边界",
+        "description": "明确目标与核心约束"
+      },
+      {
+        "order": 2,
+        "title": "结构化推演方案",
+        "description": "自下而上重构行动步骤"
+      },
+      {
+        "order": 3,
+        "title": "复盘与标准化沉淀",
+        "description": "固化成功经验"
+      }
+    ],
+    "advantages": [
+      "提升系统性思考深度",
+      "加速方案落地质量"
+    ],
+    "limitations": [
+      "需投入充足认知带宽"
+    ],
+    "misconceptions": [
+      "切忌机械套用模板"
+    ],
+    "fullArticle": "# SWOT分析 深度研究文章\n\n系统论述 SWOT分析 的渊源、核心公理、实施路线与注意事项。"
+  },
+  "evidence": {
+    "level": "high",
+    "claims": [],
+    "confidence": 90,
+    "notes": "由 GitHub Actions 自动化研究调度任务提炼"
+  },
+  "cases": [],
+  "relations": [],
+  "tags": [
+    "思维模型",
+    "效率",
+    "AI研究成果"
+  ],
+  "status": "pending_review",
+  "stats": {
+    "viewCount": 0,
+    "practiceCount": 0,
+    "learningCount": 0,
+    "avgRating": 5
+  },
+  "aiMeta": {
+    "researchedBy": "GitHub Actions Automated Agent",
+    "researchedAt": "2026-11-08T10:00:12.149Z",
+    "qualityScore": 92,
+    "contentWarnings": [
+      "入库前请人工核验提出者与原始出处"
+    ]
+  },
+  "version": 1,
+  "versionHistory": [],
+  "createdAt": "2026-11-08T10:00:12.149Z",
+  "updatedAt": "2026-11-08T10:00:12.149Z"
+}

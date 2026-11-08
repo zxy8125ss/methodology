@@ -1,0 +1,107 @@
+{
+  "id": "method_pdca",
+  "name": "PDCA循环",
+  "aliases": [
+    "戴明环",
+    "质量环",
+    "Plan-Do-Check-Act"
+  ],
+  "domains": [
+    "management",
+    "work_efficiency"
+  ],
+  "subDomains": [
+    "process",
+    "perf_mgmt"
+  ],
+  "type": "process",
+  "layer": 1,
+  "origin": {
+    "proposer": "威廉·爱德华兹·戴明 (W. Edwards Deming)",
+    "proposerBio": "美国统计学家、质量管理大师",
+    "year": 1950,
+    "sources": [
+      {
+        "id": "src_pdca_1",
+        "title": "Out of the Crisis",
+        "type": "book",
+        "credibility": "high"
+      }
+    ]
+  },
+  "content": {
+    "summary": "通过计划、执行、检查、行动四个阶段持续改进工作质量与流程的管理工具",
+    "coreIdea": "任何事物的发展与持续优化都不是一次性的，而是螺旋上升的闭环迭代过程。",
+    "principles": [
+      "大环套小环，互相促进",
+      "阶梯式上升",
+      "基于数据决策"
+    ],
+    "mechanism": "周期性对照目标检视偏差，将成功经验标准化，沉淀组织认知。",
+    "scenarios": [
+      "流程优化",
+      "项目迭代",
+      "个人效率提升"
+    ],
+    "conditions": [
+      "可量化的预期目标",
+      "真实的过程数据追踪"
+    ],
+    "steps": [
+      {
+        "order": 1,
+        "title": "Plan (计划)",
+        "description": "分析现状找出问题，制定目标与改善计划"
+      },
+      {
+        "order": 2,
+        "title": "Do (执行)",
+        "description": "按照计划方案具体实施行动并采集过程数据"
+      },
+      {
+        "order": 3,
+        "title": "Check (检查)",
+        "description": "对照预期目标检查实际执行效果并寻找原因"
+      },
+      {
+        "order": 4,
+        "title": "Act (处理)",
+        "description": "将成功经验固化为标准，遗留问题纳入下一轮循环"
+      }
+    ],
+    "advantages": [
+      "逻辑严谨，易于落地",
+      "推动组织螺旋式成长"
+    ],
+    "limitations": [
+      "极端不确定性探索中节奏略慢"
+    ],
+    "misconceptions": [
+      "误以为是一次性的线性流程"
+    ],
+    "fullArticle": "# PDCA 循环深度报告\n\n戴明环是持续质量改善与敏捷运作的底层通用基石。"
+  },
+  "evidence": {
+    "level": "high",
+    "confidence": 96,
+    "notes": "全球五百强长期检验"
+  },
+  "cases": [],
+  "relations": [],
+  "tags": [
+    "管理",
+    "质量管理",
+    "持续改进",
+    "通用模型"
+  ],
+  "status": "active",
+  "stats": {
+    "viewCount": 128,
+    "practiceCount": 14,
+    "learningCount": 32,
+    "avgRating": 4.9
+  },
+  "version": 1,
+  "createdAt": "2026-11-08T10:00:08.270Z",
+  "updatedAt": "2026-11-08T10:00:08.284Z"
+}
