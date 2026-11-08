@@ -362,7 +362,7 @@ export default function Research() {
               {count > 0 && (
                 <span
                   className={`text-xs px-1.5 py-0.5 rounded-full ${
-                    tab === key ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-400'
+                    tab === key ? 'bg-white text-zinc-950 font-semibold' : 'bg-gray-700 text-gray-400'
                   }`}
                 >
                   {count}

@@ -24,13 +24,14 @@ export default function Graph() {
   INITIAL_DOMAINS.forEach(d => { domainColors[d.id] = d.color })
 
   const getNodeColor = (node: GraphNode) => {
-    if (node.type === 'domain') return '#6366f1'
+    if (node.type === 'domain') return '#71717a'
     if (node.type === 'method') {
       const method = node.data as Method | undefined
-      if (method?.domains?.[0]) return domainColors[method.domains[0]] ?? '#3b82f6'
-      return '#3b82f6'
+      if (method?.layer === 1) return '#ffffff'
+      if (method?.layer === 2) return '#d4d4d8'
+      return '#a1a1aa'
     }
-    return '#94a3b8'
+    return '#71717a'
   }
 
   const buildGraph = useCallback(async () => {

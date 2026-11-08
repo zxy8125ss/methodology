@@ -5,26 +5,36 @@ interface EvidenceBadgeProps {
   level: EvidenceLevel
 }
 
-const evidenceConfig: Record<EvidenceLevel, { label: string; className: string }> = {
+const evidenceConfig: Record<EvidenceLevel, { label: string; dot: string; text: string; bg: string }> = {
   high: {
-    label: '高可信',
-    className: 'bg-emerald-500/20 text-emerald-300 ring-emerald-500/30',
+    label: '高可信度',
+    dot: 'bg-emerald-400',
+    text: 'text-zinc-300',
+    bg: 'bg-zinc-800/80 border-zinc-700/60'
   },
   medium: {
-    label: '中等',
-    className: 'bg-blue-500/20 text-blue-300 ring-blue-500/30',
+    label: '中等可信',
+    dot: 'bg-sky-400',
+    text: 'text-zinc-300',
+    bg: 'bg-zinc-800/80 border-zinc-700/60'
   },
   low: {
-    label: '低可信',
-    className: 'bg-amber-500/20 text-amber-300 ring-amber-500/30',
+    label: '经验性',
+    dot: 'bg-amber-400',
+    text: 'text-zinc-400',
+    bg: 'bg-zinc-800/80 border-zinc-700/60'
   },
   unverified: {
     label: '待验证',
-    className: 'bg-slate-500/20 text-slate-400 ring-slate-500/30',
+    dot: 'bg-zinc-500',
+    text: 'text-zinc-500',
+    bg: 'bg-zinc-900 border-zinc-800'
   },
   disputed: {
-    label: '争议',
-    className: 'bg-red-500/20 text-red-300 ring-red-500/30',
+    label: '存疑',
+    dot: 'bg-rose-400',
+    text: 'text-rose-300',
+    bg: 'bg-rose-950/20 border-rose-900/40'
   },
 }
 
@@ -32,9 +42,10 @@ const EvidenceBadge: React.FC<EvidenceBadgeProps> = ({ level }) => {
   const config = evidenceConfig[level] ?? evidenceConfig.unverified
   return (
     <span
-      className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ring-1 ${config.className}`}
+      className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono border ${config.bg} ${config.text}`}
     >
-      {config.label}
+      <span className={`w-1.5 h-1.5 rounded-full ${config.dot}`} />
+      <span>{config.label}</span>
     </span>
   )
 }

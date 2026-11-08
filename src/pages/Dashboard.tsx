@@ -1,87 +1,95 @@
 import React, { useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import {
+  Sparkles,
+  ArrowRight,
+  TrendingUp,
+  BookOpen,
+  CheckCircle2,
+  RefreshCw,
+  Compass,
+  Layers,
+  ChevronRight
+} from 'lucide-react'
 import { useAppStore } from '../stores'
 import MethodCard from '../components/MethodCard'
 import LoadingSpinner from '../components/LoadingSpinner'
 import EmptyState from '../components/EmptyState'
-import DomainBadge from '../components/DomainBadge'
 
-// ---- Domain metadata ----
 const DOMAIN_IDS = [
   'management', 'personal_growth', 'thinking', 'work_efficiency',
   'communication', 'learning', 'business', 'life',
 ]
 
 const domainNameMap: Record<string, string> = {
-  management: '管理',
+  management: '管理与组织',
   personal_growth: '个人成长',
-  thinking: '思维',
+  thinking: '思维模型',
   work_efficiency: '工作效率',
-  communication: '沟通',
-  learning: '学习',
-  business: '商业',
-  life: '生活',
+  communication: '沟通谈判',
+  learning: '学习管理',
+  business: '商业经营',
+  life: '生活哲学',
 }
 
-const domainIconMap: Record<string, string> = {
-  management: '🏢',
-  personal_growth: '🌱',
-  thinking: '🧠',
-  work_efficiency: '⚡',
-  communication: '💬',
-  learning: '📚',
-  business: '💼',
-  life: '🌿',
-}
-
-// Progress-bar colors (Tailwind safe-listed via inline style to avoid purge issues)
 const domainBarColorMap: Record<string, string> = {
-  management: '#3b82f6',
-  personal_growth: '#22c55e',
-  thinking: '#a855f7',
-  work_efficiency: '#eab308',
-  communication: '#ec4899',
-  learning: '#06b6d4',
-  business: '#f97316',
+  management: '#71717a',
+  personal_growth: '#10b981',
+  thinking: '#f4f4f5',
+  work_efficiency: '#f59e0b',
+  communication: '#a1a1aa',
+  learning: '#0ea5e9',
+  business: '#d4d4d8',
   life: '#84cc16',
 }
 
-// ---- Stat Card ----
 interface StatCardProps {
   label: string
   value: number | string
-  icon: string
-  color: string
   sub?: string
+  icon: React.ReactNode
+  onClick?: () => void
 }
 
-const StatCard: React.FC<StatCardProps> = ({ label, value, icon, color, sub }) => (
-  <div className="bg-slate-800/60 border border-slate-700/60 rounded-xl p-4 flex flex-col gap-2">
-    <div className="flex items-center justify-between">
-      <span className="text-xs text-slate-400 font-medium">{label}</span>
-      <span className="text-xl">{icon}</span>
+const StatCard: React.FC<StatCardProps> = ({ label, value, sub, icon, onClick }) => (
+  <div
+    onClick={onClick}
+    className={`bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/80 rounded-2xl p-4.5 flex flex-col justify-between transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-900/90 hover:shadow-float ${
+      onClick ? 'cursor-pointer' : ''
+    }`}
+  >
+    <div className="flex items-center justify-between text-zinc-400">
+      <span className="text-xs font-medium tracking-tight">{label}</span>
+      <span className="w-6 h-6 rounded-lg bg-zinc-800/60 flex items-center justify-center text-zinc-300">
+        {icon}
+      </span>
     </div>
-    <div className={`text-3xl font-bold ${color}`}>{value}</div>
-    {sub && <div className="text-xs text-slate-500">{sub}</div>}
+    <div className="mt-3">
+      <div className="text-2xl font-bold font-mono tracking-tight text-white">{value}</div>
+      {sub && <div className="text-[11px] text-zinc-400 mt-0.5">{sub}</div>}
+    </div>
   </div>
 )
 
-// ---- AI Recommendation chips ----
-const AI_TIPS = [
-  '📌 尝试"费曼学习法"加深对新概念的理解',
-  '🔗 "GTD 时间管理"与"番茄工作法"可以组合使用',
-  '🌟 本周进行中的实践已超 3 天，记得记录复盘日志',
-  '💡 "心流理论"是提升专注力的高可信方法论，建议收藏',
+const AI_INSIGHTS = [
+  {
+    tag: '思维模型',
+    title: '第一性原理 × 费曼技巧',
+    desc: '尝试将底层事实还原与以教促学结合，彻底击穿认知假象与术语迷雾。'
+  },
+  {
+    tag: '执行闭环',
+    title: 'OKR 与 双周 PDCA 冲刺',
+    desc: '用野心目标明确方向，用高频敏捷循环持续纠偏，告别低价值虚忙。'
+  }
 ]
 
-// ---- Dashboard ----
 const Dashboard: React.FC = () => {
   const navigate = useNavigate()
   const {
     stats,
     recentMethods,
     pendingReviews,
-    domains,
     loading,
     initialize,
     loadDashboardStats,
@@ -99,80 +107,90 @@ const Dashboard: React.FC = () => {
     loadDashboardStats()
   }, [loadDashboardStats])
 
-  // Domain distribution data
   const totalMethods = stats?.totalMethods ?? 0
   const domainDistribution = stats?.domainDistribution ?? {}
-
-  // Max count for scaling bars
   const maxDomainCount = Math.max(1, ...Object.values(domainDistribution))
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 p-6 space-y-6">
-
-      {/* ---- Page Header ---- */}
-      <div className="flex items-center justify-between">
+    <div className="space-y-7">
+      {/* Editorial Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-900/80 pb-5">
         <div>
-          <h1 className="text-2xl font-bold text-slate-100">📊 工作台</h1>
-          <p className="text-sm text-slate-400 mt-0.5">方法论知识库综合概览</p>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400">Cogito · Overview</span>
+          </div>
+          <h1 className="text-2xl font-bold tracking-tight text-white">综合概览与认知工作台</h1>
+          <p className="text-xs text-zinc-400 mt-1">
+            标准化沉淀、关联推演与实践验证的个人方法论总览
+          </p>
         </div>
-        <button
-          onClick={handleRefresh}
-          className="px-3 py-1.5 text-xs text-slate-300 bg-slate-700/50 hover:bg-slate-700 rounded-lg transition-colors flex items-center gap-1.5"
-        >
-          🔄 刷新
-        </button>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleRefresh}
+            className="btn-secondary text-xs flex items-center gap-1.5"
+          >
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span>刷新数据</span>
+          </button>
+          <button
+            onClick={() => navigate('/library/new')}
+            className="btn-primary text-xs flex items-center gap-1.5"
+          >
+            <span>+ 新建方法论</span>
+          </button>
+        </div>
       </div>
 
-      {/* ---- Stat Cards ---- */}
       {isLoading ? (
-        <div className="flex justify-center py-12">
-          <LoadingSpinner size="lg" />
+        <div className="py-20 flex justify-center">
+          <LoadingSpinner text="正在同步方法论资产体系..." />
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {/* 4 核心指标卡片 */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5">
             <StatCard
-              label="方法论总数"
+              label="收录方法论"
               value={totalMethods}
-              icon="📚"
-              color="text-indigo-400"
-              sub="已收录知识"
+              sub="标准化核心档案"
+              icon={<BookOpen className="w-3.5 h-3.5" />}
+              onClick={() => navigate('/library')}
             />
             <StatCard
-              label="待审核"
+              label="AI 待审核成果"
               value={stats?.pendingReviews ?? 0}
-              icon="🔍"
-              color={stats?.pendingReviews ? 'text-amber-400' : 'text-slate-400'}
-              sub="AI 研究成果"
+              sub={stats?.pendingReviews ? '待人工检视入库' : '暂无积压'}
+              icon={<Sparkles className="w-3.5 h-3.5" />}
+              onClick={() => navigate('/research')}
             />
             <StatCard
               label="进行中实践"
               value={stats?.activePractices ?? 0}
-              icon="🚀"
-              color="text-emerald-400"
-              sub="实践项目"
+              sub="现实问题验证中"
+              icon={<Compass className="w-3.5 h-3.5" />}
+              onClick={() => navigate('/practice')}
             />
             <StatCard
-              label="学习计划"
+              label="活跃学习计划"
               value={stats?.activeLearningPlans ?? 0}
-              icon="🎯"
-              color="text-cyan-400"
-              sub="进行中"
+              sub="系统化认知进阶"
+              icon={<TrendingUp className="w-3.5 h-3.5" />}
+              onClick={() => navigate('/practice')}
             />
           </div>
 
-          {/* ---- Main Grid ---- */}
+          {/* 主工作区二分网格 */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-            {/* ---- Left: Domain Distribution ---- */}
-            <div className="lg:col-span-1 bg-slate-800/60 border border-slate-700/60 rounded-xl p-5 space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-sm font-semibold text-slate-200">八大领域分布</h2>
-                <span className="text-xs text-slate-500">共 {totalMethods} 条</span>
+            {/* 左侧：八大领域知识分布图 */}
+            <div className="card p-5 space-y-4 lg:col-span-1">
+              <div className="flex items-center justify-between border-b border-zinc-800/60 pb-3">
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-zinc-300">八大领域分布</h2>
+                <span className="text-[11px] font-mono text-zinc-500">{totalMethods} 档案</span>
               </div>
 
-              {/* Donut-style ring summary */}
-              <div className="relative flex items-center justify-center py-4">
+              {/* 极简环形概览 */}
+              <div className="relative flex items-center justify-center py-2">
                 <svg viewBox="0 0 120 120" className="w-28 h-28 -rotate-90">
                   {(() => {
                     let cumulativePercent = 0
@@ -197,39 +215,43 @@ const Dashboard: React.FC = () => {
                           cy="60"
                           r={radius}
                           fill="none"
-                          stroke={domainBarColorMap[id] ?? '#64748b'}
-                          strokeWidth="12"
+                          stroke={domainBarColorMap[id] ?? '#52525b'}
+                          strokeWidth="10"
                           strokeDasharray={strokeDasharray}
                           strokeDashoffset={strokeDashoffset}
-                          strokeLinecap="butt"
+                          className="transition-all duration-500"
                         />
                       )
                     })
                   })()}
                 </svg>
                 <div className="absolute text-center">
-                  <div className="text-2xl font-bold text-slate-100">{totalMethods}</div>
-                  <div className="text-[10px] text-slate-500">方法论</div>
+                  <div className="text-xl font-bold font-mono text-white">{totalMethods}</div>
+                  <div className="text-[10px] text-zinc-500">Methodology</div>
                 </div>
               </div>
 
-              {/* Bar list */}
-              <div className="space-y-2.5">
+              {/* 领域进度条列表 */}
+              <div className="space-y-2 pt-1">
                 {DOMAIN_IDS.map((id) => {
                   const count = domainDistribution[id] ?? 0
                   const pct = maxDomainCount > 0 ? Math.round((count / maxDomainCount) * 100) : 0
                   return (
-                    <div key={id} className="space-y-1">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-slate-400">
-                          {domainIconMap[id]} {domainNameMap[id]}
+                    <div
+                      key={id}
+                      onClick={() => navigate(`/library?domain=${id}`)}
+                      className="group cursor-pointer p-1.5 rounded-lg hover:bg-zinc-800/40 transition-colors"
+                    >
+                      <div className="flex items-center justify-between text-xs mb-1">
+                        <span className="text-zinc-400 group-hover:text-zinc-200 transition-colors">
+                          {domainNameMap[id]}
                         </span>
-                        <span className="text-slate-500">{count}</span>
+                        <span className="font-mono text-zinc-500 text-[11px]">{count}</span>
                       </div>
-                      <div className="h-1.5 bg-slate-700/50 rounded-full overflow-hidden">
+                      <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
                         <div
                           className="h-full rounded-full transition-all duration-500"
-                          style={{ width: `${pct}%`, backgroundColor: domainBarColorMap[id] ?? '#64748b' }}
+                          style={{ width: `${pct}%`, backgroundColor: domainBarColorMap[id] ?? '#71717a' }}
                         />
                       </div>
                     </div>
@@ -238,31 +260,31 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
 
-            {/* ---- Right: Recent Methods + Pending Reviews ---- */}
-            <div className="lg:col-span-2 space-y-5">
-
-              {/* Recent Methods */}
-              <div className="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-sm font-semibold text-slate-200">🆕 最近新增</h2>
+            {/* 右侧：最近收录 + 待审核队列 */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* 最近收录 */}
+              <div className="card p-5 space-y-4">
+                <div className="flex items-center justify-between border-b border-zinc-800/60 pb-3">
+                  <h2 className="text-xs font-semibold uppercase tracking-wider text-zinc-300">最近更新档案</h2>
                   <button
                     onClick={() => navigate('/library')}
-                    className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors"
+                    className="text-xs text-zinc-400 hover:text-white transition-colors flex items-center gap-1"
                   >
-                    查看全部 →
+                    <span>浏览全部</span>
+                    <ArrowRight className="w-3 h-3" />
                   </button>
                 </div>
 
                 {recentMethods.length === 0 ? (
                   <EmptyState
                     icon="📭"
-                    title="暂无方法论"
-                    description="尝试从知识库页面新建或通过 AI 研究添加"
-                    action={{ label: '前往知识库', onClick: () => navigate('/library') }}
+                    title="知识库尚无档案"
+                    description="点击新建方法论或进入 AI 研究中心主动探索"
+                    action={{ label: '新建方法论', onClick: () => navigate('/library/new') }}
                   />
                 ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {recentMethods.slice(0, 6).map((method) => (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {recentMethods.slice(0, 4).map((method) => (
                       <MethodCard
                         key={method.id}
                         method={method}
@@ -273,51 +295,51 @@ const Dashboard: React.FC = () => {
                 )}
               </div>
 
-              {/* Pending Reviews */}
+              {/* 待审核队列（若有） */}
               {pendingReviews.length > 0 && (
-                <div className="bg-slate-800/60 border border-amber-500/20 rounded-xl p-5">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-sm font-semibold text-slate-200">
-                      🔍 待审核
-                      <span className="ml-2 px-1.5 py-0.5 text-xs bg-amber-500/20 text-amber-300 rounded-full">
-                        {pendingReviews.length}
-                      </span>
-                    </h2>
+                <div className="card p-5 border-amber-900/40 bg-amber-950/10 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-amber-400" />
+                      <h2 className="text-xs font-semibold uppercase tracking-wider text-amber-300">
+                        AI 研究成果待审核 ({pendingReviews.length})
+                      </h2>
+                    </div>
                     <button
-                      onClick={() => navigate('/review')}
-                      className="text-xs text-amber-400 hover:text-amber-300 transition-colors"
+                      onClick={() => navigate('/research')}
+                      className="text-xs text-amber-400 hover:text-amber-300 flex items-center gap-1 font-medium"
                     >
-                      审核全部 →
+                      <span>前往审核队列</span>
+                      <ChevronRight className="w-3 h-3" />
                     </button>
                   </div>
+
                   <div className="space-y-2">
-                    {pendingReviews.slice(0, 3).map((review) => (
+                    {pendingReviews.slice(0, 2).map((review) => (
                       <div
                         key={review.id}
-                        className="flex items-start justify-between gap-3 p-3 bg-slate-700/40 rounded-lg border border-slate-700/50"
+                        className="flex items-start justify-between gap-3 p-3 rounded-xl bg-zinc-900/80 border border-zinc-800"
                       >
                         <div className="flex-1 min-w-0">
-                          <p className="text-xs font-medium text-slate-200 truncate">
-                            {review.discoveredMethod?.draftMethod?.name ??
-                              review.updatedMethod?.methodName ??
-                              '未知方法论'}
+                          <p className="text-xs font-medium text-zinc-200 truncate">
+                            {review.discoveredMethod?.draftMethod?.name ?? '待收录方法论'}
                           </p>
-                          <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-1">
+                          <p className="text-[11px] text-zinc-400 mt-0.5 line-clamp-1">
                             {review.aiSummary}
                           </p>
                         </div>
                         <div className="flex gap-1.5 shrink-0">
                           <button
                             onClick={() => approveReview(review.id)}
-                            className="px-2 py-1 text-[11px] bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 rounded transition-colors"
+                            className="px-2.5 py-1 text-[11px] bg-white text-zinc-950 font-semibold rounded-lg hover:bg-zinc-200 transition-colors"
                           >
                             批准
                           </button>
                           <button
-                            onClick={() => rejectReview(review.id, '不符合标准')}
-                            className="px-2 py-1 text-[11px] bg-red-500/20 text-red-300 hover:bg-red-500/30 rounded transition-colors"
+                            onClick={() => rejectReview(review.id, '退回')}
+                            className="px-2.5 py-1 text-[11px] bg-zinc-800 text-zinc-400 hover:text-zinc-200 rounded-lg transition-colors"
                           >
-                            拒绝
+                            忽略
                           </button>
                         </div>
                       </div>
@@ -325,85 +347,19 @@ const Dashboard: React.FC = () => {
                   </div>
                 </div>
               )}
-            </div>
-          </div>
 
-          {/* ---- Bottom Row ---- */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            {/* Today's Learning Tasks */}
-            <div className="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-sm font-semibold text-slate-200">📅 今日学习任务</h2>
-                <button
-                  onClick={() => navigate('/learning')}
-                  className="text-xs text-cyan-400 hover:text-cyan-300 transition-colors"
-                >
-                  全部计划 →
-                </button>
-              </div>
-              {stats?.activeLearningPlans === 0 ? (
-                <EmptyState
-                  icon="🎓"
-                  title="暂无学习计划"
-                  description="创建学习计划，系统会安排每日任务和间隔复习"
-                  action={{ label: '新建计划', onClick: () => navigate('/learning') }}
-                />
-              ) : (
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2 p-3 bg-cyan-500/10 border border-cyan-500/20 rounded-lg">
-                    <span className="text-lg">📖</span>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-medium text-slate-200">你有 {stats?.activeLearningPlans} 个进行中的学习计划</p>
-                      <p className="text-[11px] text-slate-500 mt-0.5">点击前往查看今日任务</p>
+              {/* AI 推荐洞察 */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {AI_INSIGHTS.map((item, idx) => (
+                  <div key={idx} className="card p-4 space-y-2 border-zinc-800/60 bg-zinc-900/40">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
+                      <span>{item.tag}</span>
+                      <Sparkles className="w-3 h-3 text-zinc-400" />
                     </div>
-                    <button
-                      onClick={() => navigate('/learning')}
-                      className="shrink-0 px-2 py-1 text-[11px] bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/30 rounded transition-colors"
-                    >
-                      开始
-                    </button>
+                    <h3 className="text-xs font-semibold text-zinc-200">{item.title}</h3>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed">{item.desc}</p>
                   </div>
-                </div>
-              )}
-            </div>
-
-            {/* Practice Status + AI Tips */}
-            <div className="space-y-4">
-              {/* Practice */}
-              <div className="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <h2 className="text-sm font-semibold text-slate-200">🚀 实践项目状态</h2>
-                  <button
-                    onClick={() => navigate('/practice')}
-                    className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors"
-                  >
-                    查看全部 →
-                  </button>
-                </div>
-                {stats?.activePractices === 0 ? (
-                  <p className="text-xs text-slate-500 py-2">暂无进行中的实践项目</p>
-                ) : (
-                  <div className="flex items-center gap-3 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
-                    <span className="text-2xl font-bold text-emerald-400">{stats?.activePractices}</span>
-                    <div className="text-xs text-slate-400">个实践项目正在进行中，记得定期记录进展</div>
-                  </div>
-                )}
-              </div>
-
-              {/* AI Recommendation */}
-              <div className="bg-slate-800/60 border border-purple-500/20 rounded-xl p-5">
-                <h2 className="text-sm font-semibold text-slate-200 mb-3">✨ AI 推荐</h2>
-                <div className="space-y-2">
-                  {AI_TIPS.slice(0, 2).map((tip, i) => (
-                    <div
-                      key={i}
-                      className="text-xs text-slate-400 p-2.5 bg-slate-700/30 rounded-lg border border-slate-700/40 leading-relaxed"
-                    >
-                      {tip}
-                    </div>
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
           </div>

@@ -20,8 +20,8 @@ export default function NotificationCenter() {
             {n.type === 'success' ? '✅' : n.type === 'error' ? '❌' : n.type === 'warning' ? '⚠️' : 'ℹ️'}
           </span>
           <div className="flex-1 min-w-0">
-            <div className="font-medium text-sm text-slate-100">{n.title}</div>
-            {n.message && <div className="text-xs text-slate-400 mt-0.5 line-clamp-2">{n.message}</div>}
+            <div className="font-medium text-sm text-zinc-100">{n.title}</div>
+            {n.message && <div className="text-xs text-zinc-400 mt-0.5 line-clamp-2">{n.message}</div>}
             {n.action && (
               <button
                 onClick={n.action.onClick}
@@ -33,7 +33,7 @@ export default function NotificationCenter() {
           </div>
           <button
             onClick={() => removeNotification(n.id)}
-            className="text-slate-500 hover:text-slate-300 text-lg leading-none flex-shrink-0"
+            className="text-zinc-500 hover:text-zinc-300 text-lg leading-none flex-shrink-0"
           >
             ×
           </button>

@@ -114,7 +114,7 @@ function StepsTab({ method }: { method: Method }) {
       {method.content.steps.map((step) => (
         <div
           key={step.order}
-          className="flex gap-4 p-5 bg-slate-800 border border-slate-700 rounded-xl"
+          className="flex gap-4 p-5 bg-zinc-900 border border-zinc-800 rounded-xl"
         >
           <div className="flex-shrink-0 w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm">
             {step.order}
@@ -157,7 +157,7 @@ function CasesTab({ method }: { method: Method }) {
   return (
     <div className="space-y-4">
       {method.cases.map((c) => (
-        <div key={c.id} className="p-5 bg-slate-800 border border-slate-700 rounded-xl space-y-3">
+        <div key={c.id} className="p-5 bg-zinc-900 border border-zinc-800 rounded-xl space-y-3">
           <div className="flex items-start justify-between gap-3">
             <h3 className="font-semibold text-slate-100">{c.title}</h3>
             <div className="flex gap-1.5 flex-shrink-0">
@@ -285,7 +285,7 @@ function RelatedTab({ methodId }: { methodId: string }) {
         <Link
           key={m.id}
           to={`/library/${m.id}`}
-          className="p-4 bg-slate-800 border border-slate-700 rounded-xl hover:border-blue-500/50 transition-colors group"
+          className="p-4 bg-zinc-900 border border-zinc-800 rounded-xl hover:border-blue-500/50 transition-colors group"
         >
           <div className="flex items-start justify-between mb-2">
             <h3 className="font-semibold text-slate-100 group-hover:text-blue-300 transition-colors">
@@ -318,7 +318,7 @@ function SourcesTab({ sources }: { sources: Source[] }) {
   return (
     <div className="space-y-3">
       {sources.map((s) => (
-        <div key={s.id} className="p-4 bg-slate-800 border border-slate-700 rounded-xl">
+        <div key={s.id} className="p-4 bg-zinc-900 border border-zinc-800 rounded-xl">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <h3 className="font-medium text-slate-100 text-sm mb-1">{s.title}</h3>
@@ -354,7 +354,7 @@ function SourcesTab({ sources }: { sources: Source[] }) {
 // ---- Shared helpers ----
 function InfoCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="p-5 bg-slate-800 border border-slate-700 rounded-xl">
+    <div className="p-5 bg-zinc-900 border border-zinc-800 rounded-xl">
       <h3 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">{title}</h3>
       {children}
     </div>
@@ -457,7 +457,7 @@ export default function MethodDetail() {
             cls="bg-blue-500/20 text-blue-300 border-blue-500/40"
           />
           {method.tags.map((tag) => (
-            <span key={tag} className="text-xs text-slate-400 bg-slate-700/50 px-2 py-0.5 rounded">
+            <span key={tag} className="text-xs text-slate-400 bg-zinc-800/50 px-2 py-0.5 rounded">
               #{tag}
             </span>
           ))}
@@ -467,7 +467,7 @@ export default function MethodDetail() {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => navigate(`/library/${id}/edit`)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-zinc-800 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors"
           >
             <Edit2 className="w-4 h-4" /> 编辑
           </button>
@@ -485,7 +485,7 @@ export default function MethodDetail() {
           </button>
           <button
             onClick={handleShare}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-sm bg-zinc-800 hover:bg-slate-600 text-slate-200 rounded-lg transition-colors"
           >
             <Share2 className="w-4 h-4" /> 分享
           </button>
@@ -493,14 +493,14 @@ export default function MethodDetail() {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-6 border-b border-slate-700 overflow-x-auto">
+      <div className="flex gap-1 mb-6 border-b border-zinc-800 overflow-x-auto">
         {TABS.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={`flex-shrink-0 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
               activeTab === tab.key
-                ? 'border-blue-500 text-blue-400'
+                ? 'border-white text-white'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -521,7 +521,7 @@ export default function MethodDetail() {
           ) : (
             <div className="space-y-4">
               {method.content.principles.length > 0 && (
-                <div className="p-5 bg-slate-800 border border-slate-700 rounded-xl">
+                <div className="p-5 bg-zinc-900 border border-zinc-800 rounded-xl">
                   <h3 className="font-semibold text-slate-200 mb-3">理论基础</h3>
                   <ul className="space-y-2">
                     {method.content.principles.map((p, i) => (
@@ -545,7 +545,7 @@ export default function MethodDetail() {
       </div>
 
       {/* Stats footer */}
-      <div className="mt-10 pt-6 border-t border-slate-700 flex gap-6 text-xs text-slate-500">
+      <div className="mt-10 pt-6 border-t border-zinc-800 flex gap-6 text-xs text-slate-500">
         <span className="flex items-center gap-1">
           <Users className="w-3.5 h-3.5" /> {method.stats.viewCount} 次查看
         </span>

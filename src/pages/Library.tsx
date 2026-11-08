@@ -1,18 +1,17 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { Plus, Search, Filter, Download, Upload, RefreshCw, X, SlidersHorizontal, BookOpen } from 'lucide-react'
+import { Plus, Search, Download, Upload, RefreshCw, X, SlidersHorizontal, BookMarked } from 'lucide-react'
 import { useMethodsStore, useAppStore } from '../stores'
-import { methodsDB, domainsDB } from '../services/db'
+import { methodsDB } from '../services/db'
 import MethodCard from '../components/MethodCard'
-import LoadingSpinner from '../components/LoadingSpinner'
 import EmptyState from '../components/EmptyState'
-import type { Method, MethodType, EvidenceLevel } from '../types'
+import type { Method } from '../types'
 
 export default function Library() {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const { domains, addNotification, loadDashboardStats } = useAppStore()
-  const { methods, total, currentPage, pageSize, loadMethods, setPage } = useMethodsStore()
+  const { methods, loadMethods } = useMethodsStore()
 
   // 筛选与搜索状态
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '')
@@ -23,10 +22,8 @@ export default function Library() {
   const [selectedStatus, setSelectedStatus] = useState<string>('all')
   const [sortBy, setSortBy] = useState<'updatedAt' | 'name' | 'views' | 'practice'>('updatedAt')
   const [isFilterOpen, setIsFilterOpen] = useState(false)
-  const [loading, setLoading] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  // 初始加载
   useEffect(() => {
     loadMethods({ reset: true })
   }, [loadMethods])
@@ -34,7 +31,6 @@ export default function Library() {
   // 本地过滤与排序
   const filteredMethods = useMemo(() => {
     return methods.filter(m => {
-      // 关键字搜索
       if (searchTerm.trim()) {
         const q = searchTerm.toLowerCase()
         const matchName = m.name?.toLowerCase().includes(q)
@@ -47,27 +43,22 @@ export default function Library() {
         }
       }
 
-      // 领域过滤
       if (selectedDomain && !m.domains?.includes(selectedDomain)) {
         return false
       }
 
-      // 类型过滤
       if (selectedType !== 'all' && m.type !== selectedType) {
         return false
       }
 
-      // 层级过滤
       if (selectedLayer !== 'all' && m.layer !== Number(selectedLayer)) {
         return false
       }
 
-      // 证据过滤
       if (selectedEvidence !== 'all' && m.evidence?.level !== selectedEvidence) {
         return false
       }
 
-      // 状态过滤
       if (selectedStatus !== 'all' && m.status !== selectedStatus) {
         return false
       }
@@ -81,7 +72,6 @@ export default function Library() {
     })
   }, [methods, searchTerm, selectedDomain, selectedType, selectedLayer, selectedEvidence, selectedStatus, sortBy])
 
-  // 处理领域点击
   const handleDomainSelect = (domainId: string | null) => {
     setSelectedDomain(domainId)
     if (domainId) {
@@ -92,14 +82,13 @@ export default function Library() {
     setSearchParams(searchParams)
   }
 
-  // 导出数据
   const handleExportJSON = async () => {
     try {
       const { items: all } = await methodsDB.getAll()
       const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(all, null, 2))
       const downloadAnchor = document.createElement('a')
       downloadAnchor.setAttribute('href', dataStr)
-      downloadAnchor.setAttribute('download', `methodologies_export_${new Date().toISOString().slice(0, 10)}.json`)
+      downloadAnchor.setAttribute('download', `cogito_methodologies_${new Date().toISOString().slice(0, 10)}.json`)
       document.body.appendChild(downloadAnchor)
       downloadAnchor.click()
       downloadAnchor.remove()
@@ -109,7 +98,6 @@ export default function Library() {
     }
   }
 
-  // 导入数据
   const handleImportJSON = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -147,7 +135,6 @@ export default function Library() {
     }
   }
 
-  // 重置筛选
   const handleResetFilters = () => {
     setSearchTerm('')
     setSelectedDomain(null)
@@ -163,19 +150,20 @@ export default function Library() {
 
   return (
     <div className="space-y-6">
-      {/* 顶部标题与操作栏 */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      {/* 顶部标题栏 */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-900/80 pb-5">
         <div>
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-slate-100">方法论知识库</h1>
-            <span className="badge badge-blue">{filteredMethods.length} 个条目</span>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500">Cogito · Library</span>
+            <span className="badge-zinc text-[10px]">{filteredMethods.length} 条收录</span>
           </div>
-          <p className="text-sm text-slate-400 mt-1">
-            标准化、成体系的个人方法论资产库
+          <h1 className="text-2xl font-bold tracking-tight text-white">方法论知识库</h1>
+          <p className="text-xs text-zinc-400 mt-1">
+            标准化结构档案、多维检验证据与跨领域关联体系
           </p>
         </div>
 
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center gap-2">
           <input
             type="file"
             ref={fileInputRef}
@@ -201,65 +189,69 @@ export default function Library() {
           </button>
           <button
             onClick={() => navigate('/library/new')}
-            className="btn-primary text-xs"
+            className="btn-primary text-xs flex items-center gap-1.5"
           >
-            <Plus className="w-4 h-4" />
-            <span>新建方法论</span>
+            <Plus className="w-3.5 h-3.5" />
+            <span>新建档案</span>
           </button>
         </div>
       </div>
 
-      {/* 搜索与主过滤器 */}
-      <div className="card p-4 space-y-3">
+      {/* 搜索与主筛选卡片 */}
+      <div className="card p-4 space-y-3.5">
         <div className="flex flex-col md:flex-row gap-3">
-          {/* 实时搜索框 */}
+          {/* 搜索框 */}
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
+            <Search className="absolute left-3.5 top-3 w-4 h-4 text-zinc-500" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="按名称、别名、核心概念、标签、提出者搜索..."
-              className="input pl-9 pr-8 text-sm"
+              placeholder="按名称、别名、核心思想、标签或创始人搜索..."
+              className="input pl-10 pr-9 text-xs"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-200"
+                className="absolute right-3 top-3 text-zinc-500 hover:text-zinc-200"
               >
                 <X className="w-4 h-4" />
               </button>
             )}
           </div>
 
-          {/* 排序方式 */}
+          {/* 排序与高级筛选按钮 */}
           <div className="flex items-center gap-2">
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="select text-sm py-2"
+              className="select text-xs py-2"
             >
               <option value="updatedAt">最近更新</option>
               <option value="name">名称字母序</option>
-              <option value="views">热度/浏览数</option>
+              <option value="views">热度/浏览</option>
               <option value="practice">实践次数</option>
             </select>
 
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
-              className={`btn text-xs px-3 py-2 ${isFilterOpen ? 'bg-blue-600/30 text-blue-400 border border-blue-500/40' : 'btn-secondary'}`}
+              className={`btn text-xs px-3.5 py-2 ${
+                isFilterOpen
+                  ? 'bg-zinc-100 text-zinc-950 font-semibold'
+                  : 'btn-secondary'
+              }`}
             >
               <SlidersHorizontal className="w-3.5 h-3.5" />
-              <span>高级筛选</span>
+              <span>筛选</span>
             </button>
           </div>
         </div>
 
-        {/* 展开式高级筛选器 */}
+        {/* 展开式高级过滤器 */}
         {isFilterOpen && (
-          <div className="pt-3 border-t border-slate-700/60 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div className="pt-3 border-t border-zinc-800/60 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
             <div>
-              <label className="text-slate-400 block mb-1">知识架构层级</label>
+              <label className="label">知识架构层级</label>
               <select
                 value={selectedLayer}
                 onChange={(e) => setSelectedLayer(e.target.value)}
@@ -273,15 +265,15 @@ export default function Library() {
             </div>
 
             <div>
-              <label className="text-slate-400 block mb-1">方法论类型</label>
+              <label className="label">方法论类型</label>
               <select
                 value={selectedType}
                 onChange={(e) => setSelectedType(e.target.value)}
                 className="select text-xs py-1.5"
               >
                 <option value="all">全部类型</option>
-                <option value="process">流程 (Process)</option>
                 <option value="model">模型 (Model)</option>
+                <option value="process">流程 (Process)</option>
                 <option value="framework">框架 (Framework)</option>
                 <option value="principle">原则 (Principle)</option>
                 <option value="tool">工具 (Tool)</option>
@@ -290,30 +282,30 @@ export default function Library() {
             </div>
 
             <div>
-              <label className="text-slate-400 block mb-1">证据等级</label>
+              <label className="label">证据等级</label>
               <select
                 value={selectedEvidence}
                 onChange={(e) => setSelectedEvidence(e.target.value)}
                 className="select text-xs py-1.5"
               >
-                <option value="all">全部证据等级</option>
+                <option value="all">全部等级</option>
                 <option value="high">高可信度 (High)</option>
                 <option value="medium">中等可信度 (Medium)</option>
-                <option value="low">低可信度 (Low)</option>
+                <option value="low">经验性 (Low)</option>
                 <option value="unverified">待验证 (Unverified)</option>
                 <option value="disputed">存疑 (Disputed)</option>
               </select>
             </div>
 
             <div>
-              <label className="text-slate-400 block mb-1">状态</label>
+              <label className="label">状态</label>
               <select
                 value={selectedStatus}
                 onChange={(e) => setSelectedStatus(e.target.value)}
                 className="select text-xs py-1.5"
               >
                 <option value="all">全部状态</option>
-                <option value="active">已正式收录</option>
+                <option value="active">已收录</option>
                 <option value="pending_review">待审核</option>
                 <option value="draft">草稿</option>
                 <option value="disputed">存疑</option>
@@ -322,17 +314,17 @@ export default function Library() {
           </div>
         )}
 
-        {/* 八大领域横向标签栏 */}
+        {/* 八大领域水平切换按钮 */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 pt-1 no-scrollbar text-xs">
           <button
             onClick={() => handleDomainSelect(null)}
-            className={`px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
+            className={`px-3 py-1.5 rounded-xl whitespace-nowrap transition-all duration-150 ${
               selectedDomain === null
-                ? 'bg-blue-600 text-white font-medium'
-                : 'bg-slate-700/60 text-slate-300 hover:bg-slate-700 hover:text-white'
+                ? 'bg-white text-zinc-950 font-semibold shadow-sm'
+                : 'bg-zinc-800/80 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
             }`}
           >
-            全部领域 ({methods.length})
+            全部 ({methods.length})
           </button>
           {domains.map((dom) => {
             const isSelected = selectedDomain === dom.id
@@ -341,15 +333,16 @@ export default function Library() {
               <button
                 key={dom.id}
                 onClick={() => handleDomainSelect(isSelected ? null : dom.id)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg whitespace-nowrap transition-colors ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl whitespace-nowrap transition-all duration-150 ${
                   isSelected
-                    ? 'bg-blue-600 text-white font-medium'
-                    : 'bg-slate-700/60 text-slate-300 hover:bg-slate-700 hover:text-white'
+                    ? 'bg-white text-zinc-950 font-semibold shadow-sm'
+                    : 'bg-zinc-800/80 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
                 }`}
               >
-                <span>{dom.icon}</span>
                 <span>{dom.name}</span>
-                <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isSelected ? 'bg-blue-700 text-blue-100' : 'bg-slate-800 text-slate-400'}`}>
+                <span className={`text-[10px] font-mono px-1 rounded ${
+                  isSelected ? 'bg-zinc-200 text-zinc-950' : 'bg-zinc-900 text-zinc-500'
+                }`}>
                   {count}
                 </span>
               </button>
@@ -357,16 +350,15 @@ export default function Library() {
           })}
         </div>
 
-        {/* 激活的筛选标签与重置按钮 */}
         {hasActiveFilters && (
-          <div className="flex items-center justify-between text-xs pt-1 text-slate-400">
-            <span>找到 {filteredMethods.length} 个匹配的方法论</span>
+          <div className="flex items-center justify-between text-xs pt-1 text-zinc-500 border-t border-zinc-800/40">
+            <span>筛选结果：{filteredMethods.length} 项</span>
             <button
               onClick={handleResetFilters}
-              className="text-blue-400 hover:text-blue-300 flex items-center gap-1 font-medium"
+              className="text-zinc-300 hover:text-white flex items-center gap-1 font-medium transition-colors"
             >
               <RefreshCw className="w-3 h-3" />
-              <span>清空所有筛选</span>
+              <span>清空筛选</span>
             </button>
           </div>
         )}
@@ -379,11 +371,11 @@ export default function Library() {
           title="未找到匹配的方法论"
           description={
             hasActiveFilters
-              ? '尝试减少筛选条件，或者通过 AI 研究中心主动研究新方法论'
-              : '知识库中尚无方法论档案'
+              ? '建议调整关键词或清空筛选条件'
+              : '知识库中尚无档案，可新建或通过 AI 深度研究中心自动挖掘'
           }
           action={{
-            label: hasActiveFilters ? '重置筛选条件' : '新建方法论',
+            label: hasActiveFilters ? '重置筛选条件' : '新建方法论档案',
             onClick: hasActiveFilters ? handleResetFilters : () => navigate('/library/new')
           }}
         />

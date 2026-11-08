@@ -36,22 +36,22 @@ export default function PracticeAndLearning() {
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-12">
       {/* 顶部标签切换 */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-900 pb-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-100">实践与学习中心</h1>
-          <p className="text-sm text-slate-400 mt-1">
+          <h1 className="text-2xl font-bold text-zinc-100">实践与学习中心</h1>
+          <p className="text-sm text-zinc-400 mt-1">
             将方法论转化为真实行动与长效复利认知资产
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="bg-slate-800/80 p-1 rounded-xl border border-slate-700/80 flex items-center">
+          <div className="bg-zinc-900/80 p-1 rounded-xl border border-zinc-800/80 flex items-center">
             <button
               onClick={() => setActiveTab('practice')}
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
                 activeTab === 'practice'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-white text-zinc-950 font-semibold shadow-md'
+                  : 'text-zinc-400 hover:text-zinc-200'
               }`}
             >
               <Target className="w-4 h-4" />
@@ -61,8 +61,8 @@ export default function PracticeAndLearning() {
               onClick={() => setActiveTab('learning')}
               className={`flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
                 activeTab === 'learning'
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-white text-zinc-950 font-semibold shadow-md'
+                  : 'text-zinc-400 hover:text-zinc-200'
               }`}
             >
               <BookOpen className="w-4 h-4" />
@@ -277,12 +277,12 @@ function PracticeSection({
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* 左侧实践列表 */}
       <div className="space-y-3">
-        <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-1">
+        <div className="text-xs font-semibold text-zinc-400 uppercase tracking-wider px-1">
           实践项目列表 ({practices.length})
         </div>
 
         {practices.length === 0 ? (
-          <div className="card p-6 text-center text-slate-500 text-sm">
+          <div className="card p-6 text-center text-zinc-500 text-sm">
             暂无实践项目，点击右上角“发起实践”建立第一个闭环。
           </div>
         ) : (
@@ -298,12 +298,12 @@ function PracticeSection({
                   onClick={() => onSelectPractice(p)}
                   className={`card p-4 cursor-pointer transition-all ${
                     isSelected
-                      ? 'border-blue-500 bg-slate-800/90 shadow-md shadow-blue-500/10'
-                      : 'hover:border-slate-600 hover:bg-slate-800/60'
+                      ? 'border-blue-500 bg-zinc-900/90 shadow-md shadow-blue-500/10'
+                      : 'hover:border-zinc-700 hover:bg-zinc-900/60'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <h3 className="font-semibold text-slate-100 text-sm line-clamp-1">{p.title}</h3>
+                    <h3 className="font-semibold text-zinc-100 text-sm line-clamp-1">{p.title}</h3>
                     <span className={`badge text-[10px] ${
                       p.status === 'completed' ? 'badge-green' :
                       p.status === 'in_progress' ? 'badge-blue' : 'badge-slate'
@@ -312,13 +312,13 @@ function PracticeSection({
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-400 mt-1 line-clamp-2">{p.problem}</p>
+                  <p className="text-xs text-zinc-400 mt-1 line-clamp-2">{p.problem}</p>
 
                   <div className="flex items-center gap-1.5 mt-2 flex-wrap">
                     {p.methodIds.map(id => {
                       const m = methodMap.get(id)
                       return (
-                        <span key={id} className="badge bg-slate-700/80 text-slate-300 text-[10px]">
+                        <span key={id} className="badge bg-zinc-800/80 text-zinc-300 text-[10px]">
                           {m?.name || id}
                         </span>
                       )
@@ -327,11 +327,11 @@ function PracticeSection({
 
                   {totalSteps > 0 && (
                     <div className="mt-3">
-                      <div className="flex justify-between text-[10px] text-slate-400 mb-1">
+                      <div className="flex justify-between text-[10px] text-zinc-400 mb-1">
                         <span>执行进度</span>
                         <span>{doneSteps}/{totalSteps} 步骤 ({p.evaluation?.goalCompletion || 0}%)</span>
                       </div>
-                      <div className="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                      <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
                         <div
                           className="bg-blue-500 h-full rounded-full transition-all"
                           style={{ width: `${p.evaluation?.goalCompletion || 0}%` }}
@@ -349,39 +349,39 @@ function PracticeSection({
       {/* 右侧实践详情与闭环操作 */}
       <div className="lg:col-span-2">
         {!currentPractice ? (
-          <div className="card p-12 text-center text-slate-500">
+          <div className="card p-12 text-center text-zinc-500">
             <Target className="w-12 h-12 mx-auto mb-3 opacity-30 text-blue-400" />
-            <h3 className="text-slate-300 font-medium mb-1">请选择左侧的实践项目</h3>
-            <p className="text-xs text-slate-500">查看执行步骤、记录过程日志、开展效果评价与 AI 复盘</p>
+            <h3 className="text-zinc-300 font-medium mb-1">请选择左侧的实践项目</h3>
+            <p className="text-xs text-zinc-500">查看执行步骤、记录过程日志、开展效果评价与 AI 复盘</p>
           </div>
         ) : (
           <div className="card p-6 space-y-6">
             {/* 项目头部 */}
-            <div className="flex items-start justify-between gap-4 border-b border-slate-700/60 pb-4">
+            <div className="flex items-start justify-between gap-4 border-b border-zinc-800/60 pb-4">
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-xl font-bold text-slate-100">{currentPractice.title}</h2>
+                  <h2 className="text-xl font-bold text-zinc-100">{currentPractice.title}</h2>
                   <span className={`badge text-xs ${
                     currentPractice.status === 'completed' ? 'badge-green' : 'badge-blue'
                   }`}>
                     {currentPractice.status === 'completed' ? '已完成' : '进行中'}
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-zinc-400 mt-1">
                   <strong>解决问题：</strong> {currentPractice.problem}
                 </p>
               </div>
 
               <button
                 onClick={() => onDeletePractice(currentPractice.id)}
-                className="text-xs text-slate-500 hover:text-red-400"
+                className="text-xs text-zinc-500 hover:text-red-400"
               >
                 删除项目
               </button>
             </div>
 
             {/* 关联方法论与方案 */}
-            <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 space-y-3">
+            <div className="p-4 rounded-xl bg-zinc-950/60 border border-zinc-800/60 space-y-3">
               <div className="text-xs font-semibold text-blue-300 flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>关联方法论与预期目标</span>
@@ -396,16 +396,16 @@ function PracticeSection({
                   )
                 })}
               </div>
-              <div className="text-xs text-slate-300">
+              <div className="text-xs text-zinc-300">
                 <strong>预期目标：</strong> {currentPractice.planning?.goal || currentPractice.planning?.expectedOutcome}
               </div>
             </div>
 
             {/* 执行步骤清单 */}
             <div className="space-y-3">
-              <h3 className="text-sm font-semibold text-slate-200 flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-zinc-200 flex items-center justify-between">
                 <span>执行步骤 ({currentPractice.planning?.steps?.filter(s => s.status === 'done').length || 0}/{currentPractice.planning?.steps?.length || 0})</span>
-                <span className="text-xs font-normal text-slate-400">点击勾选完成</span>
+                <span className="text-xs font-normal text-zinc-400">点击勾选完成</span>
               </h3>
 
               <div className="space-y-2">
@@ -417,8 +417,8 @@ function PracticeSection({
                       onClick={() => toggleStep(idx)}
                       className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
                         isDone
-                          ? 'bg-emerald-950/20 border-emerald-800/40 text-slate-400 line-through'
-                          : 'bg-slate-800/50 border-slate-700 text-slate-200 hover:border-slate-600'
+                          ? 'bg-emerald-950/20 border-emerald-800/40 text-zinc-400 line-through'
+                          : 'bg-zinc-900/50 border-zinc-800 text-zinc-200 hover:border-zinc-700'
                       }`}
                     >
                       <input
@@ -428,8 +428,8 @@ function PracticeSection({
                         className="mt-0.5 rounded text-blue-600"
                       />
                       <div className="flex-1 text-xs">
-                        <div className="font-medium text-slate-200">{step.title}</div>
-                        {step.description && <div className="text-slate-400 mt-0.5">{step.description}</div>}
+                        <div className="font-medium text-zinc-200">{step.title}</div>
+                        {step.description && <div className="text-zinc-400 mt-0.5">{step.description}</div>}
                       </div>
                     </div>
                   )
@@ -438,8 +438,8 @@ function PracticeSection({
             </div>
 
             {/* 过程日志记录 */}
-            <div className="space-y-3 pt-2 border-t border-slate-700/60">
-              <h3 className="text-sm font-semibold text-slate-200">执行过程日志</h3>
+            <div className="space-y-3 pt-2 border-t border-zinc-800/60">
+              <h3 className="text-sm font-semibold text-zinc-200">执行过程日志</h3>
 
               <div className="flex gap-2">
                 <input
@@ -458,9 +458,9 @@ function PracticeSection({
               {currentPractice.execution?.logs && currentPractice.execution.logs.length > 0 && (
                 <div className="space-y-2 max-h-40 overflow-y-auto pr-1">
                   {currentPractice.execution.logs.map(log => (
-                    <div key={log.id} className="text-xs p-2.5 rounded bg-slate-900/50 border border-slate-800 flex justify-between gap-3">
-                      <span className="text-slate-300">{log.content}</span>
-                      <span className="text-[10px] text-slate-500 whitespace-nowrap">{log.date}</span>
+                    <div key={log.id} className="text-xs p-2.5 rounded bg-zinc-950/50 border border-zinc-900 flex justify-between gap-3">
+                      <span className="text-zinc-300">{log.content}</span>
+                      <span className="text-[10px] text-zinc-500 whitespace-nowrap">{log.date}</span>
                     </div>
                   ))}
                 </div>
@@ -468,12 +468,12 @@ function PracticeSection({
             </div>
 
             {/* 效果评价与总结 */}
-            <div className="space-y-3 pt-2 border-t border-slate-700/60">
-              <h3 className="text-sm font-semibold text-slate-200">效果评价与反思</h3>
+            <div className="space-y-3 pt-2 border-t border-zinc-800/60">
+              <h3 className="text-sm font-semibold text-zinc-200">效果评价与反思</h3>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                 <div>
-                  <label className="text-slate-400 block mb-1">目标达成度 ({evalCompletion}%)</label>
+                  <label className="text-zinc-400 block mb-1">目标达成度 ({evalCompletion}%)</label>
                   <input
                     type="range"
                     min="0"
@@ -484,7 +484,7 @@ function PracticeSection({
                   />
                 </div>
                 <div>
-                  <label className="text-slate-400 block mb-1">过程评价 ({evalProcessRating} / 5 星)</label>
+                  <label className="text-zinc-400 block mb-1">过程评价 ({evalProcessRating} / 5 星)</label>
                   <input
                     type="number"
                     min="1"
@@ -495,7 +495,7 @@ function PracticeSection({
                   />
                 </div>
                 <div>
-                  <label className="text-slate-400 block mb-1">实际效果 ({evalEffectRating} / 5 星)</label>
+                  <label className="text-zinc-400 block mb-1">实际效果 ({evalEffectRating} / 5 星)</label>
                   <input
                     type="number"
                     min="1"
@@ -543,7 +543,7 @@ function PracticeSection({
                   <Sparkles className="w-4 h-4" />
                   <span>AI 智能实践复盘报告</span>
                 </div>
-                <div className="text-xs text-slate-300">
+                <div className="text-xs text-zinc-300">
                   <MarkdownRenderer content={currentPractice.aiReview.updateSuggestions} />
                 </div>
               </div>
@@ -574,28 +574,28 @@ function LearningSection({ plans, dueTasks, onSavePlan, allMethods }: LearningSe
       {/* 顶部学习指标卡片 */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="card p-4">
-          <div className="text-xs text-slate-400">进行中计划</div>
+          <div className="text-xs text-zinc-400">进行中计划</div>
           <div className="text-2xl font-bold text-blue-400 mt-1">{plans.length}</div>
         </div>
         <div className="card p-4">
-          <div className="text-xs text-slate-400">待学习/复习任务</div>
+          <div className="text-xs text-zinc-400">待学习/复习任务</div>
           <div className="text-2xl font-bold text-yellow-400 mt-1">{dueTasks.length}</div>
         </div>
         <div className="card p-4">
-          <div className="text-xs text-slate-400">知识掌握度</div>
+          <div className="text-xs text-zinc-400">知识掌握度</div>
           <div className="text-2xl font-bold text-emerald-400 mt-1">熟练应用</div>
         </div>
         <div className="card p-4">
-          <div className="text-xs text-slate-400">连续学习</div>
+          <div className="text-xs text-zinc-400">连续学习</div>
           <div className="text-2xl font-bold text-purple-400 mt-1">7 天</div>
         </div>
       </div>
 
       {/* 学习计划列表 */}
       <div className="space-y-4">
-        <h3 className="text-sm font-semibold text-slate-300">我的学习计划</h3>
+        <h3 className="text-sm font-semibold text-zinc-300">我的学习计划</h3>
         {plans.length === 0 ? (
-          <div className="card p-8 text-center text-slate-500 text-sm">
+          <div className="card p-8 text-center text-zinc-500 text-sm">
             暂无学习计划，点击右上角“制定计划”启动系统学习。
           </div>
         ) : (
@@ -604,8 +604,8 @@ function LearningSection({ plans, dueTasks, onSavePlan, allMethods }: LearningSe
               <div key={plan.id} className="card p-5 space-y-3">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h4 className="font-bold text-slate-100 text-base">{plan.title}</h4>
-                    <p className="text-xs text-slate-400 mt-0.5">{plan.description}</p>
+                    <h4 className="font-bold text-zinc-100 text-base">{plan.title}</h4>
+                    <p className="text-xs text-zinc-400 mt-0.5">{plan.description}</p>
                   </div>
                   <span className="badge badge-blue text-xs">
                     {plan.schedule.type === 'daily' ? '每日学习' : '专题学习'}
@@ -614,18 +614,18 @@ function LearningSection({ plans, dueTasks, onSavePlan, allMethods }: LearningSe
 
                 <div className="flex flex-wrap gap-1">
                   {plan.methodIds.map(id => (
-                    <span key={id} className="badge bg-slate-700/80 text-slate-300 text-[10px]">
+                    <span key={id} className="badge bg-zinc-800/80 text-zinc-300 text-[10px]">
                       {methodMap.get(id)?.name || id}
                     </span>
                   ))}
                 </div>
 
-                <div className="pt-2 border-t border-slate-700/60">
-                  <div className="flex justify-between text-xs text-slate-400 mb-1">
+                <div className="pt-2 border-t border-zinc-800/60">
+                  <div className="flex justify-between text-xs text-zinc-400 mb-1">
                     <span>学习进度</span>
                     <span>{plan.progress.completedTasks}/{plan.progress.totalTasks || plan.tasks?.length || 1} 课时</span>
                   </div>
-                  <div className="w-full bg-slate-700 h-2 rounded-full overflow-hidden">
+                  <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
                     <div
                       className="bg-emerald-500 h-full rounded-full"
                       style={{
@@ -642,26 +642,26 @@ function LearningSection({ plans, dueTasks, onSavePlan, allMethods }: LearningSe
 
       {/* 待复习知识任务 */}
       <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-slate-300 flex items-center gap-2">
+        <h3 className="text-sm font-semibold text-zinc-300 flex items-center gap-2">
           <Clock className="w-4 h-4 text-yellow-400" />
           <span>待复习与测验任务 (间隔重复)</span>
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {dueTasks.length === 0 ? (
-            <div className="card p-6 md:col-span-3 text-center text-slate-500 text-xs">
+            <div className="card p-6 md:col-span-3 text-center text-zinc-500 text-xs">
               今日所有学习与复习任务已完成！保持节奏。
             </div>
           ) : (
             dueTasks.map(task => {
               const m = methodMap.get(task.methodId)
               return (
-                <div key={task.id} className="card p-4 space-y-2 border-slate-700">
+                <div key={task.id} className="card p-4 space-y-2 border-zinc-800">
                   <div className="flex items-center justify-between">
-                    <span className="font-semibold text-slate-100 text-sm">{m?.name || '方法论'}</span>
+                    <span className="font-semibold text-zinc-100 text-sm">{m?.name || '方法论'}</span>
                     <span className="badge badge-yellow text-[10px]">复习到期</span>
                   </div>
-                  <p className="text-xs text-slate-400">{task.objective || m?.content?.summary}</p>
+                  <p className="text-xs text-zinc-400">{task.objective || m?.content?.summary}</p>
                   <button className="btn-primary text-xs w-full py-1.5 mt-2">
                     开始复习与测验
                   </button>
@@ -782,7 +782,7 @@ function NewPracticeModal({ isOpen, onClose, allMethods, onCreated }: NewPractic
 
         <div>
           <label className="label">选择适用的方法论（可多选组合）</label>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-40 overflow-y-auto p-2 bg-slate-900/60 rounded-lg border border-slate-700">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-40 overflow-y-auto p-2 bg-zinc-950/60 rounded-lg border border-zinc-800">
             {allMethods.map(m => {
               const checked = selectedMethods.includes(m.id)
               return (
@@ -795,11 +795,11 @@ function NewPracticeModal({ isOpen, onClose, allMethods, onCreated }: NewPractic
                   className={`p-2 rounded text-left border transition-all text-xs ${
                     checked
                       ? 'bg-blue-600/20 border-blue-500 text-blue-300 font-medium'
-                      : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-600'
+                      : 'bg-zinc-900 border-zinc-800 text-zinc-300 hover:border-zinc-700'
                   }`}
                 >
                   <div className="font-medium truncate">{m.name}</div>
-                  <div className="text-[10px] text-slate-500 truncate">{m.content.summary}</div>
+                  <div className="text-[10px] text-zinc-500 truncate">{m.content.summary}</div>
                 </button>
               )
             })}
@@ -817,7 +817,7 @@ function NewPracticeModal({ isOpen, onClose, allMethods, onCreated }: NewPractic
           />
         </div>
 
-        <div className="flex justify-end gap-2 pt-3 border-t border-slate-700">
+        <div className="flex justify-end gap-2 pt-3 border-t border-zinc-800">
           <button type="button" onClick={onClose} className="btn-ghost text-xs">取消</button>
           <button type="submit" disabled={submitting} className="btn-primary text-xs">
             {submitting ? '创建中...' : '确认发起实践'}
@@ -916,7 +916,7 @@ function NewPlanModal({ isOpen, onClose, allMethods, onCreated }: NewPlanModalPr
 
         <div>
           <label className="label">选入方法论</label>
-          <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto p-2 bg-slate-900/60 rounded-lg border border-slate-700">
+          <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto p-2 bg-zinc-950/60 rounded-lg border border-zinc-800">
             {allMethods.map(m => {
               const checked = selectedMethods.includes(m.id)
               return (
@@ -929,7 +929,7 @@ function NewPlanModal({ isOpen, onClose, allMethods, onCreated }: NewPlanModalPr
                   className={`p-2 rounded text-left border transition-all text-xs truncate ${
                     checked
                       ? 'bg-blue-600/20 border-blue-500 text-blue-300 font-medium'
-                      : 'bg-slate-800 border-slate-700 text-slate-300 hover:border-slate-600'
+                      : 'bg-zinc-900 border-zinc-800 text-zinc-300 hover:border-zinc-700'
                   }`}
                 >
                   {m.name}
@@ -939,7 +939,7 @@ function NewPlanModal({ isOpen, onClose, allMethods, onCreated }: NewPlanModalPr
           </div>
         </div>
 
-        <div className="flex justify-end gap-2 pt-3 border-t border-slate-700">
+        <div className="flex justify-end gap-2 pt-3 border-t border-zinc-800">
           <button type="button" onClick={onClose} className="btn-ghost text-xs">取消</button>
           <button type="submit" disabled={submitting} className="btn-primary text-xs">
             {submitting ? '创建中...' : '确认开启计划'}

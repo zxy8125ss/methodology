@@ -2,6 +2,7 @@ import React from 'react'
 import type { Method } from '../types'
 import DomainBadge from './DomainBadge'
 import EvidenceBadge from './EvidenceBadge'
+import { ArrowUpRight, Sparkles } from 'lucide-react'
 
 const methodTypeLabel: Record<string, string> = {
   theory: '理论',
@@ -33,67 +34,63 @@ function formatDate(dateStr: string): string {
 const MethodCard: React.FC<MethodCardProps> = ({ method, onClick, showActions = false }) => {
   return (
     <div
-      className={`group bg-slate-800/60 border border-slate-700/60 rounded-xl p-4 flex flex-col gap-3 transition-all duration-200 hover:border-indigo-500/50 hover:bg-slate-800/90 hover:shadow-lg hover:shadow-indigo-900/20 ${onClick ? 'cursor-pointer' : ''}`}
+      className={`group relative bg-zinc-900/60 backdrop-blur-sm border border-zinc-800/80 rounded-2xl p-4.5 flex flex-col justify-between gap-3.5 transition-all duration-300 hover:border-zinc-600 hover:bg-zinc-900/90 hover:shadow-float hover:-translate-y-0.5 ${
+        onClick ? 'cursor-pointer' : ''
+      }`}
       onClick={onClick}
     >
-      {/* Header */}
-      <div className="flex items-start justify-between gap-2">
-        <h3 className="text-sm font-semibold text-slate-100 leading-snug group-hover:text-indigo-300 transition-colors line-clamp-1">
-          {method.name}
-        </h3>
-        <span className="shrink-0 px-1.5 py-0.5 rounded text-[11px] text-slate-400 bg-slate-700/50 font-medium">
-          {methodTypeLabel[method.type] ?? method.type}
-        </span>
-      </div>
+      <div>
+        {/* Top Header: Title, Layer & Type */}
+        <div className="flex items-start justify-between gap-2 mb-2">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[10px] font-mono uppercase px-1.5 py-0.2 rounded bg-zinc-800 text-zinc-400 border border-zinc-700/50">
+                Layer {method.layer}
+              </span>
+              <span className="text-[11px] text-zinc-400">
+                {methodTypeLabel[method.type] ?? method.type}
+              </span>
+            </div>
+            <h3 className="text-base font-semibold text-zinc-100 tracking-tight group-hover:text-white transition-colors truncate">
+              {method.name}
+            </h3>
+          </div>
 
-      {/* Summary */}
-      <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">
-        {method.content.summary}
-      </p>
+          <div className="w-6 h-6 rounded-lg bg-zinc-800/60 flex items-center justify-center text-zinc-400 opacity-0 group-hover:opacity-100 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </div>
+        </div>
 
-      {/* Domain badges */}
-      <div className="flex flex-wrap gap-1.5">
-        {method.domains.slice(0, 3).map((domainId) => (
-          <DomainBadge key={domainId} domainId={domainId} />
-        ))}
-        {method.domains.length > 3 && (
-          <span className="px-2 py-0.5 text-xs text-slate-500 bg-slate-700/40 rounded-full">
-            +{method.domains.length - 3}
-          </span>
-        )}
-      </div>
+        {/* Core Summary (Editorial typography) */}
+        <p className="text-xs text-zinc-400 leading-relaxed line-clamp-2 mb-3">
+          {method.content?.summary}
+        </p>
 
-      {/* Footer */}
-      <div className="flex items-center justify-between pt-1 border-t border-slate-700/50">
-        <EvidenceBadge level={method.evidence.level} />
-        <span className="text-[11px] text-slate-500">{formatDate(method.updatedAt)}</span>
-      </div>
-
-      {/* Tags */}
-      {method.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1">
-          {method.tags.slice(0, 4).map((tag) => (
-            <span key={tag} className="px-1.5 py-0.5 text-[11px] text-slate-500 bg-slate-700/30 rounded">
-              #{tag}
-            </span>
+        {/* Domain Badges */}
+        <div className="flex flex-wrap gap-1.5">
+          {method.domains.slice(0, 3).map((domainId) => (
+            <DomainBadge key={domainId} domainId={domainId} />
           ))}
-          {method.tags.length > 4 && (
-            <span className="px-1.5 py-0.5 text-[11px] text-slate-500">+{method.tags.length - 4}</span>
+          {method.domains.length > 3 && (
+            <span className="px-1.5 py-0.5 text-[10px] text-zinc-500 bg-zinc-800/60 rounded-md">
+              +{method.domains.length - 3}
+            </span>
           )}
         </div>
-      )}
+      </div>
 
-      {/* Actions */}
-      {showActions && (
-        <div className="flex gap-2 mt-1">
-          <button
-            className="flex-1 py-1.5 text-xs text-slate-300 bg-slate-700/50 hover:bg-slate-700 rounded-lg transition-colors"
-            onClick={(e) => { e.stopPropagation(); onClick?.() }}
-          >
-            查看详情
-          </button>
+      {/* Footer: Evidence & Meta Info */}
+      <div className="flex items-center justify-between text-[11px] pt-3 border-t border-zinc-800/60 text-zinc-500">
+        <EvidenceBadge level={method.evidence?.level ?? 'unverified'} />
+
+        <div className="flex items-center gap-2 font-mono text-[10px]">
+          {method.origin?.proposer && (
+            <span className="truncate max-w-[90px]">{method.origin.proposer}</span>
+          )}
+          <span>·</span>
+          <span>{formatDate(method.updatedAt)}</span>
         </div>
-      )}
+      </div>
     </div>
   )
 }
