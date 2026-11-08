@@ -28,26 +28,26 @@ function formatDate(dateStr: string): string {
   if (diffDays === 0) return '今天'
   if (diffDays === 1) return '昨天'
   if (diffDays < 7) return `${diffDays} 天前`
-  return d.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' })
+  return d.toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' })
 }
 
 const MethodCard: React.FC<MethodCardProps> = ({ method, onClick }) => {
   return (
     <div
-      className={`group relative bg-white border border-stone-200/85 rounded-2xl p-4 flex flex-col justify-between gap-3 transition-all duration-200 hover:border-stone-400/80 hover:shadow-card hover:-translate-y-0.5 ${
+      className={`group relative bg-white border border-stone-200/85 rounded-2xl p-4 flex flex-col justify-between gap-3 transition-all duration-200 hover:border-stone-400/80 hover:shadow-card hover:-translate-y-0.5 overflow-hidden ${
         onClick ? 'cursor-pointer' : ''
       }`}
       onClick={onClick}
     >
-      <div>
+      <div className="min-w-0">
         {/* Top Header: Title, Layer & Type */}
         <div className="flex items-start justify-between gap-2 mb-1.5">
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-1.5 mb-1">
-              <span className="text-[10px] font-mono uppercase px-1.5 py-0.2 rounded bg-stone-100 text-stone-600 border border-stone-200">
+            <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+              <span className="text-[10px] font-mono uppercase px-1.5 py-0.2 rounded bg-stone-100 text-stone-600 border border-stone-200 shrink-0">
                 Layer {method.layer}
               </span>
-              <span className="text-[11px] text-stone-500">
+              <span className="text-[11px] text-stone-500 shrink-0">
                 {methodTypeLabel[method.type] ?? method.type}
               </span>
             </div>
@@ -56,39 +56,41 @@ const MethodCard: React.FC<MethodCardProps> = ({ method, onClick }) => {
             </h3>
           </div>
 
-          <div className="w-6 h-6 rounded-lg bg-stone-100 flex items-center justify-center text-stone-400 group-hover:text-stone-800 transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+          <div className="w-6 h-6 rounded-lg bg-stone-100 flex items-center justify-center text-stone-400 group-hover:text-stone-800 transition-all duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shrink-0">
             <ArrowUpRight className="w-3.5 h-3.5" />
           </div>
         </div>
 
         {/* Core Summary (Editorial typography) */}
-        <p className="text-xs text-stone-600 leading-relaxed line-clamp-2 mb-3">
+        <p className="text-xs text-stone-600 leading-relaxed line-clamp-2 mb-3 break-words">
           {method.content?.summary}
         </p>
 
         {/* Domain Badges */}
-        <div className="flex flex-wrap gap-1.5">
-          {method.domains.slice(0, 3).map((domainId) => (
+        <div className="flex flex-wrap gap-1.5 overflow-hidden">
+          {method.domains.slice(0, 2).map((domainId) => (
             <DomainBadge key={domainId} domainId={domainId} />
           ))}
-          {method.domains.length > 3 && (
-            <span className="px-1.5 py-0.5 text-[10px] text-stone-500 bg-stone-100 rounded-md border border-stone-200">
-              +{method.domains.length - 3}
+          {method.domains.length > 2 && (
+            <span className="px-1.5 py-0.5 text-[10px] text-stone-500 bg-stone-100 rounded-md border border-stone-200 shrink-0">
+              +{method.domains.length - 2}
             </span>
           )}
         </div>
       </div>
 
       {/* Footer: Evidence & Meta Info */}
-      <div className="flex items-center justify-between text-[11px] pt-2.5 border-t border-stone-100 text-stone-500">
-        <EvidenceBadge level={method.evidence?.level ?? 'unverified'} />
+      <div className="flex items-center justify-between text-[11px] pt-2.5 border-t border-stone-100 text-stone-500 min-w-0 gap-2">
+        <div className="shrink-0">
+          <EvidenceBadge level={method.evidence?.level ?? 'unverified'} />
+        </div>
 
-        <div className="flex items-center gap-2 font-mono text-[10px] text-stone-400">
+        <div className="flex items-center gap-1.5 font-mono text-[10px] text-stone-400 min-w-0 shrink truncate">
           {method.origin?.proposer && (
-            <span className="truncate max-w-[90px]">{method.origin.proposer}</span>
+            <span className="truncate max-w-[80px]">{method.origin.proposer}</span>
           )}
           <span>·</span>
-          <span>{formatDate(method.updatedAt)}</span>
+          <span className="shrink-0">{formatDate(method.updatedAt)}</span>
         </div>
       </div>
     </div>

@@ -152,18 +152,18 @@ export default function Library() {
     <div className="space-y-6">
       {/* 顶部标题栏 */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-stone-200/80 pb-4">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
             <span className="text-[10px] font-mono uppercase tracking-widest text-stone-500">Cogito · Library</span>
             <span className="badge-zinc text-[10px]">{filteredMethods.length} 条收录</span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-stone-900">方法论知识库</h1>
-          <p className="text-xs text-stone-500 mt-0.5">
+          <h1 className="text-2xl font-bold tracking-tight text-stone-900 truncate">方法论知识库</h1>
+          <p className="text-xs text-stone-500 mt-0.5 truncate">
             标准化结构档案、多维检验证据与跨领域关联体系
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <input
             type="file"
             ref={fileInputRef}

@@ -20,15 +20,20 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.011em;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   body {
     @apply min-h-screen bg-[#FAF9F6] font-sans text-stone-900 selection:bg-stone-200 selection:text-stone-900;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
   * {
     @apply border-stone-200/80;
+    box-sizing: border-box;
   }
 
   /* Safe Area Helper Utilities for iPhone 17 & Dynamic Island */
@@ -37,7 +42,7 @@
   }
 
   .safe-bottom {
-    padding-bottom: max(env(safe-area-inset-bottom, 0px), 10px);
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 8px);
   }
 
   ::-webkit-scrollbar {
@@ -55,18 +60,20 @@
 }
 
 @layer components {
-  /* Warm Paper Floating Cards */
+  /* Warm Paper Floating Cards - strictly contained */
   .card {
-    @apply bg-white border border-stone-200/70 rounded-2xl shadow-card transition-all duration-200;
+    @apply bg-white border border-stone-200/85 rounded-2xl shadow-card transition-all duration-200 overflow-hidden;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   .card-hover {
-    @apply card hover:border-stone-300 hover:shadow-float hover:-translate-y-0.5;
+    @apply card hover:border-stone-400/80 hover:shadow-float hover:-translate-y-0.5;
   }
 
   /* Tactile Modern Buttons */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl font-medium text-xs tracking-tight transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-stone-400 focus:ring-offset-2 active:scale-[0.98] select-none;
+    @apply inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl font-medium text-xs tracking-tight transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-stone-400 focus:ring-offset-2 active:scale-[0.98] select-none whitespace-nowrap;
   }
 
   .btn-primary {
@@ -85,9 +92,9 @@
     @apply btn bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200;
   }
 
-  /* Clean Minimal Inputs */
+  /* Clean Minimal Inputs - strictly bounds-checked */
   .input {
-    @apply w-full bg-white border border-stone-200 rounded-xl px-3.5 py-2.5 text-stone-900 text-sm placeholder-stone-400 focus:outline-none focus:border-stone-500 focus:ring-1 focus:ring-stone-500 transition-all duration-150 shadow-soft;
+    @apply w-full max-w-full bg-white border border-stone-200 rounded-xl px-3.5 py-2.5 text-stone-900 text-xs sm:text-sm placeholder-stone-400 focus:outline-none focus:border-stone-500 focus:ring-1 focus:ring-stone-500 transition-all duration-150 shadow-soft min-w-0;
   }
 
   .textarea {
@@ -95,16 +102,16 @@
   }
 
   .select {
-    @apply input appearance-none cursor-pointer;
+    @apply input cursor-pointer truncate pr-7;
   }
 
   .label {
-    @apply block text-xs font-semibold text-stone-600 mb-1.5 uppercase tracking-wider;
+    @apply block text-[11px] font-semibold text-stone-600 mb-1.5 uppercase tracking-wider truncate;
   }
 
   /* Low-Saturation Warm Paper Badges */
   .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium tracking-tight border;
+    @apply inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-medium tracking-tight border whitespace-nowrap shrink-0;
   }
 
   .badge-zinc {
@@ -154,7 +161,8 @@
 
 /* Markdown Editorial Typography */
 .prose {
-  @apply text-stone-800 leading-relaxed max-w-none text-sm;
+  @apply text-stone-800 leading-relaxed max-w-none text-xs sm:text-sm;
+  word-break: break-word;
 }
 .prose h1 { @apply text-2xl font-bold text-stone-900 mt-6 mb-3 tracking-tight; }
 .prose h2 { @apply text-xl font-bold text-stone-900 mt-5 mb-2.5 tracking-tight border-b border-stone-200 pb-1.5; }
@@ -163,5 +171,5 @@
 .prose ul { @apply list-disc list-inside space-y-1 my-2 text-stone-700 pl-1; }
 .prose ol { @apply list-decimal list-inside space-y-1 my-2 text-stone-700 pl-1; }
 .prose blockquote { @apply border-l-2 border-stone-400 pl-4 py-1 italic my-3 text-stone-600 bg-stone-50 rounded-r-lg; }
-.prose code { @apply font-mono text-xs bg-stone-100 text-stone-800 px-1.5 py-0.5 rounded border border-stone-200; }
+.prose code { @apply font-mono text-xs bg-stone-100 text-stone-800 px-1.5 py-0.5 rounded border border-stone-200 break-all; }
 .prose pre { @apply bg-stone-900 text-stone-100 p-4 rounded-xl overflow-x-auto my-3 text-xs leading-relaxed font-mono; }

@@ -216,27 +216,29 @@ export default function SearchPage() {
                   <div
                     key={m.id}
                     onClick={() => navigate(`/library/${m.id}`)}
-                    className="card p-4 cursor-pointer hover:border-stone-400 hover:shadow-card transition-all group flex items-start justify-between gap-4"
+                    className="card p-4 cursor-pointer hover:border-stone-400 hover:shadow-card transition-all group flex flex-col sm:flex-row sm:items-start justify-between gap-3 overflow-hidden"
                   >
                     <div className="space-y-1.5 flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <h4 className="text-sm font-semibold text-stone-900 group-hover:text-stone-950 truncate">
+                      <div className="flex items-center gap-2 min-w-0 flex-wrap sm:flex-nowrap">
+                        <h4 className="text-sm font-semibold text-stone-900 group-hover:text-stone-950 truncate min-w-0">
                           {m.name}
                         </h4>
-                        <EvidenceBadge level={m.evidence?.level ?? 'unverified'} />
+                        <div className="shrink-0">
+                          <EvidenceBadge level={m.evidence?.level ?? 'unverified'} />
+                        </div>
                       </div>
-                      <p className="text-xs text-stone-600 line-clamp-2">
+                      <p className="text-xs text-stone-600 line-clamp-2 break-words">
                         {m.content?.summary}
                       </p>
                       {hit.relevanceReason && (
-                        <div className="text-[11px] text-stone-500 font-mono">
+                        <div className="text-[11px] text-stone-500 font-mono truncate">
                           匹配依据：{hit.relevanceReason}
                         </div>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-2 shrink-0 pt-1">
-                      <span className="btn-secondary text-xs py-1 px-2.5 rounded-lg">
+                    <div className="flex items-center gap-2 shrink-0 self-end sm:self-start pt-0 sm:pt-1">
+                      <span className="btn-secondary text-xs py-1 px-2.5 rounded-lg whitespace-nowrap">
                         查阅档案 →
                       </span>
                     </div>

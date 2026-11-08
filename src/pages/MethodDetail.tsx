@@ -354,8 +354,8 @@ function SourcesTab({ sources }: { sources: Source[] }) {
 // ---- Shared helpers ----
 function InfoCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="p-4.5 bg-white border border-stone-200/80 rounded-2xl shadow-card">
-      <h3 className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-3">{title}</h3>
+    <div className="p-4 sm:p-4.5 bg-white border border-stone-200/80 rounded-2xl shadow-card overflow-hidden">
+      <h3 className="text-xs font-semibold text-stone-500 uppercase tracking-wider mb-2.5">{title}</h3>
       {children}
     </div>
   )
@@ -363,9 +363,9 @@ function InfoCard({ title, children }: { title: string; children: React.ReactNod
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex gap-3 mb-2 last:mb-0 text-xs">
-      <span className="text-stone-400 w-16 flex-shrink-0">{label}</span>
-      <span className="text-stone-800 font-medium">{value}</span>
+    <div className="flex gap-2.5 mb-2 last:mb-0 text-xs items-start min-w-0">
+      <span className="text-stone-400 w-16 flex-shrink-0 pt-0.5">{label}</span>
+      <span className="text-stone-800 font-medium flex-1 min-w-0 break-words">{value}</span>
     </div>
   )
 }

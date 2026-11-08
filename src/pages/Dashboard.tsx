@@ -52,19 +52,19 @@ interface StatCardProps {
 const StatCard: React.FC<StatCardProps> = ({ label, value, sub, icon, onClick }) => (
   <div
     onClick={onClick}
-    className={`bg-white border border-stone-200/85 rounded-2xl p-4 flex flex-col justify-between shadow-card transition-all duration-200 hover:border-stone-400 hover:shadow-float ${
+    className={`bg-white border border-stone-200/85 rounded-2xl p-3 sm:p-4 flex flex-col justify-between shadow-card transition-all duration-200 hover:border-stone-400 hover:shadow-float overflow-hidden ${
       onClick ? 'cursor-pointer' : ''
     }`}
   >
-    <div className="flex items-center justify-between text-stone-500">
-      <span className="text-xs font-medium tracking-tight">{label}</span>
-      <span className="w-6 h-6 rounded-lg bg-stone-100 flex items-center justify-center text-stone-700">
+    <div className="flex items-center justify-between text-stone-500 gap-2 min-w-0">
+      <span className="text-xs font-medium tracking-tight truncate">{label}</span>
+      <span className="w-6 h-6 rounded-lg bg-stone-100 flex items-center justify-center text-stone-700 shrink-0">
         {icon}
       </span>
     </div>
-    <div className="mt-2.5">
-      <div className="text-2xl font-bold font-mono tracking-tight text-stone-900">{value}</div>
-      {sub && <div className="text-[11px] text-stone-500 mt-0.5">{sub}</div>}
+    <div className="mt-2 min-w-0">
+      <div className="text-xl sm:text-2xl font-bold font-mono tracking-tight text-stone-900 truncate">{value}</div>
+      {sub && <div className="text-[10px] sm:text-[11px] text-stone-500 mt-0.5 truncate">{sub}</div>}
     </div>
   </div>
 )
